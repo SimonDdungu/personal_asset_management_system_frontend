@@ -9,7 +9,7 @@ import { currencyOptions } from '@/src/constants/currency/currency'
 import { GotoNextStepper } from '@/src/interfaces/stepper/stepper_interfaces'
 import { useForm } from 'react-hook-form'
 
-const Add_AssetForm = ({onNext}: GotoNextStepper) => {
+const Add_AssetForm = ({onNext}: GotoNextStepper) => { 
   const { register, handleSubmit, control } = useForm();
 
   const dummy_data = {
