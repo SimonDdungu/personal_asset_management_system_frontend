@@ -1,36 +1,49 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Personal Asset Management System
 
-## Getting Started
+A personal asset management system designed to help individuals **track, organize, and manage their assets in one place**.
 
-First, run the development server:
+The system allows users to keep records of different types of personal assets, including:
+### Physical Assets
+* Land
+* Real Estate
+* Vehicles
+* Electronics
+* Furniture
+* Machinery & Equipment
+* Other Physical Assets
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### Financial Assets
+* Bank Accounts
+* Cash
+* Savings
+* Investments
+* Stocks
+* Retirement Funds
+* Loans
+* Liabilities
+* Insurance Policies
+* Other
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Each asset can contain relevant information such as ownership details, acquisition information, current value, supporting images, and documents.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+The system also tracks **asset transactions**, such as purchases and sales, providing a history of important financial activity related to assets.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Key Features
 
-## Learn More
+* Personal asset tracking and organization
+* Asset categorization
+* Acquisition tracking
+* Current asset valuation
+* Purchase and sale transaction history
+* Asset images and supporting documents
+* Support for physical and financial assets
+* Role-based access control for users and administrators
 
-To learn more about Next.js, take a look at the following resources:
+The goal of the project is to provide a **structured and centralized way to understand and manage personal assets and valuable possessions**.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+*---- Final year project | work in progress -----*
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## License
+Copyright © 2026 Simon Ddungu. All rights reserved.  
+This project is licensed under the GNU GENERAL PUBLIC LICENSE - see the [LICENSE.md](LICENSE.md) file  
+This Project is developed by [Simon Ddungu](https://simonddungu-portfolio.vercel.app/).
