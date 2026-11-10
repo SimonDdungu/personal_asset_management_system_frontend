@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "../views/layout/Navbar";
 import Sidebar from "../views/layout/Sidebar/Sidebar";
 import QueryProvider from "../providers/QueryProvider";
+import { Suspense } from "react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -29,11 +30,13 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="min-h-full">
         <QueryProvider>
           <div className="flex flex-row w-full">
-            <Sidebar />
+            <Suspense fallback={<div>Loading...</div>}>
+              <Sidebar />
+            </Suspense>
           
             <main className="flex-1 flex flex-col">
               <Navbar />
-              <div className="px-5 py-2">
+              <div className="px-5 py-2 bg-gray-100">
                   {children}
               </div>
             </main>
