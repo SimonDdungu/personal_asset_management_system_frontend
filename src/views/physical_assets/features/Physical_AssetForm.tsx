@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import Add_AssetForm from './Add_AssetForm'
 import ElectronicForm from './ElectronicForm'
 import MediaForm from './MediaForm'
+import RealEstateForm from './RealEstateForm'
 
 const Physical_AssetForm = () => {
     const [step, setStep] = useState<string>("assets")
@@ -23,8 +24,9 @@ const Physical_AssetForm = () => {
     <div className='max-w-3xl mx-auto'>
         <h1>Add Asset</h1>
         <div>
-            {step === "assets" && <Add_AssetForm onNext={(data) => NextStep("electronic_form", data)}/>}
+            {step === "assets" && <Add_AssetForm onNext={(data) => NextStep("realestate_form", data)}/>}
             {step === "electronic_form" && <ElectronicForm onNext={(data) => NextStep("media_form", data)}/>}
+            {step === "realestate_form" && <RealEstateForm onNext={(data) => NextStep("media_form", data)}/>}
             {step === "media_form" && <MediaForm assetData={assetData}/>}
         </div>
     </div>

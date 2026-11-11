@@ -42,7 +42,7 @@ const AssetCoverImages = ({assetImages = [], assetName, caption}: AssetCoverImag
             <div className='flex items-center gap-x-10 h-50 px-5'>
                 {images?.length > 0 ? 
                 (images?.map((pic: any) => (
-                    <div key={pic.imageUrl} onClick={() => setSelectedImage(pic)} className={`cursor-pointer rounded-lg overflow-hidden w-50 h-full relative ${selectedImage?.imageUrl === pic.imageUrl ? "ring-1 ring-blue-600" : ""}`}>
+                    <div key={pic.id} onClick={() => setSelectedImage(pic)} className={`cursor-pointer rounded-lg overflow-hidden w-50 h-full relative ${selectedImage?.imageUrl === pic.imageUrl ? "ring-1 ring-blue-600" : ""}`}>
                         <div className='absolute bg-black/20 top-0 left-0 right-0 h-full w-full opacity-0 hover:opacity-100 transition-opacity z-5'></div>
                         <Image src={pic?.imageUrl} alt={pic?.caption ?? assetName} fill className='object-cover' unoptimized/>
                     </div>

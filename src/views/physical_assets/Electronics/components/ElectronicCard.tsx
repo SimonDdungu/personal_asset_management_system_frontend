@@ -37,11 +37,13 @@ const ElectronicCard = ({id, assetId, assetName, image, currency, currentValue}:
         </div>
 
         <div className='py-4 px-3 border-t'>
-          <Link href={`/assets/electronic/${id}`} className='mb-1 text-sm hover:underline'>{assetName}</Link>
+          <Link href={`/assets/electronic/${id}`} className='mb-2 text-sm hover:underline text-wrap block'>{assetName}</Link>
+
           <div className='flex items-center justify-between text-sm'>
             <span className='text-gray-700'>current value</span> 
             <span>{currency} {currentValue.toLocaleString("en-US", {maximumFractionDigits: 2})}</span> 
           </div>
+          
         </div>
 
     </div>

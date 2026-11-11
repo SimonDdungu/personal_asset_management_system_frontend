@@ -6,6 +6,7 @@ import ImagePicker from '@/src/components/ui/ImagePicker';
 import SelectInput from '@/src/components/ui/SelectInput';
 import { documentTypes } from '@/src/constants/document_options/documentTypes';
 import { useCreateElectronicAsset } from '@/src/hooks/electronics/useElectronics';
+import { useCreateRealEstateAsset } from '@/src/hooks/real_estate/useRealEstate';
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form';
 
@@ -28,15 +29,16 @@ const MediaForm = ({assetData}: MediaFormProps) => {
   const [documentCaption, setDocumentCaption] = useState<string | null>(null)
   const [documentType, setDocumentType] = useState<string | null>(null)
 
- const { mutate, isPending } = useCreateElectronicAsset();
+ const { mutate, isPending } = useCreateRealEstateAsset();
 
   function createAsset() {
    const formData = new FormData();
 
     formData.append("asset.name", assetData.asset.name);
     formData.append("asset.description", assetData.asset.description);
-    formData.append("asset.assetCategoryId", assetData.asset.assetCategoryId);
-    formData.append("asset.acquisitionId", assetData.asset.acquisitionId);
+    formData.append("asset.assetCategory", assetData.asset.assetCategory);
+    formData.append("asset.assetType", assetData.asset.assetType);
+    formData.append("asset.acquisition", assetData.asset.acquisition);
     formData.append("asset.currency", assetData.asset.currency);
     formData.append("asset.currentValue", assetData.asset.currentValue);
 

@@ -1,3 +1,5 @@
+import { File } from 'lucide-react';
+import Link from 'next/link';
 import React from 'react'
 
 type AssetDocument = {
@@ -29,11 +31,11 @@ const AssetDocuments = ({assetDocuments = [], caption}: AssetCoverDocumentsProps
 
                 {assetDocuments.length > 0 ? 
                     <div>
-                    
                         {assetDocuments.map((doc: any) => (
-                            <div key={doc?.doucmentUrl} className='w-30'>
-                                <span>{doc?.originalFileName}</span>
-                            </div>
+                            <Link key={doc?.id} href={doc?.documentUrl} target="_blank" rel="noopener noreferrer" className='w-full rounded-lg flex flex-col gap-y-1 items-center justify-center'>
+                                <File size={15}/>
+                                <span className='text-gray-700 text-sm truncate'>{doc?.originalFileName}</span>
+                            </Link>
                             ))} 
                     </div>
                     :      
