@@ -1,8 +1,8 @@
 "use client"
-import { Ellipsis, ImagePlay } from 'lucide-react'
+import { Ellipsis, ImageOff } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
-import React, { useState } from 'react'
+import { useState } from 'react'
 
 interface ElectronicCardProps {
     id: string,
@@ -16,7 +16,7 @@ const ElectronicCard = ({id, assetId, assetName, image, currency, currentValue}:
     const [imageLoaded, setImageLoaded] = useState<boolean>(false)
     
   return (
-    <Link href={`/assets/electronic/${id}`} key={id} className='w-80 relative rounded-lg overflow-hidden border border-gray-200 bg-white hover:shadow-lg transition-shadow duration-150 cursor-pointer'>
+    <div key={id} className='w-80 relative rounded-lg overflow-hidden border border-gray-200 bg-white hover:shadow-lg transition-shadow duration-150 cursor-pointer'>
 
         <div className='absolute top-1 right-1 bg-blue-900/70 hover:bg-blue-900/90 transition-colors duration-200 rounded-lg z-50 p-1 cursor-pointer'>
           <Ellipsis className='text-white' />
@@ -28,8 +28,8 @@ const ElectronicCard = ({id, assetId, assetName, image, currency, currentValue}:
               :
               <div className='w-full h-full flex items-center justify-center text-sm text-gray-700'>
                 <div>
-                  <ImagePlay className='mx-auto' />
-                  <span>No image.</span>
+                  <ImageOff className='mx-auto' />
+                  <span>No image</span>
                 </div>
               </div>
             }
@@ -37,14 +37,14 @@ const ElectronicCard = ({id, assetId, assetName, image, currency, currentValue}:
         </div>
 
         <div className='py-4 px-3 border-t'>
-          <p className='mb-1 text-sm'>{assetName}</p>
+          <Link href={`/assets/electronic/${id}`} className='mb-1 text-sm hover:underline'>{assetName}</Link>
           <div className='flex items-center justify-between text-sm'>
             <span className='text-gray-700'>current value</span> 
             <span>{currency} {currentValue.toLocaleString("en-US", {maximumFractionDigits: 2})}</span> 
           </div>
         </div>
 
-    </Link>
+    </div>
   )
 }
 

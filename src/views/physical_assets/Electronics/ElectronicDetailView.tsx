@@ -1,5 +1,11 @@
 "use client"
+import AssetCoverImages from '@/src/components/ui/AssetCoverImages';
+import AssetDocuments from '@/src/components/ui/AssetDocuments';
+import BlueButton from '@/src/components/ui/BlueButton';
+import WhiteButton from '@/src/components/ui/WhiteButton';
 import { useGetElectronicAsset } from '@/src/hooks/electronics/useElectronics';
+import { formatDateTime } from '@/src/util/formatDateTime';
+import { ImageOff, PencilIcon } from 'lucide-react';
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react'
 
@@ -8,88 +14,90 @@ interface ElectronicDetailViewProps {
 }
 
 const ElectronicDetailView = ({id}: ElectronicDetailViewProps) => {
+    const [editMode, setEditMode] = useState<boolean>(false);
+
     const { data, isLoading, isError, error } = useGetElectronicAsset(id);
-    const [selectedImage, setSelectedImage] = useState<any>(null);
 
-    // primary image appears first
-    const images = data?.images?.[0]?.images?.sort((a: any, b: any) => Number(b.isPrimary) - Number(a.isPrimary));
+    const images = data?.images?.[0]?.images
+    const imageCaption = data?.images?.[0]?.caption
 
-    useEffect(() => {
-        if (images?.length) setSelectedImage(images[0]);
-    }, [images]);
-
-
-    console.log("this asset: ", data)
-    console.log(data?.images?.images);
+    const documents = data?.documents?.[0]?.documents
+    const documentCaption = data?.documents?.[0]?.caption
 
   return (
     <section className='px-10 py-5'>
         <div className='mb-5'>
-            <h1 className='text-xl'>{data?.assetName ?? ""}</h1>
+            <div className='flex items-center justify-between'>
+                <h1 className='text-xl'>Electronic Asset</h1>
+                <div className='flex flex-row items-center gap-x-3'>
+                    {editMode && <WhiteButton label='Cancel' onClick={() => setEditMode(!editMode)}/>}
+                    {editMode ?  <BlueButton label='Save' onClick={() => setEditMode(!editMode)}/> :  <BlueButton label='Edit' onClick={() => setEditMode(!editMode)} icon={PencilIcon}/>}
+                   
+                </div>
+            </div>
         </div>
 
         <div>
             <div>
-                <div>
-                    {/* preview */}
-                    <div className='w-full h-120 rounded-lg overflow-hidden relative bg-black/90 mb-4'>
-                        {selectedImage && <Image src={selectedImage.imageUrl} alt={selectedImage.caption ?? data.assetName} fill className='object-scale-down' unoptimized />}
+                <AssetCoverImages assetImages={images ?? []} assetName={data?.assetName} caption={imageCaption}/>
+
+                <div className='mb-5 bg-white rounded-lg p-10 text-sm border'>
+                    <div className='pb-5 border-b'>
+                        <h1 className='text-2xl font-medium'>{data?.assetName ?? ""}</h1>
                     </div>
-                    {/* Actual images */}
-                    <div className='flex gap-x-10 items-center'>
-                         {images?.map((pic: any) => (
-                            <div key={pic.imageUrl} onClick={() => setSelectedImage(pic)} className='cursor-pointer rounded-lg overflow-hidden w-50 h-50 relative'>
-                                <div className='absolute bg-black/20 top-0 left-0 right-0 h-full w-full opacity-0 hover:opacity-100 transition-opacity z-5'></div>
-                                <Image src={pic?.imageUrl} alt={pic?.caption ?? data.assetName} fill className='object-cover' unoptimized/>
+
+                    <div className='py-5 border-b'>
+                        <span className='text-xs text-gray-700'>Current value</span>
+                        <p className='text-xl font-medium'>{data?.currency} {data?.currentValue.toLocaleString("en-US", {maximumFractionDigits: 2})}</p>
+                    </div>
+
+                    <div className='py-5 border-b'>
+                        <h5 className='mb-4'>Asset Information</h5>
+
+                        <div className='grid grid-cols-2 gap-x-5 gap-y-3 border-b pb-5 mb-3'>
+                            <div className='flex flex-col gap-y-1'>
+                                <span className='text-xs text-gray-700'>Name </span> <span>{data?.assetName ?? ""}</span>
                             </div>
-                          ))}
+                            <div className='flex flex-col gap-y-1'>
+                                <span className='text-xs text-gray-700'>Brand </span> <span>{data?.brand ?? ""}</span>
+                            </div>
+                            <div className='flex flex-col gap-y-1'>
+                                <span className='text-xs text-gray-700'>Model </span> <span>{data?.model ?? ""}</span>
+                            </div>
+                            <div className='flex flex-col gap-y-1'>
+                                <span className='text-xs text-gray-700'>Color </span> <span>{data?.color ?? ""}</span>
+                            </div>
+                            <div className='flex flex-col gap-y-1'>
+                                <span className='text-xs text-gray-700'>Serial number </span> <span>{data?.serialNumber ?? ""}</span>
+                            </div>
+                            <div className='flex flex-col gap-y-1'>
+                                <span className='text-xs text-gray-700'>Year </span> <span>{data?.year ?? ""}</span>
+                            </div>
+                        </div> 
+
+                        <div className=''>
+                            <h1 className='mb-2'>Description</h1>
+                            <p className='text-gray-700'>
+                                {data?.description ?? "No description available"}
+                            </p>
+                        </div>
+                    </div>
+
+                     <div className='pt-5 space-y-4'>
+                        <div className='flex items-center justify-between'>
+                            <span className='text-gray-500'>Created at</span> <span>{data?.createdAt ? formatDateTime(data.createdAt) : "No data"}</span>
+                        </div>
+
+                         <div className='flex items-center justify-between'>
+                            <span className='text-gray-500'>Updated at</span> <span>{data?.updatedAt ? formatDateTime(data.updatedAt) : "No data"}</span>
+                        </div>
                     </div>
                 </div>
 
-                <div className='flex items-center justify-between'>
-                        <span className='text-sm text-gray-700'>Current value</span>
-                        <p>{data?.currency} {data?.currentValue}</p>
-                </div>
-
-                <div className='bg-white rounded-lg pt-2 pb-4 px-3 text-sm'>
-                   <h1 className='border-b pb-1 mb-1 text-base'>Asset Info</h1>
-                   <div className='grid grid-cols-2 gap-x-5 gap-y-2'>
-                        <div className='flex gap-x-2'>
-                            <span>Name: </span> <span>{data?.assetName ?? ""}</span>
-                        </div>
-                        <div className='flex gap-x-2'>
-                            <span>Brand: </span> <span>{data?.brand ?? ""}</span>
-                        </div>
-                        <div className='flex gap-x-2'>
-                            <span>Model: </span> <span>{data?.model ?? ""}</span>
-                        </div>
-                        <div className='flex gap-x-2'>
-                            <span>Color: </span> <span>{data?.color ?? ""}</span>
-                        </div>
-                        <div className='flex gap-x-2'>
-                            <span>Serial number: </span> <span>{data?.serialNumber ?? ""}</span>
-                        </div>
-                        <div className='flex gap-x-2'>
-                            <span>Year: </span> <span>{data?.year ?? ""}</span>
-                        </div>
-                    </div> 
-
-                    <div>
-
-                    </div>
-                </div>
-
-                <div className='bg-white rounded-lg pt-2 pb-4 px-3'>
-                    <h1 className='border-b pb-1 mb-1'>Description</h1>
-                    <p>
-                        {data?.description}
-                    </p>
-                </div>
+                
             </div>
 
-            <div>
-                Grid 2
-            </div>
+             <AssetDocuments assetDocuments={documents ?? []} caption={documentCaption} />
         </div>
         
     </section>

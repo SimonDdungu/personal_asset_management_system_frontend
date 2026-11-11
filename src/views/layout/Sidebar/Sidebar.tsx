@@ -7,7 +7,7 @@ import { sidebarItems } from './navLinks'
 const Sidebar = () => {
   const pathname = usePathname();
   return (
-    <aside className="w-60 min-h-screen bg-white border-r border-gray-200 py-5 px-2">
+    <aside className="w-50 min-h-screen bg-white border-r border-gray-200 py-5 px-2">
        <h1 className="text-lg font-medium text-gray-900 mb-5">
         Accretion AMS
       </h1>
