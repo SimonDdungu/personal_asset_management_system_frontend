@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Navbar from "../views/layout/Navbar";
-import Sidebar from "../views/layout/Sidebar/Sidebar";
+import Navbar from "../components/ui/layout/Navbar";
+import Sidebar from "../components/ui/layout/Sidebar/Sidebar";
 import QueryProvider from "../providers/QueryProvider";
 import { Suspense } from "react";
+import Footer from "../components/ui/layout/Footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,7 +28,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full">
+      <body className="min-h-full bg-gray-100">
         <QueryProvider>
           <div className="flex flex-row w-full">
             <Suspense fallback={<div>Loading...</div>}>
@@ -36,9 +37,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           
             <main className="flex-1 flex flex-col">
               <Navbar />
-              <div className="px-5 py-2 bg-gray-100">
+              <div className="px-5 py-2 mx-auto xl:min-w-300 xl:max-w-400 w-full">
                   {children}
               </div>
+              <Footer />  
             </main>
           </div>
         </QueryProvider>

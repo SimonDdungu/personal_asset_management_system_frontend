@@ -1,4 +1,5 @@
 "use client"
+import { propertySizeUnitLabels } from '@/src/constants/symbols/propertySizeUnitLabels'
 import { BathIcon, Bed, Ellipsis, ImageOff, SquareDimensions } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -44,7 +45,7 @@ const RealEstateCard = ({id, assetId, assetName, image, currency, currentValue, 
 
         <div className='py-4 px-3 border-t'>
           <p className='text-xs text-gray-700'>{address}</p>
-          <Link href={`/assets/realestate/${id}`} className='mb-2 text-sm hover:underline text-wrap block'>{assetName}</Link>
+          <Link href={`/assets/real_estate/${id}`} className='mb-2 text-sm hover:underline text-wrap block'>{assetName}</Link>
 
           <div className='flex flex-row flex-wrap gap-x-5 text-sm mb-1 border-b pb-1'>
             {noBedrooms && 
@@ -62,7 +63,7 @@ const RealEstateCard = ({id, assetId, assetName, image, currency, currentValue, 
             {propertySize && 
             <div className='flex flex-nowrap gap-x-1 items-center'>
               <SquareDimensions size={15}/>
-              <span>{propertySize} {propertySizeUnit ?? ""}</span>
+              <span>{propertySize} {propertySizeUnit ? propertySizeUnitLabels[propertySizeUnit] : ""}</span>
             </div>}
             
           </div>

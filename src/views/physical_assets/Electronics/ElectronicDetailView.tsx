@@ -25,7 +25,7 @@ const ElectronicDetailView = ({id}: ElectronicDetailViewProps) => {
     const documentCaption = data?.documents?.[0]?.caption
 
   return (
-    <section className='px-10 py-5'>
+    <section className='px-10 pt-10 pb-20'>
         <div className='mb-5'>
             <div className='flex items-center justify-between'>
                 <h1 className='text-xl'>Electronic Asset</h1>
@@ -54,10 +54,7 @@ const ElectronicDetailView = ({id}: ElectronicDetailViewProps) => {
                     <div className='py-5 border-b'>
                         <h5 className='mb-4'>Asset Information</h5>
 
-                        <div className='grid grid-cols-2 gap-x-5 gap-y-3 border-b pb-5 mb-3'>
-                            <div className='flex flex-col gap-y-1'>
-                                <span className='text-xs text-gray-700'>Name </span> <span>{data?.assetName ?? ""}</span>
-                            </div>
+                        <div className='grid grid-cols-[auto_auto] gap-x-5 gap-y-3 border-b pb-5 mb-3'>
                             <div className='flex flex-col gap-y-1'>
                                 <span className='text-xs text-gray-700'>Brand </span> <span>{data?.brand ?? ""}</span>
                             </div>

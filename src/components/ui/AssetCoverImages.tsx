@@ -27,7 +27,7 @@ const AssetCoverImages = ({assetImages = [], assetName, caption}: AssetCoverImag
   return (
         <div className='mb-5 bg-white border pb-5 rounded-xl overflow-hidden '>
             {/* preview */}
-            <div className='w-full h-120 flex items-center justify-center overflow-hidden relative bg-black/90 mb-4'>
+            <div className='w-full h-120 flex items-center justify-center overflow-hidden relative bg-black/95 mb-4'>
                 {selectedImage ? <Image src={selectedImage.imageUrl} alt={selectedImage.caption ?? assetName} fill className='object-contain' unoptimized />
                 :
                 <div className='text-white flex flex-col gap-y-2 items-center justify-center'>

@@ -1,6 +1,7 @@
 import { File } from 'lucide-react';
 import Link from 'next/link';
 import React from 'react'
+import { getDocumentIcon } from './getDocIcon';
 
 type AssetDocument = {
   documentUrl: string;
@@ -32,9 +33,9 @@ const AssetDocuments = ({assetDocuments = [], caption}: AssetCoverDocumentsProps
                 {assetDocuments.length > 0 ? 
                     <div>
                         {assetDocuments.map((doc: any) => (
-                            <Link key={doc?.id} href={doc?.documentUrl} target="_blank" rel="noopener noreferrer" className='w-full rounded-lg flex flex-col gap-y-1 items-center justify-center'>
-                                <File size={15}/>
-                                <span className='text-gray-700 text-sm truncate'>{doc?.originalFileName}</span>
+                            <Link key={doc?.id} href={doc?.documentUrl} target="_blank" rel="noopener noreferrer" className='w-50 rounded-lg border px-2 py-5 flex flex-col gap-y-2 items-center justify-center'>
+                                {getDocumentIcon(doc?.originalFileName ?? "")}
+                                <span title={doc?.originalFileName} className='w-full text-gray-700 text-xs truncate'>{doc?.originalFileName}</span>
                             </Link>
                             ))} 
                     </div>
