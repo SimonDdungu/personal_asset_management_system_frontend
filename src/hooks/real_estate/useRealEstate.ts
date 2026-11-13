@@ -3,6 +3,7 @@ import api from "@/src/lib/api";
 import { API_ENDPOINTS } from "@/src/constants/endpoints/apiEndpoints";
 import { config } from "@/src/config/config";
 import { logApiError } from "@/src/util/logApiError";
+import { RealEstateAssetFilters } from "@/src/interfaces/search_filters/realEstate_SearchFilters";
 
 export const useCreateRealEstateAsset = () => {
   return useMutation({
@@ -21,12 +22,12 @@ export const useCreateRealEstateAsset = () => {
   });
 };
 
-export const useGetRealEstateAssets = () => {
+export const useGetRealEstateAssets = (filters?: RealEstateAssetFilters) => {
   return useQuery({
-    queryKey: ["realestate-assets"],
+     queryKey: ["realestate-assets", filters],
     queryFn: async () => {
       try {
-        const response = await api.get(`${API_ENDPOINTS.ASSETS.REAL_ESTATE}?userId=${config.testing_userId}`);
+        const response = await api.get(API_ENDPOINTS.ASSETS.REAL_ESTATE, {params: { userId: config.testing_userId, ...filters}});
         return response.data;
       } catch (error) {
         logApiError("Get Real Estate Assets", error);

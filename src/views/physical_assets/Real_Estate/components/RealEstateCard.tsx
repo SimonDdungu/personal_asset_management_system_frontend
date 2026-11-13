@@ -23,7 +23,7 @@ const RealEstateCard = ({id, assetId, assetName, image, currency, currentValue, 
 
     
   return (
-    <div key={id} className='w-80 relative rounded-lg overflow-hidden border border-gray-200 bg-white hover:shadow-lg transition-shadow duration-150 cursor-pointer'>
+    <div key={id} className='w-80 relative rounded-lg overflow-hidden border border-gray-300 bg-white shadow hover:shadow-lg transition-shadow duration-150 cursor-pointer'>
 
         <div className='absolute top-1 right-1 bg-blue-900/70 hover:bg-blue-900/90 transition-colors duration-200 rounded-lg z-50 p-1 cursor-pointer'>
           <Ellipsis className='text-white' />

@@ -1,4 +1,5 @@
 import AssetCoverImages from "./AssetCoverImages";
+import AssetDocuments from "./AssetDocuments";
 import BlueButton from "./BlueButton";
 import DetailViewLayout from "./DetailViewLayout";
 import DocumentPicker from "./DocumentPicker";
@@ -7,8 +8,9 @@ import ImagePicker from "./ImagePicker";
 import NumberInput from "./NumberInput";
 import SelectInput from "./SelectInput";
 import TextInput from "./TextInput";
+import TextSearchInput from "./TextSearchInput";
 import WhiteButton from "./WhiteButton";
-
+TextSearchInput
 
 
 export {
@@ -21,5 +23,7 @@ export {
     ImagePicker,
     NumberInput,
     SelectInput,
-    DocumentPicker
+    DocumentPicker,
+    AssetDocuments,
+    TextSearchInput
 }
