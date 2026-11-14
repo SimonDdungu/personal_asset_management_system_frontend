@@ -50,5 +50,7 @@ export const useGetRealEstateAsset = (id: string) => {
       }
     },
     enabled: !!id,
+    staleTime: 60 * 60 * 1000,
+    gcTime: 60 * 60 * 1000, 
   });
 };
