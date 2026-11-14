@@ -2,6 +2,7 @@
 import { DetailViewLayout } from '@/src/components/ui';
 import { propertySizeUnitLabels } from '@/src/constants/symbols/propertySizeUnitLabels';
 import { useGetRealEstateAsset } from '@/src/hooks/real_estate/useRealEstate';
+import { formatDate } from '@/src/util/formatDateTime';
 import { useState } from 'react';
 
 interface RealEstateDetailViewProps {
@@ -20,7 +21,7 @@ const RealEstateDetailView = ({id}: RealEstateDetailViewProps) => {
 
   return (
     <DetailViewLayout assetCategory='Real Estate Asset' assetName={data?.assetName} assetLabel={data?.address} assetImages={images} imageCaption={imageCaption} assetDocuments={documents} documentCaption={documentCaption} currentCurrency={data?.currency} 
-    currentValue={data?.currentValue} createdAt={data?.createdAt} updatedAt={data?.updatedAt}>
+    currentValue={data?.currentValue} createdAt={data?.createdAt} updatedAt={data?.updatedAt} currentValueUpdatedAt={data?.currentValueUpdatedAt}>
 
             <div>
                 <div className='grid grid-cols-2 sm:grid-cols-[max-content_max-content_max-content] xl:grid-cols-[max-content_max-content_max-content_max-content] gap-x-5 sm:gap-x-10 gap-y-3 border-b pb-5 mb-3'>
@@ -59,7 +60,7 @@ const RealEstateDetailView = ({id}: RealEstateDetailViewProps) => {
 
                             <div className='flex flex-col gap-y-1'>
                                 <span className='text-xs text-gray-700'>Construction completion date</span>
-                                <span>{data?.constructionCompletionDate ?? "N/A"}</span>
+                                <span>{formatDate(data?.constructionCompletionDate) ?? "N/A"}</span>
                             </div>
                         </div>
                     </div>

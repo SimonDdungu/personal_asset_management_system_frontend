@@ -35,7 +35,7 @@ const RealEstateView = () => {
     console.log(searchFilters)
 
   return (
-    <div className='px-10 pt-10 pb-40 bg-white'>
+    <div className='px-10 pt-10 pb-40 bg-gray-100'>
        <h1 className='mb-2 pb-2 border-b'>Real Estate Assets</h1>
         <div className='mb-5 pt-2 pb-4 border-b'>
           <div className='mb-2 flex flex-row flex-wrap gap-x-5 items-center'>

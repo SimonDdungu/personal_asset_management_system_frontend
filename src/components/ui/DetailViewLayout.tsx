@@ -19,8 +19,10 @@ interface DetailViewLayoutProps {
     createdAt: string,
     updatedAt: string,
     children: ReactNode,
+    currentValueUpdatedAt: string,
 }
-const DetailViewLayout = ({assetCategory, assetName, assetImages, assetLabel, imageCaption, children, currentCurrency, currentValue, updatedAt, createdAt, description, assetDocuments, documentCaption}: DetailViewLayoutProps) => {
+const DetailViewLayout = ({assetCategory, assetName, assetImages, assetLabel, imageCaption, children, currentCurrency, currentValue, updatedAt, createdAt, description, assetDocuments, 
+    documentCaption, currentValueUpdatedAt}: DetailViewLayoutProps) => {
     const [editMode, setEditMode] = useState<boolean>(false);
     
   return (
@@ -42,6 +44,7 @@ const DetailViewLayout = ({assetCategory, assetName, assetImages, assetLabel, im
                     <div className='pb-5 border-b'>
                         <span className='text-xs text-gray-700'>{assetLabel}</span>
                         <h1 className='text-2xl font-medium'>{assetName ?? ""}</h1>
+                        <span className='text-xs text-gray-700'>last updated on {formatDateTime(currentValueUpdatedAt)}</span>
                     </div>
 
                     <div className='py-5 border-b'>
@@ -64,11 +67,11 @@ const DetailViewLayout = ({assetCategory, assetName, assetImages, assetLabel, im
 
                     <div className='pt-5 space-y-4'>
                         <div className='flex items-center justify-between'>
-                            <span className='text-gray-500'>Created at</span> <span>{createdAt ? formatDateTime(createdAt) : "No data"}</span>
+                            <span className='text-gray-500'>Created on</span> <span>{createdAt ? formatDateTime(createdAt) : "No data"}</span>
                         </div>
 
                             <div className='flex items-center justify-between'>
-                            <span className='text-gray-500'>Updated at</span> <span>{updatedAt ? formatDateTime(updatedAt) : "No data"}</span>
+                            <span className='text-gray-500'>Updated on</span> <span>{updatedAt ? formatDateTime(updatedAt) : "No data"}</span>
                         </div>
                     </div>
                 </div>

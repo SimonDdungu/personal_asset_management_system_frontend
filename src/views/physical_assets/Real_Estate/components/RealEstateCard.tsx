@@ -23,7 +23,7 @@ const RealEstateCard = ({id, assetId, assetName, image, currency, currentValue, 
 
     
   return (
-    <div key={id} className='w-80 relative rounded-lg overflow-hidden border border-gray-300 bg-white shadow hover:shadow-lg transition-shadow duration-150 cursor-pointer'>
+    <div key={id} className='w-80 relative rounded-lg overflow-hidden border border-gray-300 bg-white hover:shadow transition-shadow duration-150 cursor-pointer'>
 
         <div className='absolute top-1 right-1 bg-blue-900/70 hover:bg-blue-900/90 transition-colors duration-200 rounded-lg z-50 p-1 cursor-pointer'>
           <Ellipsis className='text-white' />
@@ -45,7 +45,7 @@ const RealEstateCard = ({id, assetId, assetName, image, currency, currentValue, 
 
         <div className='py-4 px-3 border-t'>
           <p className='text-xs text-gray-700'>{address}</p>
-          <Link href={`/assets/real_estate/${id}`} className='mb-2 text-sm hover:underline text-wrap block'>{assetName}</Link>
+          <Link href={`/assets/real_estate/${id}`} className='mb-2 text-sm hover:underline text-wrap'>{assetName}</Link>
 
           <div className='flex flex-row flex-wrap gap-x-5 text-sm mb-1 border-b pb-1'>
             {noBedrooms && 
