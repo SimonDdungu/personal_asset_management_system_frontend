@@ -8,5 +8,6 @@ export interface ButtonProps {
     height?: string,
     link?: string,
     onClick?: (value?: any) => void,
-    button?: boolean
+    button?: boolean,
+    disabled?: boolean
 }
