@@ -9,10 +9,9 @@ type AssetDocument = {
 
 interface AssetCoverDocumentsProps {
     assetDocuments?: AssetDocument[];
-    caption?: string;
 }
 
-const AssetDocuments = ({assetDocuments = [], caption}: AssetCoverDocumentsProps) => {
+const AssetDocuments = ({assetDocuments = []}: AssetCoverDocumentsProps) => {
     
   return (
     <div className='bg-white rounded-lg p-10 text-sm border'>
@@ -23,12 +22,6 @@ const AssetDocuments = ({assetDocuments = [], caption}: AssetCoverDocumentsProps
 
         <div className='mt-5'>
             <div>
-                {caption && 
-                    <div className='mb-5'>
-                        <p className='text-gray-700 mb-1 text-xs'>Caption</p>
-                        <p>{caption}</p>
-                    </div>
-                }
 
                 {assetDocuments.length > 0 ? 
                     <div>

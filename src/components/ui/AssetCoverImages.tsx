@@ -11,10 +11,9 @@ type AssetImage = {
 interface AssetCoverImagesProps {
     assetImages?: AssetImage[];
     assetName?: string;
-    caption?: string;
 }
 
-const AssetCoverImages = ({assetImages = [], assetName, caption}: AssetCoverImagesProps) => {
+const AssetCoverImages = ({assetImages = [], assetName}: AssetCoverImagesProps) => {
     const [selectedImage, setSelectedImage] = useState<any>(null);
     
     // primary image appears first
@@ -51,13 +50,6 @@ const AssetCoverImages = ({assetImages = [], assetName, caption}: AssetCoverImag
                     <p className='text-gray-700 mx-auto'>No images available</p>
                 }
             </div>
-
-            {caption && 
-                <div className='px-5 mt-8'>
-                    <p className='text-gray-700 text-xs'>Caption</p>
-                    <p>{caption ?? "testing"}</p>
-                </div>
-            }
 
         </div>
   )

@@ -6,6 +6,7 @@ import { PencilIcon } from 'lucide-react';
 import { formatDateTime } from '@/src/util/formatDateTime';
 
 interface DetailViewLayoutProps {
+    assetId: string,
     assetCategory?: string,
     assetName: string,
     description?: string,
@@ -20,9 +21,10 @@ interface DetailViewLayoutProps {
     updatedAt: string,
     children: ReactNode,
     currentValueUpdatedAt: string,
+    editLink: string,
 }
-const DetailViewLayout = ({assetCategory, assetName, assetImages, assetLabel, imageCaption, children, currentCurrency, currentValue, updatedAt, createdAt, description, assetDocuments, 
-    documentCaption, currentValueUpdatedAt}: DetailViewLayoutProps) => {
+const DetailViewLayout = ({assetCategory, assetName, assetImages, assetLabel, children, currentCurrency, currentValue, updatedAt, createdAt, description, assetDocuments, 
+    currentValueUpdatedAt, assetId, editLink}: DetailViewLayoutProps) => {
     const [editMode, setEditMode] = useState<boolean>(false);
     
   return (
@@ -32,24 +34,23 @@ const DetailViewLayout = ({assetCategory, assetName, assetImages, assetLabel, im
                 <div className='flex items-center justify-between'>
                     <h1 className='text-xl'>{assetCategory ?? "Asset"}</h1>
                     <div className='flex flex-row items-center gap-x-3'>
-                        {editMode && <WhiteButton label='Cancel' onClick={() => setEditMode(!editMode)}/>}
-                        {editMode ?  <BlueButton label='Save' onClick={() => setEditMode(!editMode)}/> :  <BlueButton label='Edit' onClick={() => setEditMode(!editMode)} icon={PencilIcon}/>}
+                       <BlueButton link={`/${editLink}/${assetId}/edit`} label='Edit' onClick={() => setEditMode(!editMode)} icon={PencilIcon}/>
                     </div>
                 </div>
             </div>
 
-            <AssetCoverImages assetImages={assetImages ?? []} assetName={assetName} caption={imageCaption}/>
+            <AssetCoverImages assetImages={assetImages ?? []} assetName={assetName} />
 
                 <div className='mb-5 bg-white rounded-lg p-10 text-sm border'>
                     <div className='pb-5 border-b'>
                         <span className='text-xs text-gray-700'>{assetLabel}</span>
                         <h1 className='text-2xl font-medium'>{assetName ?? ""}</h1>
-                        <span className='text-xs text-gray-700'>last updated on {formatDateTime(currentValueUpdatedAt)}</span>
                     </div>
 
                     <div className='py-5 border-b'>
                         <span className='text-xs text-gray-700'>Current value</span>
                         <p className='text-xl font-medium'>{currentCurrency} {currentValue?.toLocaleString("en-US", {maximumFractionDigits: 2})}</p>
+                        <span className='text-xs text-gray-700'>last updated on {formatDateTime(currentValueUpdatedAt)}</span>
                     </div>
 
                     <div className='py-5 border-b'>
@@ -76,7 +77,7 @@ const DetailViewLayout = ({assetCategory, assetName, assetImages, assetLabel, im
                     </div>
                 </div>
 
-                <AssetDocuments assetDocuments={assetDocuments ?? []} caption={documentCaption} />
+                <AssetDocuments assetDocuments={assetDocuments ?? []} />
 
         </div>
 

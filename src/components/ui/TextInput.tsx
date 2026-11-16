@@ -26,11 +26,11 @@ const TextInput = ({name, id, placeholder, label, width, height, fontSize, regis
             <input 
                 type='text'
                 name={name}
-                {...register}
+                {...register(name, { onChange: (e: React.ChangeEvent<HTMLInputElement>) => onChange?.(e.target.value) })}
                 id={id}
                 placeholder={placeholder}
                 onChange={(e) => onChange?.(e.target.value)}
-                className={`outline-none border placeholder:text-gray-600 placeholder:text-sm ${errorMessage ? "border-red-500" : "border-gray-300"} rounded-lg px-2 py-2 ${width ? width : "w-full"} ${height ? height : ""} ${fontSize ? fontSize : "text-base xl:text-sm"} `}
+                className={`outline-none border placeholder:text-gray-600 placeholder:text-sm ${errorMessage ? "border-red-500" : "border-blue-600"} rounded-lg px-2 py-2 ${width ? width : "w-full"} ${height ? height : ""} ${fontSize ? fontSize : "text-base xl:text-sm"} `}
             />
 
             {errorMessage && <span className='absolute bottom-0 left-1 text-red-600 text-sm'>{errorMessage}</span>}

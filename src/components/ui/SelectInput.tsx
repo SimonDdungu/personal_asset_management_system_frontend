@@ -1,4 +1,4 @@
-import { Control, FieldErrors, UseFormRegister } from "react-hook-form";
+import { Control, FieldErrors, FieldValues, Path, UseFormRegister } from "react-hook-form";
 import {
   Select,
   SelectContent,
@@ -13,7 +13,7 @@ type Option = {
     value: string;
 };
 
-interface SelectInputProps {
+interface SelectInputProps<T extends FieldValues = FieldValues> {
     name: string;
     id?: string;
     label?: string;
@@ -24,11 +24,11 @@ interface SelectInputProps {
     width?: string,
     height?: string,
     fontSize?: string,
-    control: Control<any>;
+    control: Control<T>;
     onChange?: (value?: any) => void;
 };
 
-const SelectInput = ({name, id, label, placeholder, options, register, error, width, height, fontSize, control, onChange}: SelectInputProps) => {
+const SelectInput = <T extends FieldValues,>({name, id, label, placeholder, options, register, error, width, height, fontSize, control, onChange}: SelectInputProps<T>) => {
   const errorMessage = error?.[name]?.message as string | undefined;
 
   return (
@@ -38,11 +38,11 @@ const SelectInput = ({name, id, label, placeholder, options, register, error, wi
              </label>
 
             <Controller
-                name={name}
+                name={name as Path<T>}
                 control={control}
                 render={({ field }) => (
-                    <Select  onValueChange={(value) => {field.onChange(value); onChange?.(value);}}    value={field.value}>
-                    <SelectTrigger className="w-full  text-base py-2">
+                    <Select  onValueChange={(value) => {field.onChange(value); onChange?.(value);}}    value={field.value ?? ""}>
+                    <SelectTrigger className={`w-full  text-sm py-2 ${errorMessage ? "border-red-500" : "border-blue-600"}`}>
                         <SelectValue placeholder={placeholder || "Select an option"} />
                     </SelectTrigger>
 

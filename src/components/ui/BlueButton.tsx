@@ -3,8 +3,8 @@ import Link from 'next/link'
 import { ButtonProps } from '@/src/interfaces/ui/button_interfaces';
 
 
-const BlueButton = ({label, width, height, link, onClick, button, icon: Icon, iconSize = 15}: ButtonProps) => {
-    const className = `text-xs sm:text-sm px-4 py-1 rounded-lg bg-blue-600 text-white ${width || ""} ${height || ""} hover:bg-blue-700 transition-colors cursor-pointer duration-150 flex gap-x-1 items-center`;
+const BlueButton = ({label, width, height, link, onClick, button, icon: Icon, iconSize = 15, disabled}: ButtonProps) => {
+    const className = `text-xs sm:text-sm px-4 py-1 rounded-lg bg-blue-600 ${disabled ? "opacity-50" : "opacity-100 hover:bg-blue-700 "} text-white ${width || ""} ${height || ""}  transition-colors ${disabled ? "cursor-not-allowed"  : "cursor-pointer"} duration-150 flex gap-x-1 items-center`;
   return (
     <>
         {link ?
@@ -13,7 +13,7 @@ const BlueButton = ({label, width, height, link, onClick, button, icon: Icon, ic
               {label ?? "link"}
             </Link> 
             :
-            <button type={button ? "button" : "submit"} onClick={onClick} className={className}>
+            <button disabled={disabled} type={button ? "button" : "submit"} onClick={onClick} className={className}>
               {Icon && <Icon size={iconSize} />}
               {label ?? "button"}
             </button> 
