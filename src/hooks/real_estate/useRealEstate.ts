@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import api from "@/src/lib/api";
 import { API_ENDPOINTS } from "@/src/constants/endpoints/apiEndpoints";
 import { config } from "@/src/config/config";
@@ -52,5 +52,28 @@ export const useGetRealEstateAsset = (id: string) => {
     enabled: !!id,
     staleTime: 60 * 60 * 1000,
     gcTime: 60 * 60 * 1000, 
+  });
+};
+
+export const useUpdateRealEstateAsset = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async ({ id, data }: { id: string; data: any }) => {
+      try {
+        const response = await api.patch(`${API_ENDPOINTS.ASSETS.REAL_ESTATE}/${id}?userId=${config.testing_userId}`, data);
+        return response.data;
+      } catch (error) {
+        logApiError("Update Real Estate Asset", error);
+        throw error;
+      }
+    },
+
+    onSuccess: async (_, variables) => {
+      await Promise.all([
+        queryClient.invalidateQueries({ queryKey: ["realestate-asset", variables.id] }),
+        queryClient.invalidateQueries({ queryKey: ["realestate-assets"] }),
+        queryClient.invalidateQueries({ queryKey: ["all_assets"] })
+      ]);
+    },
   });
 };
