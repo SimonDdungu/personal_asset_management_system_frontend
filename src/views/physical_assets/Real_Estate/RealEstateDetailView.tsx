@@ -20,8 +20,8 @@ const RealEstateDetailView = ({id}: RealEstateDetailViewProps) => {
     const documentCaption = data?.documents?.[0]?.caption
 
   return (
-    <DetailViewLayout assetCategory='Real Estate Asset' assetName={data?.assetName} assetLabel={data?.address} assetImages={images} imageCaption={imageCaption} assetDocuments={documents} documentCaption={documentCaption} currentCurrency={data?.currency} 
-    currentValue={data?.currentValue} createdAt={data?.createdAt} updatedAt={data?.updatedAt} currentValueUpdatedAt={data?.currentValueUpdatedAt}>
+    <DetailViewLayout assetId={data?.id} editLink="assets/real_estate" assetCategory='Real Estate Asset' assetName={data?.assetName} assetLabel={data?.address} assetImages={images} imageCaption={imageCaption} assetDocuments={documents} documentCaption={documentCaption} currentCurrency={data?.currency} 
+    currentValue={data?.currentValue} description={data?.description} createdAt={data?.createdAt} updatedAt={data?.updatedAt} currentValueUpdatedAt={data?.currentValueUpdatedAt}>
 
             <div>
                 <div className='grid grid-cols-2 sm:grid-cols-[max-content_max-content_max-content] xl:grid-cols-[max-content_max-content_max-content_max-content] gap-x-5 sm:gap-x-10 gap-y-3 border-b pb-5 mb-3'>

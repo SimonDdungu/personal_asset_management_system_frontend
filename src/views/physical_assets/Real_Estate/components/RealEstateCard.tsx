@@ -1,8 +1,10 @@
 "use client"
+import { ActionPopover } from '@/src/components/ui/ActionPopOver'
 import { propertySizeUnitLabels } from '@/src/constants/symbols/propertySizeUnitLabels'
-import { BathIcon, Bed, Ellipsis, ImageOff, SquareDimensions } from 'lucide-react'
+import { BathIcon, Bed, Ellipsis, Eye, ImageOff, Pencil, SquareDimensions, Trash2 } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
 interface RealEstateCardProps {
@@ -18,16 +20,38 @@ interface RealEstateCardProps {
     propertySizeUnit?: string
     address: string
 }
+
 const RealEstateCard = ({id, assetId, assetName, image, currency, currentValue, address, noBathrooms, noBedrooms, propertySize, propertySizeUnit}: RealEstateCardProps) => {
     const [imageLoaded, setImageLoaded] = useState<boolean>(false)
+    const router = useRouter();
+    const basePath = "/assets/real_estate";
 
     
   return (
     <div key={id} className='w-80 relative rounded-lg overflow-hidden border border-gray-300 bg-white hover:shadow transition-shadow duration-150 cursor-pointer'>
 
-        <div className='absolute top-1 right-1 bg-blue-900/70 hover:bg-blue-900/90 transition-colors duration-200 rounded-lg z-50 p-1 cursor-pointer'>
-          <Ellipsis className='text-white' />
-        </div>
+        <ActionPopover
+          options={[
+            {
+              label: "View",
+              icon: <Eye className="h-4 w-4" />,
+              className: "text-gray-700",
+              onClick: () => router.push(`${basePath}/${id}`),
+            },
+            {
+              label: "Edit",
+              icon: <Pencil className="h-4 w-4" />,
+              className: "text-blue-800",
+              onClick: () => router.push(`${basePath}/${id}/edit`),
+            },
+            {
+              label: "Delete",
+              icon: <Trash2 className="h-4 w-4" />,
+              className: "text-red-600",
+              onClick: () => console.log("Delete clicked"),
+            },
+          ]}
+        />
 
         <div className={`relative w-full h-80 bg-gray-900/50 ${image && !imageLoaded ? "animate-pulse [animation-duration:1s]" : ""}`}>
             {image ?
