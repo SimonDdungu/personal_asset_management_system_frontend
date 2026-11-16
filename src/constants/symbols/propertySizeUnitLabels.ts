@@ -13,3 +13,7 @@ export const propertySizeUnitOptions = [
   {label: "ha", value: "HECTARES"},
   {label: "Decimals", value: "DECIMALS"}
 ]
+
+export const PROPERTY_SIZE_UNITS = ["SQUARE_METERS", "SQUARE_FEET", "ACRES", "HECTARES", "DECIMALS"] as const;
+
+export type PropertySizeUnitTypes = typeof PROPERTY_SIZE_UNITS[number];

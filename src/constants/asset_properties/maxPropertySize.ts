@@ -1,0 +1,1 @@
+export const maxPropertySize = 9999999999.99;

@@ -1,0 +1,1 @@
+export const maxMoneyValue = 99999999999999999.99;
