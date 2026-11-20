@@ -1,6 +1,6 @@
 "use client"
-import { ActionPopover } from '@/src/components/ui/ActionPopOver'
-import AssetPopOver from '@/src/components/ui/AssetPopOver'
+import { ActionPopover } from '@/src/components/ui/pop_over/ActionPopOver'
+import AssetPopOver from '@/src/components/ui/pop_over/AssetPopOver'
 import { propertySizeUnitLabels } from '@/src/constants/symbols/propertySizeUnitLabels'
 import { BathIcon, Bed, Ellipsis, Eye, ImageOff, Pencil, SquareDimensions, Trash2 } from 'lucide-react'
 import Image from 'next/image'
@@ -31,7 +31,9 @@ const RealEstateCard = ({id, assetId, assetName, image, currency, currentValue, 
   return (
     <div key={id} className='w-80 relative rounded-lg overflow-hidden border border-gray-300 bg-white hover:shadow transition-shadow duration-150 cursor-pointer'>
 
-        <AssetPopOver basePath={basePath} id={id}/>
+        <AssetPopOver basePath={basePath} id={id} assetName={assetName} />
+
+        
 
         <div className={`relative w-full h-80 bg-gray-900/50 ${image && !imageLoaded ? "animate-pulse [animation-duration:1s]" : ""}`}>
             {image ?
