@@ -10,7 +10,7 @@ export const usedDeleteImages = () => {
   return useMutation({
     mutationFn: async ({ id,uploadId }: { id: string, uploadId: string }) => {
       try {
-        const response = await api.delete(`${API_ENDPOINTS.IMAGES.BASE}/${uploadId}/${id}?userId=${config.testing_userId}`);
+        const response = await api.delete(`${API_ENDPOINTS.ASSETS.IMAGES}/${uploadId}/${id}?userId=${config.testing_userId}`);
         return response.data;
       } catch (error) {
         logApiError("Delete Images: ", error);
