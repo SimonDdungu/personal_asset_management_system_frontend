@@ -6,9 +6,9 @@ import { UpdateAssetFormData, updateAssetSchema } from '@/src/validation/asset_p
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ReactNode, useRef, useState } from 'react';
 import { FieldValues, FormProvider, useForm } from 'react-hook-form';
-import { BlueButton, NumberInput, SelectInput, TextInput, WhiteButton } from '.';
-import MultiTextInput from './MultiTextInput';
-import FullScreenLoadingSpinner from './layout/FullScreenLoadingSpinner';
+import { BlueButton, NumberInput, SelectInput, TextInput, WhiteButton } from '..';
+import MultiTextInput from '../input/MultiTextInput';
+import FullScreenLoadingSpinner from '../loading_state/FullScreenLoadingSpinner';
 
 interface DetailViewLayoutProps <T extends FieldValues>{
     assetid: string,

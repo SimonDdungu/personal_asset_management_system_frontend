@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Image from 'next/image'
-import ImagePicker from './ImagePicker'
+import ImagePicker from './images/ImagePicker'
 
 interface AssetImages {
     id: string,
