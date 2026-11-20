@@ -1,8 +1,8 @@
 "use client"
 import { TextInput } from '@/src/components/ui'
-import BlueButton from '@/src/components/ui/BlueButton'
-import NumberInput from '@/src/components/ui/NumberInput'
-import SelectInput from '@/src/components/ui/SelectInput'
+import BlueButton from '@/src/components/ui/buttons/BlueButton'
+import NumberInput from '@/src/components/ui/input/NumberInput'
+import SelectInput from '@/src/components/ui/input/SelectInput'
 import { acquisitionTypes } from '@/src/constants/assets_options/acquistion'
 import { assetCategories } from '@/src/constants/assets_options/assetCategories'
 import { assetTypes } from '@/src/constants/assets_options/assetTypes'

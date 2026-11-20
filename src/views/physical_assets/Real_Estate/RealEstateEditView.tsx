@@ -1,14 +1,7 @@
 "use client"
-import { BlueButton, DetailViewLayout, NumberInput, SelectInput, TextInput, WhiteButton } from '@/src/components/ui';
-import EditViewLayout from '@/src/components/ui/EditViewLayout';
-import { currencyOptions } from '@/src/constants/currency/currency';
-import { propertySizeUnitLabels, propertySizeUnitOptions } from '@/src/constants/symbols/propertySizeUnitLabels';
-import { useUpdateAsset } from '@/src/hooks/assets/useAssets';
+import EditViewLayout from '@/src/components/ui/layout/EditViewLayout';
 import { useGetRealEstateAsset, useUpdateRealEstateAsset } from '@/src/hooks/real_estate/useRealEstate';
-import { formatDate } from '@/src/util/formatDateTime';
-import { UpdateRealEstateFormData, updateRealEstateSchema } from '@/src/validation/asset_properties/realEstate_Validation';
-import { useState } from 'react';
-import { useForm, Control, useFormContext } from 'react-hook-form';
+import { updateRealEstateSchema } from '@/src/validation/asset_properties/realEstate_Validation';
 import RealEstateEditFields from './RealEstateEditFields';
 
 

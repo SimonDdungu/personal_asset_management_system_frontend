@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { RealEstateAssetFilters } from '@/src/interfaces/search_filters/realEstate_SearchFilters';
 import { BlueButton, TextSearchInput } from '@/src/components/ui';
 import { CircleX, Search } from 'lucide-react';
-import NumberSearchInput from '@/src/components/ui/NumberSearchInput';
+import NumberSearchInput from '@/src/components/ui/input/NumberSearchInput';
 
 const RealEstateView = () => {
   const [searchFilters, setSearchFilters] = useState<RealEstateAssetFilters>({});

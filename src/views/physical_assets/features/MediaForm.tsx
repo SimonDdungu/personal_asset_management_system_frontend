@@ -1,9 +1,9 @@
 "use client"
 import { TextInput } from '@/src/components/ui'
-import BlueButton from '@/src/components/ui/BlueButton'
-import DocumentPicker from '@/src/components/ui/DocumentPicker';
-import ImagePicker from '@/src/components/ui/ImagePicker';
-import SelectInput from '@/src/components/ui/SelectInput';
+import BlueButton from '@/src/components/ui/buttons/BlueButton'
+import DocumentPicker from '@/src/components/ui/documents/DocumentPicker';
+import ImagePicker from '@/src/components/ui/images/ImagePicker';
+import SelectInput from '@/src/components/ui/input/SelectInput';
 import { documentTypes } from '@/src/constants/document_options/documentTypes';
 import { useCreateElectronicAsset } from '@/src/hooks/electronics/useElectronics';
 import { useCreateRealEstateAsset } from '@/src/hooks/real_estate/useRealEstate';

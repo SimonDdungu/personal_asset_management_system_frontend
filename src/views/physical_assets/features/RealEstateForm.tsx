@@ -1,7 +1,7 @@
 "use client"
 import { TextInput } from '@/src/components/ui';
-import BlueButton from '@/src/components/ui/BlueButton';
-import NumberInput from '@/src/components/ui/NumberInput';
+import BlueButton from '@/src/components/ui/buttons/BlueButton';
+import NumberInput from '@/src/components/ui/input/NumberInput';
 import { GotoNextStepper } from '@/src/interfaces/stepper/stepper_interfaces';
 import React from 'react'
 import { useForm } from 'react-hook-form';

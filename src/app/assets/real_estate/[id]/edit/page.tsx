@@ -1,5 +1,5 @@
 "use client"
-import FullScreenLoadingSpinner from '@/src/components/ui/layout/FullScreenLoadingSpinner';
+import FullScreenLoadingSpinner from '@/src/components/ui/loading_state/FullScreenLoadingSpinner';
 import RealEstateDetailView from '@/src/views/physical_assets/Real_Estate/RealEstateDetailView';
 import RealEstateEditView from '@/src/views/physical_assets/Real_Estate/RealEstateEditView';
 import { useParams } from "next/navigation";
