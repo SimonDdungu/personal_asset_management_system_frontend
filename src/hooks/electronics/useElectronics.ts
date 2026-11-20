@@ -1,10 +1,11 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import api from "@/src/lib/api";
 import { API_ENDPOINTS } from "@/src/constants/endpoints/apiEndpoints";
 import { config } from "@/src/config/config";
 import { logApiError } from "@/src/util/logApiError";
 
 export const useCreateElectronicAsset = () => {
+  const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (data: any) => {
       const response = await api.post(`${API_ENDPOINTS.ASSETS.ELECTRONICS}?userId=${config.testing_userId}`, data);
@@ -12,7 +13,7 @@ export const useCreateElectronicAsset = () => {
     },
 
     onSuccess: (data) => {
-      console.log("Asset created successfully:", data);
+      queryClient.setQueryData(["electronic-asset", data.id], data);
     },
 
     onError: (error) => {
@@ -49,5 +50,28 @@ export const useGetElectronicAsset = (id: string) => {
       }
     },
     enabled: !!id,
+  });
+};
+
+export const useUpdateElectronicAsset = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async ({ id, data }: { id: string; data: any }) => {
+      try {
+        const response = await api.patch(`${API_ENDPOINTS.ASSETS.ELECTRONICS}?userId=${config.testing_userId}`, data);
+        return response.data;
+      } catch (error) {
+        logApiError("Update Electronic Asset", error);
+        throw error;
+      }
+    },
+
+    onSuccess: async (_, variables) => {
+      await Promise.all([
+        queryClient.invalidateQueries({ queryKey: ["electronic-asset", variables.id] }),
+        queryClient.invalidateQueries({ queryKey: ["electronic-assets"] }),
+        queryClient.invalidateQueries({ queryKey: ["all_assets"] })
+      ]);
+    },
   });
 };
