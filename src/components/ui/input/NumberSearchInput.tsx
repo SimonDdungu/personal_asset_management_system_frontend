@@ -9,9 +9,10 @@ interface NumberSearchProps {
     height?: string,
     fontSize?: string,
     onChange?: (value: any) => void
-    max?: number
+    max?: number,
+    value: number | string,
 }
-const NumberSearchInput = ({name, placeholder, label, width, height, fontSize, max, onChange}: NumberSearchProps) => {
+const NumberSearchInput = ({name, placeholder, label, width, height, fontSize, max, onChange, value}: NumberSearchProps) => {
 
     return (
         <div className='relative pb-2'>
@@ -23,6 +24,7 @@ const NumberSearchInput = ({name, placeholder, label, width, height, fontSize, m
                 type='text'
                 inputMode="decimal"
                 name={name}
+                value={value ?? ""}
                 maxLength={max}
                 onChange = {(e) => {
                     const value = e.target.value.replace(/[^\d.]/g, "").replace(/^(\d*\.?\d{0,2}).*$/, "$1");

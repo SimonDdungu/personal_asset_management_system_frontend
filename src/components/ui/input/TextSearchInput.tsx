@@ -6,10 +6,11 @@ interface TextSearchProps {
     width?: string,
     height?: string,
     fontSize?: string,
+    value: string,
     onChange?: (value: any) => void
 }
 
-const TextSearchInput = ({name, placeholder, label, width, height, fontSize, onChange}: TextSearchProps) => {
+const TextSearchInput = ({name, placeholder, label, width, height, fontSize, onChange, value}: TextSearchProps) => {
 
     return (
         <div className='relative pb-2'>
@@ -21,6 +22,7 @@ const TextSearchInput = ({name, placeholder, label, width, height, fontSize, onC
                 type='text'
                 name={name}
                 placeholder={placeholder}
+                value={value ?? ""}
                 onChange={(e) => onChange?.(e.target.value)}
                 className={`bg-white outline-none border placeholder:text-gray-600 placeholder:text-xs border-gray-300 rounded-lg px-2 py-2 ${width ? width : "w-full"} ${height ? height : ""} ${fontSize ? fontSize : "text-base xl:text-sm"} `}
             />
