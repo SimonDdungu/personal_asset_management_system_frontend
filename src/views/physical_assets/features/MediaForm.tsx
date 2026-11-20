@@ -78,7 +78,6 @@ const MediaForm = ({assetData}: MediaFormProps) => {
     }
 
     mutate(formData);
-    console.log("Submitting data: ", formData)
   }
 
   return (

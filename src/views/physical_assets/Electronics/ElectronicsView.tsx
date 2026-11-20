@@ -6,7 +6,6 @@ import ElectronicCard from './components/ElectronicCard';
 const ElectronicsView = () => {
     const { data, isLoading, isError, error, refetch } = useGetElectronicAssets();
 
-    console.log(data);
   return (
     <div className='px-10 py-10'>
         <h1>All Electronics</h1>

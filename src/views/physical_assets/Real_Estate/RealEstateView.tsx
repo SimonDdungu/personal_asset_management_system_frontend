@@ -39,8 +39,6 @@ const RealEstateView = () => {
   
     const { data, isLoading, isError, error, refetch } = useGetRealEstateAssets(appliedFilters);
 
-    console.log(searchFilters)
-
   return (
     <div className='px-10 pt-10 pb-40 bg-gray-100'>
        <h1 className='mb-2 pb-2 border-b'>Real Estate Assets</h1>
