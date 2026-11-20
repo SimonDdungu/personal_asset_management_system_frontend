@@ -15,12 +15,13 @@ const RealEstateDetailView = ({id}: RealEstateDetailViewProps) => {
 
     const images = data?.images?.[0]?.images
     const imageCaption = data?.images?.[0]?.caption
+    const imageUploadId = data?.images?.[0]?.id
 
     const documents = data?.documents?.[0]?.documents
     const documentCaption = data?.documents?.[0]?.caption
 
   return (
-    <DetailViewLayout assetId={data?.id} editLink="assets/real_estate" assetCategory='Real Estate Asset' assetName={data?.assetName} assetLabel={data?.address} assetImages={images} imageCaption={imageCaption} assetDocuments={documents} documentCaption={documentCaption} currentCurrency={data?.currency} 
+    <DetailViewLayout assetId={data?.id} editLink="assets/real_estate" assetCategory='Real Estate Asset' assetName={data?.assetName} assetLabel={data?.address} assetUploadImageId={imageUploadId} assetImages={images} imageCaption={imageCaption} assetDocuments={documents} documentCaption={documentCaption} currentCurrency={data?.currency} 
     currentValue={data?.currentValue} description={data?.description} createdAt={data?.createdAt} updatedAt={data?.updatedAt} currentValueUpdatedAt={data?.currentValueUpdatedAt}>
 
             <div>

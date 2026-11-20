@@ -14,6 +14,7 @@ interface DetailViewLayoutProps {
     description?: string,
     assetLabel?: string,
     assetImages?: any,
+    assetUploadImageId?: string,
     assetDocuments?: any,
     documentCaption?: string,
     imageCaption?: string,
@@ -25,7 +26,7 @@ interface DetailViewLayoutProps {
     currentValueUpdatedAt: string,
     editLink: string,
 }
-const DetailViewLayout = ({assetCategory, assetName, assetImages, assetLabel, children, currentCurrency, currentValue, updatedAt, createdAt, description, assetDocuments, 
+const DetailViewLayout = ({assetCategory, assetName, assetUploadImageId, assetImages, assetLabel, children, currentCurrency, currentValue, updatedAt, createdAt, description, assetDocuments, 
     currentValueUpdatedAt, assetId, editLink}: DetailViewLayoutProps) => {
     const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
     const { mutateAsync: deleteAsset, isPending: isDeleting } = useDeleteAsset();
@@ -59,7 +60,7 @@ const DetailViewLayout = ({assetCategory, assetName, assetImages, assetLabel, ch
                 assetName={assetName}      
             />
 
-            <AssetCoverImages assetImages={assetImages ?? []} assetName={assetName} />
+            <AssetCoverImages assetImages={assetImages ?? []} assetName={assetName} uploadId={assetUploadImageId ?? ""}/>
 
                 <div className='mb-5 bg-white rounded-lg p-10 text-sm border'>
                     <div className='pb-5 border-b'>
