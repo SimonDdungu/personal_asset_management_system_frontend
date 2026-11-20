@@ -4,9 +4,8 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover"
 
-import { Button } from "@/components/ui/button"
 
-import { Ellipsis, MoreHorizontal } from "lucide-react"
+import { Ellipsis } from "lucide-react"
 
 export interface PopoverOption {
   label: string
@@ -38,7 +37,8 @@ export function ActionPopover({ options }: ActionPopoverProps) {
                 type="button"
                 disabled={option.disabled}
                 onClick={option.onClick}
-                className={`flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm text-left hover:bg-gray-200 cursor-pointer ${option.className || ""} focus:outline-none focus:ring-0`}
+                className={`flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm text-left hover:bg-gray-200 ${option.disabled ? "cursor-not-allowed" : "cursor-pointer"} 
+                  ${option.className || ""} focus:outline-none focus:ring-0 ${option.disabled ? "opacity-50" : "opacity-100"}`}
             >
                 {option.icon}
                 {option.label}

@@ -60,3 +60,27 @@ export const useUpdateAsset = () => {
     },
   });
 };
+
+export const useDeleteAsset = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async ({ id }: { id: string }) => {
+      try {
+        const response = await api.delete(`${API_ENDPOINTS.ASSETS.BASE}/${id}?userId=${config.testing_userId}`);
+        return response.data;
+      } catch (error) {
+        logApiError("Delete Asset: ", error);
+        throw error;
+      }
+    },
+
+    onSuccess: async (_, variables) => {
+      await Promise.all([
+        queryClient.invalidateQueries({ queryKey: ["asset", variables.id] }),
+        queryClient.invalidateQueries({ queryKey: ["all_assets"] }),
+        queryClient.invalidateQueries({ queryKey: ["realestate-assets"] }),
+      ]);
+    },
+  });
+};
