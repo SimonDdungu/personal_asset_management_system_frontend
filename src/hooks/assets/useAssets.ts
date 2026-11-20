@@ -56,6 +56,9 @@ export const useUpdateAsset = () => {
         queryClient.invalidateQueries({ queryKey: ["asset", variables.id] }),
         queryClient.invalidateQueries({ queryKey: ["all_assets"] }),
         queryClient.invalidateQueries({ queryKey: ["realestate-assets"] }),
+        queryClient.invalidateQueries({ queryKey: ["realestate-asset"] }),
+        queryClient.invalidateQueries({ queryKey: ["electronic-assets"] }),
+        queryClient.invalidateQueries({ queryKey: ["electronic-asset"] }),
       ]);
     },
   });
@@ -80,6 +83,9 @@ export const useDeleteAsset = () => {
         queryClient.invalidateQueries({ queryKey: ["asset", variables.id] }),
         queryClient.invalidateQueries({ queryKey: ["all_assets"] }),
         queryClient.invalidateQueries({ queryKey: ["realestate-assets"] }),
+        queryClient.invalidateQueries({ queryKey: ["realestate-asset"] }),
+        queryClient.invalidateQueries({ queryKey: ["electronic-assets"] }),
+        queryClient.invalidateQueries({ queryKey: ["electronic-asset"] }),
       ]);
     },
   });

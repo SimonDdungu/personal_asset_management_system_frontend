@@ -73,7 +73,8 @@ export const useUpdateRealEstateAsset = () => {
       await Promise.all([
         queryClient.invalidateQueries({ queryKey: ["realestate-asset", variables.id] }),
         queryClient.invalidateQueries({ queryKey: ["realestate-assets"] }),
-        queryClient.invalidateQueries({ queryKey: ["all_assets"] })
+        queryClient.invalidateQueries({ queryKey: ["all_assets"] }),
+        queryClient.invalidateQueries({ queryKey: ["asset", variables.data.assetId] })
       ]);
     },
   });

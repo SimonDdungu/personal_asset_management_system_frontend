@@ -70,7 +70,8 @@ export const useUpdateElectronicAsset = () => {
       await Promise.all([
         queryClient.invalidateQueries({ queryKey: ["electronic-asset", variables.id] }),
         queryClient.invalidateQueries({ queryKey: ["electronic-assets"] }),
-        queryClient.invalidateQueries({ queryKey: ["all_assets"] })
+        queryClient.invalidateQueries({ queryKey: ["all_assets"] }),
+        queryClient.invalidateQueries({ queryKey: ["asset", variables.data.assetId] })
       ]);
     },
   });
