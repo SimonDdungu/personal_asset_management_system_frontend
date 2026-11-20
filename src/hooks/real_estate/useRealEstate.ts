@@ -6,6 +6,7 @@ import { logApiError } from "@/src/util/logApiError";
 import { RealEstateAssetFilters } from "@/src/interfaces/search_filters/realEstate_SearchFilters";
 
 export const useCreateRealEstateAsset = () => {
+  const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (data: any) => {
       const response = await api.post(`${API_ENDPOINTS.ASSETS.REAL_ESTATE}?userId=${config.testing_userId}`, data);
@@ -13,7 +14,7 @@ export const useCreateRealEstateAsset = () => {
     },
 
     onSuccess: (data) => {
-      console.log("Asset created successfully:", data);
+      queryClient.setQueryData(["realestate-asset", data.id], data);
     },
 
     onError: (error) => {
