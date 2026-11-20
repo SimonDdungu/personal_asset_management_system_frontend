@@ -17,9 +17,10 @@ interface DetailViewLayoutProps <T extends FieldValues>{
     children: ReactNode,
     onCategorySubmit: (values: T) => Promise<void>;
     initialData: UpdateAssetFormData & T;
+    viewPath: string;
 }
 
-const EditViewLayout =  <T extends FieldValues,>({assetid, assetName, children, category, onCategorySubmit, initialData }: DetailViewLayoutProps<T>) => {
+const EditViewLayout =  <T extends FieldValues,>({assetid, assetName, children, category, onCategorySubmit, initialData, viewPath}: DetailViewLayoutProps<T>) => {
     const [loading, setLoading] = useState<boolean>(false)
 
     const methods =useForm<UpdateAssetFormData & T>({values: initialData,});
@@ -63,7 +64,7 @@ const EditViewLayout =  <T extends FieldValues,>({assetid, assetName, children, 
                     <span className='text-gray-700 text-xs'>Update this asset's information, value, images, and documents.</span>
                 </div>
                 <div className='flex items-center gap-x-3'>
-                    <WhiteButton disabled={!initialData || loading} label='Cancel'/>
+                    <WhiteButton link={viewPath} disabled={!initialData || loading} label='Cancel' button={true}/>
                     <BlueButton disabled={!initialData || loading} label='Save'/>
                 </div>
             </div>

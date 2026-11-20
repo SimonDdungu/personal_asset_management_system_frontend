@@ -18,6 +18,7 @@ interface RealEstateDetailViewProps {
 
 const RealEstateEditView = ({id}: RealEstateDetailViewProps) => {
     const { data, isLoading, isError, error } = useGetRealEstateAsset(id);
+    const viewPath = `/assets/real_estate/${id}`;
 
     const updateRealEstate = useUpdateRealEstateAsset();
 
@@ -34,7 +35,7 @@ const RealEstateEditView = ({id}: RealEstateDetailViewProps) => {
     };
 
   return (
-    <EditViewLayout assetid={data?.assetId} assetName={data?.assetName} category='Real Estate' onCategorySubmit={onCategorySubmit} initialData={data ? { ...data, name: data.assetName } : undefined}>
+    <EditViewLayout viewPath={viewPath} assetid={data?.assetId} assetName={data?.assetName} category='Real Estate' onCategorySubmit={onCategorySubmit} initialData={data ? { ...data, name: data.assetName } : undefined}>
         <RealEstateEditFields />
     </EditViewLayout>
   )
