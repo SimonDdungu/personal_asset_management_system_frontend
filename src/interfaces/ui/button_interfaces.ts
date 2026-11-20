@@ -10,4 +10,5 @@ export interface ButtonProps {
     onClick?: (value?: any) => void,
     button?: boolean,
     disabled?: boolean
+    textColor?: string;
 }
