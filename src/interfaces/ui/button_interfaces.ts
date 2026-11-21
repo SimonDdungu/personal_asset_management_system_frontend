@@ -11,4 +11,6 @@ export interface ButtonProps {
     button?: boolean,
     disabled?: boolean
     textColor?: string;
+    justify?: string;
+    padding?: string;
 }

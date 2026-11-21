@@ -3,6 +3,7 @@ import { config } from "@/src/config/config";
 
 const api = axios.create({
   baseURL: config.apiUrl,
+  withCredentials: true,
 });
 
 export default api;

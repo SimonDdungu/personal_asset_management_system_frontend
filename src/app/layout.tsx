@@ -6,6 +6,7 @@ import Sidebar from "../components/ui/layout/Sidebar/Sidebar";
 import QueryProvider from "../providers/QueryProvider";
 import { Suspense } from "react";
 import Footer from "../components/ui/layout/Footer";
+import Providers from "../providers/Providers";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -29,21 +30,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full bg-gray-100">
-        <QueryProvider>
-          <div className="flex flex-row w-full">
-            <Suspense fallback={<div>Loading...</div>}>
-              <Sidebar />
-            </Suspense>
-          
-            <main className="flex-1 flex flex-col">
-              <Navbar />
-              <div className="mx-auto flex-1 xl:min-w-300 xl:max-w-400 w-full">
-                  {children}
-              </div>
-              <Footer />  
-            </main>
-          </div>
-        </QueryProvider>
+        <Providers>
+          {children}
+        </Providers>
       </body>
     </html>
   );

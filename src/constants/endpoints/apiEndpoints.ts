@@ -6,4 +6,10 @@ export const API_ENDPOINTS = {
     IMAGES: "/assets/files/images",
     DOCS: "assets/files/documents"
   },
+  USERS: {
+    CREATE: "/auth/register",
+    LOGIN: "/auth/login",
+    LOGOUT: "/auth/logout",
+    ME: "auth/me"
+  }
 };

@@ -1,24 +1,32 @@
 import axios from "axios";
 
 export function logApiError(context: string, error: unknown) {
-  console.error(`[${context}] Request failed`);
-
   if (axios.isAxiosError(error)) {
-    console.error("Message:", error.message);
-    console.error("Code:", error.code);
-    console.error("URL:", error.config?.url);
-    console.error("Method:", error.config?.method);
+    console.error(`[${context}] API Error`, {
+      message: error.message,
+      code: error.code,
+      method: error.config?.method?.toUpperCase(),
+      url: error.config?.url,
+      status: error.response?.status,
+      statusText: error.response?.statusText,
+      response: error.response?.data,
+      headers: error.response?.headers,
+      request: error.request ? "Request sent, no response received" : undefined,
+      stack: error.stack,
+    });
 
-    if (error.response) {
-      console.error("Status:", error.response.status);
-      console.error("Response data:", error.response.data);
-      console.error("Response headers:", error.response.headers);
-    } else if (error.request) {
-      console.error("Request sent, but no response received:", error.request);
-    } else {
-      console.error("Request setup failed:", error.message);
-    }
-  } else {
-    console.error("Unexpected error:", error);
+    return;
   }
+
+  if (error instanceof Error) {
+    console.error(`[${context}] Unexpected Error`, {
+      name: error.name,
+      message: error.message,
+      stack: error.stack,
+    });
+
+    return;
+  }
+
+  console.error(`[${context}] Unknown Error`, error);
 }
