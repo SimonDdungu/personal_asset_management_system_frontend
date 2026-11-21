@@ -25,9 +25,10 @@ interface DetailViewLayoutProps {
     children: ReactNode,
     currentValueUpdatedAt: string,
     editLink: string,
+    isLoading?: boolean,
 }
 const DetailViewLayout = ({assetCategory, assetName, assetUploadImageId, assetImages, assetLabel, children, currentCurrency, currentValue, updatedAt, createdAt, description, assetDocuments, 
-    currentValueUpdatedAt, assetId, editLink}: DetailViewLayoutProps) => {
+    currentValueUpdatedAt, assetId, editLink, isLoading}: DetailViewLayoutProps) => {
     const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
     const { mutateAsync: deleteAsset, isPending: isDeleting } = useDeleteAsset();
         
@@ -60,7 +61,7 @@ const DetailViewLayout = ({assetCategory, assetName, assetUploadImageId, assetIm
                 assetName={assetName}      
             />
 
-            <AssetCoverImages assetImages={assetImages ?? []} assetName={assetName} uploadId={assetUploadImageId ?? ""}/>
+            <AssetCoverImages assetImages={assetImages ?? []} assetName={assetName} uploadId={assetUploadImageId ?? ""} isLoading={isLoading}/>
 
                 <div className='mb-5 bg-white rounded-lg p-10 text-sm border'>
                     <div className='pb-5 border-b'>

@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from 'react';
 import WhiteButton from '../buttons/WhiteButton';
 import { DeleteAssetImageDialog } from '../dialogs/DeleteAssetImageDialog';
 import { usedDeleteImages } from '@/src/hooks/images/useImages';
+import FullScreenLoadingSpinner from '../loading_state/FullScreenLoadingSpinner';
 
 type AssetImage = {
   imageUrl: string;
@@ -15,13 +16,13 @@ interface AssetCoverImagesProps {
     uploadId: string;
     assetImages?: AssetImage[];
     assetName?: string;
+    isLoading?: boolean;
 }
 
-const AssetCoverImages = ({assetImages = [], assetName, uploadId}: AssetCoverImagesProps) => {
+const AssetCoverImages = ({assetImages = [], assetName, uploadId, isLoading}: AssetCoverImagesProps) => {
     const [selectionMode, setSelectionMode] = useState(false);
     const [selectedImages, setSelectedImages] = useState<string[]>([]);
     const [selectedCoverImage, setSelectedCoverImage] = useState<any>(null);
-    const [isDeletingImages, setIsDeletingImages] = useState(false);
     const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
 
     const { mutateAsync: deleteImage } = usedDeleteImages();
@@ -47,8 +48,6 @@ const AssetCoverImages = ({assetImages = [], assetName, uploadId}: AssetCoverIma
         if (!selectedImages.length || isDeletingRef.current) return;
         isDeletingRef.current = true;
 
-        setIsDeletingImages(true)
-
         try {
             await Promise.all(selectedImages.map((id) => deleteImage({ id, uploadId: uploadId })));
             cancelSelection();
@@ -56,7 +55,6 @@ const AssetCoverImages = ({assetImages = [], assetName, uploadId}: AssetCoverIma
             console.error("Failed to delete selected images: ", error);
         } finally {
             isDeletingRef.current = false;
-            setIsDeletingImages(false)
             setDeleteDialogOpen(false)
         }
     };
@@ -66,13 +64,19 @@ const AssetCoverImages = ({assetImages = [], assetName, uploadId}: AssetCoverIma
         <div className='mb-5 bg-white border pb-5 rounded-xl overflow-hidden '>
             {/* preview */}
             <div className='w-full h-120 flex items-center justify-center overflow-hidden relative bg-black/95'>
-                {selectedCoverImage ? <Image src={selectedCoverImage.imageUrl} alt={selectedCoverImage.caption ?? assetName} fill className='object-contain' unoptimized />
+            {isLoading ? 
+                <div>
+                    <FullScreenLoadingSpinner />
+                </div>
+            :
+                (selectedCoverImage ? <Image src={selectedCoverImage.imageUrl} alt={selectedCoverImage.caption ?? assetName} fill className='object-contain' unoptimized />
                 :
                 <div className='text-white flex flex-col gap-y-2 items-center justify-center'>
                     <ImageOff size={50} />
                     <p className=' text-center'>No image available</p>
                 </div>
-                }
+                )
+            }
             </div>
 
             
@@ -81,7 +85,7 @@ const AssetCoverImages = ({assetImages = [], assetName, uploadId}: AssetCoverIma
                 <div className='mb-2 w-max ml-auto'>
                     {!selectionMode 
                         ? 
-                        <WhiteButton label='Select' onClick={() => setSelectionMode(true)}/>
+                        <WhiteButton disabled={isLoading || !images.length} label='Select' onClick={() => {if(images.length > 0) {setSelectionMode(true);}}}/>
                         :
                         <div className='flex gap-x-3 items-center'>
                             <WhiteButton label='Cancel' onClick={cancelSelection}/>
@@ -91,21 +95,25 @@ const AssetCoverImages = ({assetImages = [], assetName, uploadId}: AssetCoverIma
                 </div>
 
                 <div className='flex items-center gap-x-10 h-50 px-5 pt-5'>
-                {images?.length > 0 ? 
-                (images?.map((pic: any) => (
-                    <div key={pic.id} onClick={() => selectionMode ? toggleImageSelection(pic.id) : setSelectedCoverImage(pic)} className={`cursor-pointer rounded-lg overflow-hidden w-50 h-full relative ${selectedCoverImage?.imageUrl === pic.imageUrl ? "ring-1 ring-blue-600" : ""}`}>
-                        <div className='absolute bg-black/20 top-0 left-0 right-0 h-full w-full opacity-0 hover:opacity-100 transition-opacity z-5'></div>
-                        <Image src={pic?.imageUrl} alt={pic?.caption ?? assetName} fill className='object-cover' unoptimized/>
-
-                        {selectionMode && (
-                            <div className={`absolute top-2 right-2 z-10 h-6 w-6 rounded-full border flex items-center justify-center ${selectedImages.includes(pic.id) ? "bg-blue-600 border-blue-600 text-white" : "bg-white/80 border-gray-400"}`}>
-                                {selectedImages.includes(pic.id) && <Check className="h-4 w-4" />}
-                            </div>
-                        )}
-                    </div>
-                )))
+                {isLoading ? 
+                <div></div>
                 :
-                    <p className='text-gray-700 mx-auto'>No images available</p>
+                   (images?.length > 0 ? 
+                        (images?.map((pic: any) => (
+                            <div key={pic.id} onClick={() => selectionMode ? toggleImageSelection(pic.id) : setSelectedCoverImage(pic)} className={`cursor-pointer rounded-lg overflow-hidden w-50 h-full relative ${selectedCoverImage?.imageUrl === pic.imageUrl ? "ring-1 ring-blue-600" : ""}`}>
+                                <div className='absolute bg-black/20 top-0 left-0 right-0 h-full w-full opacity-0 hover:opacity-100 transition-opacity z-5'></div>
+                                <Image src={pic?.imageUrl} alt={pic?.caption ?? assetName} fill className='object-cover' unoptimized/>
+        
+                                {selectionMode && (
+                                    <div className={`absolute top-2 right-2 z-10 h-6 w-6 rounded-full border flex items-center justify-center ${selectedImages.includes(pic.id) ? "bg-blue-600 border-blue-600 text-white" : "bg-white/80 border-gray-400"}`}>
+                                        {selectedImages.includes(pic.id) && <Check className="h-4 w-4" />}
+                                    </div>
+                                )}
+                            </div>
+                        )))
+                        :
+                            <p className='text-gray-700 mx-auto'>No images available</p>
+                    )
                 }
             </div>
             </div>
