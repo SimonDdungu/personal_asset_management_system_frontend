@@ -19,10 +19,11 @@ const RealEstateDetailView = ({id}: RealEstateDetailViewProps) => {
 
     const documents = data?.documents?.[0]?.documents
     const documentCaption = data?.documents?.[0]?.caption
+    const documentUploadId = data?.documents?.[0]?.id
 
   return (
     <DetailViewLayout assetId={data?.id} editLink="assets/real_estate" assetCategory='Real Estate Asset' assetName={data?.assetName} assetLabel={data?.address} assetUploadImageId={imageUploadId} assetImages={images} imageCaption={imageCaption} assetDocuments={documents} documentCaption={documentCaption} currentCurrency={data?.currency} 
-    currentValue={data?.currentValue} description={data?.description} createdAt={data?.createdAt} updatedAt={data?.updatedAt} currentValueUpdatedAt={data?.currentValueUpdatedAt} isLoading={isLoading}>
+    currentValue={data?.currentValue} description={data?.description} createdAt={data?.createdAt} updatedAt={data?.updatedAt} currentValueUpdatedAt={data?.currentValueUpdatedAt} isLoading={isLoading} assetUploadDocId={documentUploadId}>
 
             <div>
                 <div className='grid grid-cols-2 sm:grid-cols-[max-content_max-content_max-content] xl:grid-cols-[max-content_max-content_max-content_max-content] gap-x-5 sm:gap-x-10 gap-y-3 border-b pb-5 mb-3'>

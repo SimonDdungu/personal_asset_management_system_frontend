@@ -15,6 +15,7 @@ interface DetailViewLayoutProps {
     assetLabel?: string,
     assetImages?: any,
     assetUploadImageId?: string,
+    assetUploadDocId?: string,
     assetDocuments?: any,
     documentCaption?: string,
     imageCaption?: string,
@@ -27,7 +28,7 @@ interface DetailViewLayoutProps {
     editLink: string,
     isLoading?: boolean,
 }
-const DetailViewLayout = ({assetCategory, assetName, assetUploadImageId, assetImages, assetLabel, children, currentCurrency, currentValue, updatedAt, createdAt, description, assetDocuments, 
+const DetailViewLayout = ({assetCategory, assetName, assetUploadImageId, assetImages, assetLabel, children, currentCurrency, currentValue, updatedAt, createdAt, description, assetDocuments, assetUploadDocId,
     currentValueUpdatedAt, assetId, editLink, isLoading}: DetailViewLayoutProps) => {
     const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
     const { mutateAsync: deleteAsset, isPending: isDeleting } = useDeleteAsset();
@@ -47,8 +48,8 @@ const DetailViewLayout = ({assetCategory, assetName, assetUploadImageId, assetIm
                 <div className='flex items-center justify-between'>
                     <h1 className='text-xl'>{assetCategory ?? "Asset"}</h1>
                     <div className='flex flex-row items-center gap-x-3'>
-                       <BlueButton link={`/${editLink}/${assetId}/edit`} label='Edit' icon={PencilIcon}/>
-                       <WhiteButton disabled={isDeleting} textColor='text-red-600' label='Delete' onClick={() => setDeleteDialogOpen(true)} icon={Trash2}/>
+                       <BlueButton disabled={isLoading} link={`/${editLink}/${assetId}/edit`} label='Edit' icon={PencilIcon}/>
+                       <WhiteButton disabled={isLoading || isDeleting} textColor='text-red-600' label='Delete' onClick={() => setDeleteDialogOpen(true)} icon={Trash2}/>
                     </div>
                 </div>
             </div>
@@ -99,7 +100,7 @@ const DetailViewLayout = ({assetCategory, assetName, assetUploadImageId, assetIm
                     </div>
                 </div>
 
-                <AssetDocuments assetDocuments={assetDocuments ?? []} />
+                <AssetDocuments assetDocuments={assetDocuments ?? []} isLoading={isLoading} uploadId={assetUploadDocId ?? ""}/>
 
         </div>
 
