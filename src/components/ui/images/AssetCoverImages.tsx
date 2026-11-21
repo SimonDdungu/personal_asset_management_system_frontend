@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
 import WhiteButton from '../buttons/WhiteButton';
 import { DeleteAssetImageDialog } from '../dialogs/DeleteAssetImageDialog';
-import { usedDeleteImages } from '@/src/hooks/images/useImages';
+import { usedDeleteImages } from '@/src/hooks/files/images/useImages';
 import FullScreenLoadingSpinner from '../loading_state/FullScreenLoadingSpinner';
 
 type AssetImage = {
@@ -85,7 +85,7 @@ const AssetCoverImages = ({assetImages = [], assetName, uploadId, isLoading}: As
                 <div className='mb-2 w-max ml-auto'>
                     {!selectionMode 
                         ? 
-                        <WhiteButton disabled={isLoading || !images.length} label='Select' onClick={() => {if(images.length > 0) {setSelectionMode(true);}}}/>
+                        <WhiteButton disabled={isLoading || !images.length} label='Select' onClick={() => {if(images.length) {setSelectionMode(true);}}}/>
                         :
                         <div className='flex gap-x-3 items-center'>
                             <WhiteButton label='Cancel' onClick={cancelSelection}/>
