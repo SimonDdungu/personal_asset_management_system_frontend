@@ -4,5 +4,6 @@ export const API_ENDPOINTS = {
     ELECTRONICS: "/assets/electronics",
     REAL_ESTATE: "/assets/realestate",
     IMAGES: "/assets/files/images",
+    DOCS: "assets/files/documents"
   },
 };
