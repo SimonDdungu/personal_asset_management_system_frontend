@@ -11,6 +11,7 @@ import { useAuth } from "@/src/context/auth/AuthContext";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
+import Link from "next/link";
 
 
 
@@ -75,13 +76,14 @@ export default function SignUpForm() {
         </div>
 
         <FormProvider {...methods}>
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-5 mb-5">
             <div className="flex flex-row gap-x-3">
               <TextInput
                 label="First name"
                 name="firstName"
                 placeholder="Enter first name"
                 register={register}
+                required={true}
               />
 
               <TextInput
@@ -89,14 +91,16 @@ export default function SignUpForm() {
                 name="lastName"
                 placeholder="Enter last name"
                 register={register}
+                required={true}
               />
             </div>
 
             <TextInput
               label="Email address"
               name="email"
-              placeholder="e.g. john@example.com"
+              placeholder="Enter email address"
               register={register}
+              required={true}
             />
 
             <div className="flex flex-row gap-x-3">
@@ -107,12 +111,13 @@ export default function SignUpForm() {
                 options={genderOptions}
                 control={control}
                 register={register}
+                required={true}
               />
 
               <TextInput
                 label="Phone number (optional)"
                 name="phoneNumber"
-                placeholder="Enter phone number..."
+                placeholder="Enter phone number"
                 register={register}
               />
             </div>
@@ -122,20 +127,21 @@ export default function SignUpForm() {
                 name="password"
                 label="Password"
                 required={true}
-                placeholder="Enter password..."
+                placeholder="Enter your password"
               />
 
               <PasswordInput
                 name="confirmPassword"
                 label="Confirm Password"
                 required={true}
-                placeholder="Confirm password..."
+                placeholder="Confirm your password"
               />
             </div>
 
             <BlueButton label="Sign Up" width="w-full" justify="justify-center" padding="py-2"/>
           </form>
         </FormProvider>
+         <p className="text-xs">Already have an account? <Link href={"/login"} className="text-blue-600 underline">Login</Link></p>
       </div>
     </div>
   );
