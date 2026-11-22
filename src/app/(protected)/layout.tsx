@@ -5,17 +5,19 @@ import { Suspense } from "react";
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-      <div className="flex flex-row w-full">
+      <div className="flex h-screen w-full overflow-hidden relative">
         <Suspense fallback={<div>Loading...</div>}>
           <Sidebar />
         </Suspense>
       
         <main className="flex-1 flex flex-col">
           <Navbar />
-          <div className="mx-auto flex-1 xl:min-w-300 xl:max-w-400 w-full">
-              {children}
+          <div className="overflow-y-scroll">
+            <div className="mx-auto flex-1 xl:min-w-300 xl:max-w-400 w-full">
+                {children}
+            </div>
+            <Footer />  
           </div>
-          <Footer />  
         </main>
       </div>
   );

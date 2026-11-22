@@ -15,8 +15,8 @@ const geistMono = Geist_Mono({
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-      <QueryProvider>
+      <>
           {children}
-      </QueryProvider>
+      </>
   );
 }
