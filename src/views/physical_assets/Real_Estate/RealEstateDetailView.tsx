@@ -2,7 +2,7 @@
 import { DetailViewLayout } from '@/src/components/ui';
 import { propertySizeUnitLabels } from '@/src/constants/symbols/propertySizeUnitLabels';
 import { useGetRealEstateAsset } from '@/src/hooks/real_estate/useRealEstate';
-import { formatDate } from '@/src/util/formatDateTime';
+import { formatDate } from '@/src/util/date_time/formatDateTime';
 import { useState } from 'react';
 
 interface RealEstateDetailViewProps {
@@ -11,19 +11,24 @@ interface RealEstateDetailViewProps {
 
 const RealEstateDetailView = ({id}: RealEstateDetailViewProps) => {
     
-    const { data, isLoading, isError, error } = useGetRealEstateAsset(id);
+    const { data, isLoading, isFetching, isError, error } = useGetRealEstateAsset(id);
 
     const images = data?.images?.[0]?.images
     const imageCaption = data?.images?.[0]?.caption
     const imageUploadId = data?.images?.[0]?.id
+
+    console.log("actual image data: ",data?.images )
+    console.log("Images from the parent before being passed: ", data?.images?.[0].images)
 
     const documents = data?.documents?.[0]?.documents
     const documentCaption = data?.documents?.[0]?.caption
     const documentUploadId = data?.documents?.[0]?.id
 
   return (
-    <DetailViewLayout assetId={data?.id} editLink="assets/real_estate" assetCategory='Real Estate Asset' assetName={data?.assetName} assetLabel={data?.address} assetUploadImageId={imageUploadId} assetImages={images} imageCaption={imageCaption} assetDocuments={documents} documentCaption={documentCaption} currentCurrency={data?.currency} 
-    currentValue={data?.currentValue} description={data?.description} createdAt={data?.createdAt} updatedAt={data?.updatedAt} currentValueUpdatedAt={data?.currentValueUpdatedAt} isLoading={isLoading} assetUploadDocId={documentUploadId}>
+    <DetailViewLayout itemId={data?.id} assetId={data?.assetId} editLink="assets/real_estate" assetCategory={data?.assetCategory} assetName={data?.assetName} assetLabel={data?.address} 
+    assetUploadImageId={imageUploadId} assetImages={images} imageCaption={imageCaption} assetDocuments={documents} documentCaption={documentCaption} currentCurrency={data?.currency} 
+    currentValue={data?.currentValue} description={data?.description} createdAt={data?.createdAt} updatedAt={data?.updatedAt} currentValueUpdatedAt={data?.currentValueUpdatedAt} 
+    isLoading={isLoading} isFetching={isFetching} assetUploadDocId={documentUploadId}>
 
             <div>
                 <div className='grid grid-cols-2 sm:grid-cols-[max-content_max-content_max-content] xl:grid-cols-[max-content_max-content_max-content_max-content] gap-x-5 sm:gap-x-10 gap-y-3 border-b pb-5 mb-3'>

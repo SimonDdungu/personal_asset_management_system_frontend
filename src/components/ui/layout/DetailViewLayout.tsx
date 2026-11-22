@@ -3,11 +3,13 @@ import React, { ReactNode, useState } from 'react'
 import { AssetCoverImages, AssetDocuments, BlueButton, WhiteButton } from '..';
 import Footer from './Footer';
 import { PencilIcon, Trash2 } from 'lucide-react';
-import { formatDateTime } from '@/src/util/formatDateTime';
+import { formatDateTime } from '@/src/util/date_time/formatDateTime';
 import { useDeleteAsset } from '@/src/hooks/assets/useAssets';
 import { DeleteAssetDialog } from '../dialogs/DeleteAssetDialog';
+import { ASSET_QUERY_KEYS } from '@/src/constants/react_query/category_keys';
 
 interface DetailViewLayoutProps {
+    itemId: string
     assetId: string,
     assetCategory?: string,
     assetName: string,
@@ -27,9 +29,10 @@ interface DetailViewLayoutProps {
     currentValueUpdatedAt: string,
     editLink: string,
     isLoading?: boolean,
+    isFetching?: boolean,
 }
-const DetailViewLayout = ({assetCategory, assetName, assetUploadImageId, assetImages, assetLabel, children, currentCurrency, currentValue, updatedAt, createdAt, description, assetDocuments, assetUploadDocId,
-    currentValueUpdatedAt, assetId, editLink, isLoading}: DetailViewLayoutProps) => {
+const DetailViewLayout = ({assetCategory, itemId, assetName, assetUploadImageId, assetImages, assetLabel, children, currentCurrency, currentValue, updatedAt, createdAt, description, assetDocuments, assetUploadDocId,
+    currentValueUpdatedAt, assetId, editLink, isLoading, isFetching}: DetailViewLayoutProps) => {
     const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
     const { mutateAsync: deleteAsset, isPending: isDeleting } = useDeleteAsset();
         
@@ -62,7 +65,8 @@ const DetailViewLayout = ({assetCategory, assetName, assetUploadImageId, assetIm
                 assetName={assetName}      
             />
 
-            <AssetCoverImages assetImages={assetImages ?? []} assetName={assetName} uploadId={assetUploadImageId ?? ""} isLoading={isLoading}/>
+            <AssetCoverImages itemId={itemId} assetId={assetId} asset_category_query_key={ assetCategory ? ASSET_QUERY_KEYS[assetCategory] : undefined} assetImages={assetImages ?? []} 
+            assetName={assetName} uploadId={assetUploadImageId ?? ""} isLoading={isLoading} isReFetching={isFetching}/>
 
                 <div className='mb-5 bg-white rounded-lg p-10 text-sm border'>
                     <div className='pb-5 border-b'>
@@ -89,12 +93,12 @@ const DetailViewLayout = ({assetCategory, assetName, assetUploadImageId, assetIm
                         </div>
                     </div>
 
-                    <div className='pt-5 space-y-4'>
+                    <div className='pt-5 space-y-4 text-xs'>
                         <div className='flex items-center justify-between'>
                             <span className='text-gray-500'>Created on</span> <span>{createdAt ? formatDateTime(createdAt) : "No data"}</span>
                         </div>
 
-                            <div className='flex items-center justify-between'>
+                        <div className='flex items-center justify-between'>
                             <span className='text-gray-500'>Updated on</span> <span>{updatedAt ? formatDateTime(updatedAt) : "No data"}</span>
                         </div>
                     </div>

@@ -4,8 +4,10 @@ import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
 import WhiteButton from '../buttons/WhiteButton';
 import { DeleteAssetImageDialog } from '../dialogs/DeleteAssetImageDialog';
-import { usedDeleteImages } from '@/src/hooks/files/images/useImages';
+import { useAddAssetImages, usedDeleteImages } from '@/src/hooks/files/images/useImages';
 import FullScreenLoadingSpinner from '../loading_state/FullScreenLoadingSpinner';
+import BlueButton from '../buttons/BlueButton';
+import { AddAssetImageDialog } from '../dialogs/AddAssetImageDialog';
 
 type AssetImage = {
   imageUrl: string;
@@ -14,19 +16,26 @@ type AssetImage = {
 
 interface AssetCoverImagesProps {
     uploadId: string;
+    assetId: string;
+    itemId: string
+    asset_category_query_key?: string,
     assetImages?: AssetImage[];
     assetName?: string;
     isLoading?: boolean;
+    isReFetching?: boolean
 }
 
-const AssetCoverImages = ({assetImages = [], assetName, uploadId, isLoading}: AssetCoverImagesProps) => {
+const AssetCoverImages = ({assetImages = [], assetName, uploadId, isLoading, isReFetching, assetId, itemId, asset_category_query_key}: AssetCoverImagesProps) => {
     const [selectionMode, setSelectionMode] = useState(false);
     const [selectedImages, setSelectedImages] = useState<string[]>([]);
     const [selectedCoverImage, setSelectedCoverImage] = useState<any>(null);
     const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
+    const [addImageDialogOpen, setAddImageDialogOpen] = useState(false);
 
-    const { mutateAsync: deleteImage } = usedDeleteImages();
-    const isDeletingRef = useRef(false);
+    const [addImages, setAddImages] = useState<File[]>([]);
+
+    const { mutateAsync: deleteImage, isPending: isDeleting } = usedDeleteImages();
+    const { mutateAsync: addAssetImages, isPending: isAdding } = useAddAssetImages();
     
     // primary image appears first
     const images = assetImages.sort((a, b) => Number(b.isPrimary) - Number(a.isPrimary));
@@ -44,17 +53,33 @@ const AssetCoverImages = ({assetImages = [], assetName, uploadId, isLoading}: As
         setSelectionMode(false);
     };
 
-    const handleDeleteImages = async () => {
-        if (!selectedImages.length || isDeletingRef.current) return;
-        isDeletingRef.current = true;
+    const submitImages = async () => {
+        const formData = new FormData();
+
+        addImages.forEach((image) => {
+            formData.append("images", image);
+        });
 
         try {
-            await Promise.all(selectedImages.map((id) => deleteImage({ id, uploadId: uploadId })));
+            await addAssetImages({ uploadId, images: formData, category_key: asset_category_query_key ?? "", itemId: itemId });
+        } catch (error) {
+            console.error("Failed to add images:", error);
+        } finally {
+            setAddImageDialogOpen(false)
+        }
+    };
+    
+    console.log("fetched asset images before sorting: ", assetImages)
+
+    const handleDeleteImages = async () => {
+        if (!selectedImages.length || isDeleting) return;
+
+        try {
+            await Promise.all(selectedImages.map((id) => deleteImage({ id, uploadId: uploadId, category_key: asset_category_query_key ?? "", itemId: itemId })));
             cancelSelection();
         } catch (error) {
             console.error("Failed to delete selected images: ", error);
         } finally {
-            isDeletingRef.current = false;
             setDeleteDialogOpen(false)
         }
     };
@@ -64,7 +89,7 @@ const AssetCoverImages = ({assetImages = [], assetName, uploadId, isLoading}: As
         <div className='mb-5 bg-white border pb-5 rounded-xl overflow-hidden '>
             {/* preview */}
             <div className='w-full h-120 flex items-center justify-center overflow-hidden relative bg-black/95'>
-            {isLoading ? 
+            {isLoading || isReFetching ? 
                 <div>
                     <FullScreenLoadingSpinner />
                 </div>
@@ -85,7 +110,10 @@ const AssetCoverImages = ({assetImages = [], assetName, uploadId, isLoading}: As
                 <div className='mb-2 w-max ml-auto'>
                     {!selectionMode 
                         ? 
-                        <WhiteButton disabled={isLoading || !images.length} label='Select' onClick={() => {if(images.length) {setSelectionMode(true);}}}/>
+                        <div className='flex gap-x-3 items-center'>
+                            <WhiteButton disabled={isLoading || !images.length} label='Select' onClick={() => {if(images.length) {setSelectionMode(true);}}}/>
+                            <BlueButton disabled={isLoading || !images.length} label='Add Images' onClick={() => {if(images.length) {setAddImageDialogOpen(true);}}}/>
+                        </div>
                         :
                         <div className='flex gap-x-3 items-center'>
                             <WhiteButton label='Cancel' onClick={cancelSelection}/>
@@ -94,9 +122,11 @@ const AssetCoverImages = ({assetImages = [], assetName, uploadId, isLoading}: As
                     }
                 </div>
 
-                <div className='flex items-center gap-x-10 h-50 px-5 pt-5'>
-                {isLoading ? 
-                <div></div>
+                <div className='flex items-center gap-x-10 h-50 px-5 pt-5 relative'>
+                {isLoading || isReFetching ? 
+                    <div>
+                        <FullScreenLoadingSpinner />
+                    </div>
                 :
                    (images?.length > 0 ? 
                         (images?.map((pic: any) => (
@@ -118,11 +148,21 @@ const AssetCoverImages = ({assetImages = [], assetName, uploadId, isLoading}: As
             </div>
             </div>
 
+            <AddAssetImageDialog
+                open={addImageDialogOpen}
+                onOpenChange={setAddImageDialogOpen}
+                onConfirm={submitImages}
+                isAdding={isAdding}    
+                files={addImages}
+                setFiles={setAddImages}
+                assetName={assetName}
+            />
+
             <DeleteAssetImageDialog
                 open={deleteDialogOpen}
                 onOpenChange={setDeleteDialogOpen}
                 onConfirm={handleDeleteImages}
-                isDeleting={isDeletingRef.current}    
+                isDeleting={isDeleting}    
             />
 
         </div>
