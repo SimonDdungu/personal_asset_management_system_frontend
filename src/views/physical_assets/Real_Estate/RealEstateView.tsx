@@ -8,10 +8,12 @@ import { CircleX, Divide, Search } from 'lucide-react';
 import NumberSearchInput from '@/src/components/ui/input/NumberSearchInput';
 import FullScreenLoadingSpinner from '@/src/components/ui/loading_state/FullScreenLoadingSpinner';
 import AssetResultsLoadingSpinner from '@/src/components/ui/loading_state/AssetResultsLoadingSpinner';
+import Pagination from '@/src/components/ui/pagination/Pagination';
 
 const RealEstateView = () => {
   const [searchFilters, setSearchFilters] = useState<RealEstateAssetFilters>({});
   const [appliedFilters, setAppliedFilters] = useState<RealEstateAssetFilters>({});
+  const [page, setPage] = useState(0);
 
     const handleFilterChange = (key: keyof RealEstateAssetFilters, value: any) => {
       setSearchFilters((prev) => ({ ...prev, [key]: value }));
@@ -40,7 +42,7 @@ const RealEstateView = () => {
     const { data, isLoading, isError, error, refetch } = useGetRealEstateAssets(appliedFilters);
 
   return (
-    <div className='px-10 pt-10 pb-40 bg-gray-100'>
+    <div className='px-10 pt-10 pb-20 bg-gray-100'>
        <h1 className='mb-2 pb-2 border-b'>Real Estate Assets</h1>
         <div className='mb-5 pt-2 pb-4 border-b'>
           <div className='mb-2 flex flex-row flex-wrap gap-x-5 items-center'>
@@ -93,12 +95,18 @@ const RealEstateView = () => {
             <AssetResultsLoadingSpinner />
             : 
               (data?.content?.length > 0 ? 
-                <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-x-5 gap-y-5'>
-                      {data?.content?.map((asset: any) => (
-                        <RealEstateCard key={asset.id} id={asset.id} assetId={asset.id} assetName={asset.assetName} image={asset.image?.imageUrl} currency={asset.currency} currentValue={asset.currentValue}
-                        address={asset.address} noBedrooms={asset?.numberBedrooms} noBathrooms={asset?.numberBathrooms} propertySize={asset?.propertySize} propertySizeUnit={asset.propertySizeUnit}
-                        />
-                    ))}
+                <div>
+                  <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-x-5 gap-y-5'>
+                        {data?.content?.map((asset: any) => (
+                          <RealEstateCard key={asset.id} id={asset.id} assetId={asset.id} assetName={asset.assetName} image={asset.image?.imageUrl} currency={asset.currency} currentValue={asset.currentValue}
+                          address={asset.address} noBedrooms={asset?.numberBedrooms} noBathrooms={asset?.numberBathrooms} propertySize={asset?.propertySize} propertySizeUnit={asset.propertySizeUnit}
+                          />
+                      ))}
+                  </div>
+                  
+                  <div className='mt-20'>
+                    <Pagination page={data.number} totalPages={data.totalPages} first={data.first} last={data.last} onPageChange={setPage} />
+                  </div>
                 </div>
               :
                 <div className='flex flex-col gap-y-2 items-center justify-center w-max mx-auto h-100'>
