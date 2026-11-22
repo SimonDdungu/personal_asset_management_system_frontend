@@ -4,11 +4,30 @@ import { API_ENDPOINTS } from "@/src/constants/endpoints/apiEndpoints";
 import { config } from "@/src/config/config";
 import { logApiError } from "@/src/util/logApiError";
 
+export const useAddAssetImages = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async ({uploadId, images, category_key, itemId} : {uploadId: string, images: FormData, category_key: string, itemId: string}) => {
+      const response = await api.post(`${API_ENDPOINTS.ASSETS.IMAGES}/${uploadId}?userId=${config.testing_userId}`, images);
+      return response.data;
+    },
+
+    onSuccess: (_, { category_key, itemId }) => {
+      queryClient.invalidateQueries({ queryKey: [category_key, itemId] });
+    },
+
+    onError: (error) => {
+      logApiError("Create Electronic Asset", error);
+    },
+  });
+};
+
+
 export const usedDeleteImages = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: async ({ id,uploadId }: { id: string, uploadId: string }) => {
+    mutationFn: async ({ id, uploadId, category_key, itemId }: { id: string, uploadId: string, category_key: string, itemId: string }) => {
       try {
         const response = await api.delete(`${API_ENDPOINTS.ASSETS.IMAGES}/${uploadId}/${id}?userId=${config.testing_userId}`);
         return response.data;
@@ -18,14 +37,8 @@ export const usedDeleteImages = () => {
       }
     },
 
-    onSuccess: async (_, variables) => {
-      await Promise.all([
-        queryClient.invalidateQueries({ queryKey: ["all_assets"] }),
-        queryClient.invalidateQueries({ queryKey: ["realestate-assets"] }),
-        queryClient.invalidateQueries({ queryKey: ["realestate-asset"] }),
-        queryClient.invalidateQueries({ queryKey: ["electronic-assets"] }),
-        queryClient.invalidateQueries({ queryKey: ["electronic-asset"] }),
-      ]);
+    onSuccess: async (_, {category_key, itemId}) => {
+      queryClient.invalidateQueries({ queryKey: [category_key, itemId] })
     },
   });
 };
