@@ -11,16 +11,17 @@ interface TextInputProps {
     fontSize?: string,
     register?: any,
     error?: FieldErrors,
+    required?: boolean,
     max?: number
 }
 
-const NumberInput = ({name, id, placeholder, label, width, height, fontSize, register, error, max}: TextInputProps) => {
+const NumberInput = ({name, id, placeholder, label, width, height, fontSize, register, error, max, required}: TextInputProps) => {
      const errorMessage = error?.[name]?.message as string | undefined;
 
     return (
         <div className='relative pb-2 w-full'>
             <label htmlFor={name} className='block text-xs mb-1'>
-                {label}
+                {label}{required && <span className="text-red-600">*</span>}
             </label>
 
             <input 

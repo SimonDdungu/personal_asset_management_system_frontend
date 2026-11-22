@@ -26,15 +26,16 @@ interface SelectInputProps<T extends FieldValues = FieldValues> {
     fontSize?: string,
     control: Control<T>;
     onChange?: (value?: any) => void;
+    required?: boolean;
 };
 
-const SelectInput = <T extends FieldValues,>({name, id, label, placeholder, options, register, error, width, height, fontSize, control, onChange}: SelectInputProps<T>) => {
+const SelectInput = <T extends FieldValues,>({name, id, label, placeholder, options, register, error, width, height, fontSize, control, onChange, required}: SelectInputProps<T>) => {
   const errorMessage = error?.[name]?.message as string | undefined;
 
   return (
         <div className='relative pb-2 w-full'>
             <label htmlFor={name} className='block text-xs mb-1'>
-                {label}
+                {label}{required && <span className="text-red-600">*</span>}
              </label>
 
             <Controller
