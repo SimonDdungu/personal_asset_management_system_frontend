@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react'
+import React, { ReactNode, Suspense } from 'react'
 import QueryProvider from './QueryProvider'
 import { AuthProvider } from '../context/auth/AuthContext'
 
@@ -6,9 +6,11 @@ import { AuthProvider } from '../context/auth/AuthContext'
 const Providers = ({ children }: { children: ReactNode }) => {
   return (
      <QueryProvider>
-        <AuthProvider>
-            {children}
-        </AuthProvider>
+       <Suspense fallback={null}>
+         <AuthProvider>
+               {children}
+         </AuthProvider>
+       </Suspense>
      </QueryProvider>
   )
 }
