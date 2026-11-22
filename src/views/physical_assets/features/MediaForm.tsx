@@ -1,14 +1,9 @@
 "use client"
-import { TextInput } from '@/src/components/ui'
-import BlueButton from '@/src/components/ui/buttons/BlueButton'
-import DocumentPicker from '@/src/components/ui/documents/DocumentPicker';
-import ImagePicker from '@/src/components/ui/images/ImagePicker';
-import SelectInput from '@/src/components/ui/input/SelectInput';
-import { documentTypes } from '@/src/constants/document_options/documentTypes';
-import { useCreateElectronicAsset } from '@/src/hooks/electronics/useElectronics';
+import BlueButton from '@/src/components/ui/buttons/BlueButton';
+import DocumentForm from '@/src/components/ui/documents/DocForm';
+import ImageForm from '@/src/components/ui/images/ImageForm';
 import { useCreateRealEstateAsset } from '@/src/hooks/real_estate/useRealEstate';
-import React, { useState } from 'react'
-import { useForm } from 'react-hook-form';
+import React, { useState } from 'react';
 
 interface MediaFormProps {
   assetData: any;
@@ -95,35 +90,3 @@ const MediaForm = ({assetData}: MediaFormProps) => {
 }
 
 export default MediaForm
-
-
-
-
-const ImageForm = ({files, setFiles, setFileCaption}: mediaProps) => {
-  
-  return (
-    <div>
-        <h4>Asset Image</h4>
-        <span>Add images of the asset</span>
-        <ImagePicker value={files} onChange={setFiles} />
-        <TextInput label='Image caption' name='caption' onChange={setFileCaption}/>
-    </div>
-  )
-}
-
-const DocumentForm = ({files, setFiles, setFileCaption, setFileType}: mediaProps) => {
-  const { register, handleSubmit, control } = useForm();
-  return (
-    <div>
-        <h4>Asset Documents</h4>
-        <span>Add documents </span>
-        <DocumentPicker value={files} onChange={setFiles}/>
-
-        <div className='mb-1'>
-          <SelectInput name='assetDocumentTypeName'label='Document Type' options={documentTypes} register={register} control={control} onChange={setFileType}/>
-        </div>
-
-        <TextInput label='Image caption' name='caption' onChange={setFileCaption}/>
-    </div>
-  )
-}
