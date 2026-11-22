@@ -5,5 +5,6 @@ export interface AuthContextType {
   isAuthenticated: boolean;
   setUser: (user: UserType | null) => void;
   isLoading: boolean;
+  isLoggingOut: boolean,
   logout: () => void;
 }
