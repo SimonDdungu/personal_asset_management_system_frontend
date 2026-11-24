@@ -8,7 +8,7 @@ export const useCreateElectronicAsset = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (data: any) => {
-      const response = await api.post(`${API_ENDPOINTS.ASSETS.ELECTRONICS}?userId=${config.testing_userId}`, data);
+      const response = await api.post(`${API_ENDPOINTS.ASSETS.ELECTRONICS}`, data);
       return response.data;
     },
 
@@ -27,7 +27,7 @@ export const useGetElectronicAssets = () => {
     queryKey: ["electronic-assets"],
     queryFn: async () => {
       try {
-        const response = await api.get(`${API_ENDPOINTS.ASSETS.ELECTRONICS}?userId=${config.testing_userId}`);
+        const response = await api.get(`${API_ENDPOINTS.ASSETS.ELECTRONICS}`);
         return response.data;
       } catch (error) {
         logApiError("Get Electronic Assets", error);
@@ -42,7 +42,7 @@ export const useGetElectronicAsset = (id: string) => {
     queryKey: ["electronic-asset", id],
     queryFn: async () => {
       try {
-        const response = await api.get(`${API_ENDPOINTS.ASSETS.ELECTRONICS}/${id}?userId=${config.testing_userId}`)
+        const response = await api.get(`${API_ENDPOINTS.ASSETS.ELECTRONICS}/${id}`)
         return response.data;
       } catch (error) {
         logApiError("Get Electronic Asset", error);
@@ -58,7 +58,7 @@ export const useUpdateElectronicAsset = () => {
   return useMutation({
     mutationFn: async ({ id, data }: { id: string; data: any }) => {
       try {
-        const response = await api.patch(`${API_ENDPOINTS.ASSETS.ELECTRONICS}?userId=${config.testing_userId}`, data);
+        const response = await api.patch(`${API_ENDPOINTS.ASSETS.ELECTRONICS}`, data);
         return response.data;
       } catch (error) {
         logApiError("Update Electronic Asset", error);
@@ -71,7 +71,6 @@ export const useUpdateElectronicAsset = () => {
         queryClient.invalidateQueries({ queryKey: ["electronic-asset", variables.id] }),
         queryClient.invalidateQueries({ queryKey: ["electronic-assets"] }),
         queryClient.invalidateQueries({ queryKey: ["all_assets"] }),
-        queryClient.invalidateQueries({ queryKey: ["asset", variables.data.assetId] })
       ]);
     },
   });

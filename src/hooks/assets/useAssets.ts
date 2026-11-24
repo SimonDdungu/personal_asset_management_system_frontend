@@ -10,7 +10,7 @@ export const useGetAssets = (filters?: AssetFilters) => {
      queryKey: ["all_assets", filters],
     queryFn: async () => {
       try {
-        const response = await api.get(API_ENDPOINTS.ASSETS.BASE, {params: { userId: config.testing_userId, ...filters}});
+        const response = await api.get(API_ENDPOINTS.ASSETS.BASE, {params: {...filters}});
         return response.data;
       } catch (error) {
         logApiError("Get Assets", error);
@@ -25,7 +25,7 @@ export const useAsset = (id: string) => {
     queryKey: ["asset", id],
     queryFn: async () => {
       try {
-        const response = await api.get(`${API_ENDPOINTS.ASSETS.BASE}/${id}?userId=${config.testing_userId}`)
+        const response = await api.get(`${API_ENDPOINTS.ASSETS.BASE}/${id}`)
         return response.data;
       } catch (error) {
         logApiError("Get Asset", error);
@@ -43,7 +43,7 @@ export const useUpdateAsset = () => {
   return useMutation({
     mutationFn: async ({ id, data }: { id: string; data: any }) => {
       try {
-        const response = await api.patch(`${API_ENDPOINTS.ASSETS.BASE}/${id}?userId=${config.testing_userId}`, data);
+        const response = await api.patch(`${API_ENDPOINTS.ASSETS.BASE}/${id}`, data);
         return response.data;
       } catch (error) {
         logApiError("Update Asset", error);
@@ -70,7 +70,7 @@ export const useDeleteAsset = () => {
   return useMutation({
     mutationFn: async ({ id }: { id: string }) => {
       try {
-        const response = await api.delete(`${API_ENDPOINTS.ASSETS.BASE}/${id}?userId=${config.testing_userId}`);
+        const response = await api.delete(`${API_ENDPOINTS.ASSETS.BASE}/${id}`);
         return response.data;
       } catch (error) {
         logApiError("Delete Asset: ", error);

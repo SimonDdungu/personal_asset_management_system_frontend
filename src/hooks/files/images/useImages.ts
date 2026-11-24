@@ -8,7 +8,7 @@ export const useAddAssetImages = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async ({uploadId, images, category_key, itemId} : {uploadId: string, images: FormData, category_key: string, itemId: string}) => {
-      const response = await api.post(`${API_ENDPOINTS.ASSETS.IMAGES}/${uploadId}?userId=${config.testing_userId}`, images);
+      const response = await api.post(`${API_ENDPOINTS.ASSETS.IMAGES}/${uploadId}`, images);
       return response.data;
     },
 
@@ -17,19 +17,19 @@ export const useAddAssetImages = () => {
     },
 
     onError: (error) => {
-      logApiError("Create Electronic Asset", error);
+      logApiError("Add Images", error);
     },
   });
 };
 
 
-export const usedDeleteImages = () => {
+export const useDeleteImages = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: async ({ id, uploadId, category_key, itemId }: { id: string, uploadId: string, category_key: string, itemId: string }) => {
       try {
-        const response = await api.delete(`${API_ENDPOINTS.ASSETS.IMAGES}/${uploadId}/${id}?userId=${config.testing_userId}`);
+        const response = await api.delete(`${API_ENDPOINTS.ASSETS.IMAGES}/${uploadId}/${id}`);
         return response.data;
       } catch (error) {
         logApiError("Delete Images: ", error);
