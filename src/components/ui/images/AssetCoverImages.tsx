@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
 import WhiteButton from '../buttons/WhiteButton';
 import { DeleteAssetImageDialog } from '../dialogs/DeleteAssetImageDialog';
-import { useAddAssetImages, usedDeleteImages } from '@/src/hooks/files/images/useImages';
+import { useAddAssetImages, useDeleteImages } from '@/src/hooks/files/images/useImages';
 import FullScreenLoadingSpinner from '../loading_state/FullScreenLoadingSpinner';
 import BlueButton from '../buttons/BlueButton';
 import { AddAssetImageDialog } from '../dialogs/AddAssetImageDialog';
@@ -34,7 +34,7 @@ const AssetCoverImages = ({assetImages = [], assetName, uploadId, isLoading, isR
 
     const [addImages, setAddImages] = useState<File[]>([]);
 
-    const { mutateAsync: deleteImage, isPending: isDeleting } = usedDeleteImages();
+    const { mutateAsync: deleteImage, isPending: isDeleting } = useDeleteImages();
     const { mutateAsync: addAssetImages, isPending: isAdding } = useAddAssetImages();
     
     // primary image appears first

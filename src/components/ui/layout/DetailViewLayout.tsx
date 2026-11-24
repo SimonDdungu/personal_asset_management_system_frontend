@@ -104,7 +104,7 @@ const DetailViewLayout = ({assetCategory, itemId, assetName, assetUploadImageId,
                     </div>
                 </div>
 
-                <AssetDocuments assetDocuments={assetDocuments ?? []} isLoading={isLoading} uploadId={assetUploadDocId ?? ""}/>
+                <AssetDocuments itemId={itemId} asset_category_query_key={ assetCategory ? ASSET_QUERY_KEYS[assetCategory] : undefined} assetDocuments={assetDocuments ?? []} isLoading={isLoading} uploadId={assetUploadDocId ?? ""}/>
 
         </div>
 

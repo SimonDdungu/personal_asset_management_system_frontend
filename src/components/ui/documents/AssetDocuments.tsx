@@ -3,9 +3,10 @@ import Link from 'next/link';
 import React, { useRef, useState } from 'react'
 import { getDocumentIcon } from './getDocIcon';
 import { DeleteAssetDocDialog } from '../dialogs/DeleteAssetDocDialog';
-import { usedDeleteDocs } from '@/src/hooks/files/documents/useDocs';
+
 import FullScreenLoadingSpinner from '../loading_state/FullScreenLoadingSpinner';
 import WhiteButton from '../buttons/WhiteButton';
+import { useDeleteDocs } from '@/src/hooks/files/documents/useDocs';
 
 type AssetDocument = {
   documentUrl: string;
@@ -15,15 +16,17 @@ interface AssetCoverDocumentsProps {
     assetDocuments?: AssetDocument[];
     uploadId: string;
     isLoading?: boolean;
+    itemId: string
+    asset_category_query_key?: string,
 }
 
-const AssetDocuments = ({assetDocuments = [], uploadId, isLoading}: AssetCoverDocumentsProps) => {
+const AssetDocuments = ({assetDocuments = [], uploadId, isLoading, asset_category_query_key, itemId}: AssetCoverDocumentsProps) => {
     const [selectionMode, setSelectionMode] = useState(false);
     const [selectedDocs, setSelectedDocs] = useState<string[]>([]);
     const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
 
     const isDeletingRef = useRef(false);
-    const { mutateAsync: deleteDocs } = usedDeleteDocs();
+    const { mutateAsync: deleteDocs } = useDeleteDocs();
     
     const toggleDocsSelection = (id: string) => {
         setSelectedDocs((prev) => prev.includes(id) ? prev.filter((imageId) => imageId !== id) : [...prev, id]);
@@ -39,7 +42,7 @@ const AssetDocuments = ({assetDocuments = [], uploadId, isLoading}: AssetCoverDo
         isDeletingRef.current = true;
 
         try {
-            await Promise.all(selectedDocs.map((id) => deleteDocs({ id, uploadId: uploadId })));
+            await Promise.all(selectedDocs.map((id) => deleteDocs({ id, uploadId: uploadId, category_key: asset_category_query_key ?? "", itemId })));
             cancelSelection();
         } catch (error) {
             console.error("Failed to delete selected images: ", error);
