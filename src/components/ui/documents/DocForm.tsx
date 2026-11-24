@@ -9,17 +9,14 @@ const DocumentForm = ({files, setFiles, setFileCaption, setFileType, assetName}:
   const { register, handleSubmit, control } = useForm();
   return (
     <div>
-        <h4>{assetName ?? "Asset"} Documents</h4>
-        <span>Add documents </span>
+        <div className="mb-1 text-sm">Add documents associated with the asset</div>
         <DocumentPicker value={files} onChange={setFiles}/>
 
-        {setFileCaption && 
-            <div className='mb-1'>
+        {setFileType && 
+            <div className='mt-3'>
             <SelectInput name='assetDocumentTypeName'label='Document Type' options={documentTypes} register={register} control={control} onChange={setFileType}/>
             </div>
         }
-
-        {setFileCaption && <TextInput label='Image caption' name='caption' onChange={setFileCaption}/>}
     </div>
   )
 }

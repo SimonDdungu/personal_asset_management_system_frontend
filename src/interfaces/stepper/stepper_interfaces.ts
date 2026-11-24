@@ -1,3 +1,6 @@
 export interface GotoNextStepper {
-    onNext: (value?: any) => void
+    onNext: () => void
+    onBack?: () => void
+    toStep?: (vale: string) => void;
+    setData?: (value: any) => void;
 }

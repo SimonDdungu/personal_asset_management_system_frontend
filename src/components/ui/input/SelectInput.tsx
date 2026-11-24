@@ -33,7 +33,7 @@ const SelectInput = <T extends FieldValues,>({name, id, label, placeholder, opti
   const errorMessage = error?.[name]?.message as string | undefined;
 
   return (
-        <div className='relative pb-2 w-full'>
+        <div className='relative pb-4 w-full'>
             <label htmlFor={name} className='block text-xs mb-1'>
                 {label}{required && <span className="text-red-600">*</span>}
              </label>
@@ -58,7 +58,7 @@ const SelectInput = <T extends FieldValues,>({name, id, label, placeholder, opti
                 )}
             />
 
-            {errorMessage && <span className='absolute bottom-0 left-1 text-red-600 text-sm'>{errorMessage}</span>}
+            {errorMessage && <span className='absolute bottom-0 left-1 text-red-600 text-xs'>{errorMessage}</span>}
 
         </div>
   );

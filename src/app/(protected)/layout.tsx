@@ -12,7 +12,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       
         <main className="flex-1 flex flex-col">
           <Navbar />
-          <div className="overflow-y-scroll">
+          <div className="overflow-y-scroll flex-1 flex flex-col">
             <div className="mx-auto flex-1 xl:min-w-300 xl:max-w-400 w-full">
                 {children}
             </div>

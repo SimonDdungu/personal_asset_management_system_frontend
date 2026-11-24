@@ -9,7 +9,7 @@ export const useCreateRealEstateAsset = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (data: any) => {
-      const response = await api.post(`${API_ENDPOINTS.ASSETS.REAL_ESTATE}?userId=${config.testing_userId}`, data);
+      const response = await api.post(`${API_ENDPOINTS.ASSETS.REAL_ESTATE}`, data);
       return response.data;
     },
 
@@ -28,7 +28,7 @@ export const useGetRealEstateAssets = (filters?: RealEstateAssetFilters) => {
      queryKey: ["realestate-assets", filters],
     queryFn: async () => {
       try {
-        const response = await api.get(API_ENDPOINTS.ASSETS.REAL_ESTATE, {params: { userId: config.testing_userId, ...filters}});
+        const response = await api.get(API_ENDPOINTS.ASSETS.REAL_ESTATE, {params: {...filters}});
         return response.data;
       } catch (error) {
         logApiError("Get Real Estate Assets", error);

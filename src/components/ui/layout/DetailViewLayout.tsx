@@ -51,7 +51,7 @@ const DetailViewLayout = ({assetCategory, itemId, assetName, assetUploadImageId,
                 <div className='flex items-center justify-between'>
                     <h1 className='text-xl'>{assetCategory ?? "Asset"}</h1>
                     <div className='flex flex-row items-center gap-x-3'>
-                       <BlueButton disabled={isLoading} link={`/${editLink}/${assetId}/edit`} label='Edit' icon={PencilIcon}/>
+                       <BlueButton disabled={isLoading} link={`/${editLink}/${itemId}/edit`} label='Edit' icon={PencilIcon}/>
                        <WhiteButton disabled={isLoading || isDeleting} textColor='text-red-600' label='Delete' onClick={() => setDeleteDialogOpen(true)} icon={Trash2}/>
                     </div>
                 </div>
