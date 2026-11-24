@@ -1,7 +1,9 @@
 "use client"
+import { useAuth } from '@/src/context/auth/AuthContext';
 import React, { useEffect, useState } from 'react'
 
 const Navbar = () => {
+    const {user, isLoading} = useAuth();
     const [date, setDate] = useState<Date | null>(null);
 
     useEffect(() => {
@@ -33,8 +35,15 @@ const Navbar = () => {
             </div>
 
             <div className='flex gap-x-1 items-center text-xs text-gray-600 rounded-2xl bg-gray-100 pr-3 cursor-pointer'>
-                <div className='p-2 rounded-full bg-gray-300 text-blue-600 overflow-hidden'>SC</div>
-                <span>Simon Chainbers</span>
+                <div className={`size-8 rounded-full bg-gray-200 text-blue-600 overflow-hidden uppercase flex items-center justify-center ${isLoading ? "animate-pulse" : ""}`}><div className='max-w'>{user?.firstName?.[0]}{user?.lastName?.[0]}</div></div>
+                <div className='min-w-24'>
+                    {isLoading 
+                        ? 
+                        <div className='w-full h-4 rounded-lg bg-gray-200 animate-pulse' /> 
+                        :
+                        <span className='capitalize'>{user?.firstName} {user?.lastName}</span>
+                    }
+                </div>
             </div>
         </div>
     </nav>

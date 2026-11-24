@@ -7,6 +7,8 @@ import Add_AssetForm from '@/src/views/dashboard/components/Add_AssetForm';
 import ElectronicForm from '@/src/views/dashboard/components/ElectronicForm';
 import MediaForm from '@/src/views/dashboard/components/MediaForm';
 import RealEstateForm from '@/src/views/dashboard/components/RealEstateForm';
+import { ChevronLeft } from 'lucide-react';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React, { useRef, useState } from 'react'
 
@@ -88,6 +90,12 @@ const page = () => {
   return (
     <div className='px-20 pt-10 pb-20 bg-gray-100 min-h-screen'>
         <div className='bg-white mx-auto max-w-4xl p-10 shadow rounded-lg relative'>
+          <div className='mb-3 w-max'>
+            <Link href={"/dashboard"} className='text-xs flex items-center hover:underline'>
+              <ChevronLeft size={20}/> 
+              <span>Back to Dashboard</span>
+            </Link>
+          </div>
             <div className="">
                 {step === 0 && <Add_AssetForm onNext={() => setStep(1)} setData={setAssetData} toStep={setShowAsset}/>}
                 {step === 1 && showAsset === "Real estate" && <RealEstateForm onNext={() => setStep(2)} onBack={() => setStep(0)} setData={setAssetProperties}/>}

@@ -1,5 +1,9 @@
+"use client"
+import { useGetTotalAssetCount } from '@/src/hooks/assets/useAssets';
+import { useGetTotalFinancialAssetValue, useGetTotalNetworth, useGetTotalPhysicalAssetValue } from '@/src/hooks/dashboard/useDashboard';
+import { useBaseCurrencyStore } from '@/src/zustand/store/base-currency-store';
 import { Briefcase, BuildingComplex, ChartColumn, LucideIcon, TrendingDown, TrendingUp, Wallet } from 'lucide-react';
-import React from 'react'
+import { Total_Networth_Type } from '../../../shared/types/total-networth-type';
 
 interface KPICard_Prop{
     label: string;
@@ -13,16 +17,35 @@ interface KPICard_Prop{
 }
 
 
-const KPICards = () => {
+const KPICards = ({setTotalNetworth}: {setTotalNetworth: (value: number) => void}) => {
+    const seletedBaseCurrency = useBaseCurrencyStore((state) => state.baseCurrency)
+
+    const { data: totalNetworthData, isLoading: totalNetworthLoading, isError: isTotalNetworthError} = useGetTotalNetworth();
+    const { data: totalPhysicalValue, isLoading: totalPhysicalLoading, isError: isTotalPhysicalError} = useGetTotalPhysicalAssetValue();
+    const { data: totalFinancialValue, isLoading: totalFinancialLoading, isError: isTotalFinancialError} = useGetTotalFinancialAssetValue();
+    const { data: totalAssetCount, isLoading: totalAsssetCountLoading, isError: isTotalAssetCountError} = useGetTotalAssetCount();
+
+    const selectedNetworth: Total_Networth_Type = totalNetworthData?.find((item: Total_Networth_Type) => item.currency === seletedBaseCurrency)
+    const selectedPhysicalValue: Total_Networth_Type = totalPhysicalValue?.find((item: Total_Networth_Type) => item.currency === seletedBaseCurrency)
+    const selectedFinancialValue: Total_Networth_Type = totalFinancialValue?.find((item: Total_Networth_Type) => item.currency === seletedBaseCurrency)
+
+    const networth = selectedNetworth?.total ?? 0
+    const baseCurrency = selectedNetworth?.currency
+    const physicalValue = selectedPhysicalValue?.total ?? 0
+    const financialValue = selectedFinancialValue?.total ?? 0
+
+    setTotalNetworth(networth ?? 0)
+
+
   return (
     <div className='grid grid-cols-4 gap-x-5'>
-        <KPICard label="Total net worth" icon={Wallet} icon_bgcolor='bg-purple-100' icon_color='text-purple-500' value={{ money: 67500000, currency: "UGX" }} percentage={6} />
+        <KPICard label="Total net worth" icon={Wallet} icon_bgcolor='bg-purple-100' icon_color='text-purple-500' value={{ money: networth, currency: baseCurrency }} isLoading={totalNetworthLoading} />
 
-        <KPICard label="Physical assets" icon={BuildingComplex} icon_bgcolor='bg-blue-100' icon_color='text-blue-500' value={{ money: 22000000, currency: "UGX" }} percentage={2.5} extraInfo="Compared to last year"/>
+        <KPICard label="Physical assets" icon={BuildingComplex} icon_bgcolor='bg-blue-100' icon_color='text-blue-500' value={{ money: physicalValue, currency: baseCurrency }}  isLoading={totalPhysicalLoading} />
 
-        <KPICard label="Financial assets" icon={ChartColumn} icon_bgcolor='bg-green-100' icon_color='text-green-500' value={{money: 35500000, currency: "UGX"}} percentage={-4} extraInfo="Compared to last year" />
+        <KPICard label="Financial assets" icon={ChartColumn} icon_bgcolor='bg-green-100' icon_color='text-green-500' value={{money: financialValue, currency: baseCurrency}}  isLoading={totalFinancialLoading} />
 
-        <KPICard label="Total assets" icon={Briefcase} icon_bgcolor='bg-orange-100' icon_color='text-orange-500' value={24} />
+        <KPICard label="Total assets" icon={Briefcase} icon_bgcolor='bg-orange-100' icon_color='text-orange-500' value={totalAssetCount ?? 0} isLoading={totalAsssetCountLoading}/>
     </div>
   )
 }
@@ -46,9 +69,9 @@ function KPICard({label, icon: Icon, icon_bgcolor, icon_color, value, percentage
                 </div>
             </div>
             
-            <div className='my-3 text-xl font-semibold'>
+            <div className='my-3 text-xl font-medium'>
                 <div>
-                     {typeof value === "number" ? value.toLocaleString() : value ? `${value.currency} ${value.money.toLocaleString()}` : "--"}
+                     {isLoading ? <div className='h-7 w-61.5 rounded-lg bg-gray-200 animate-pulse'/> : (typeof value === "number" ? value.toLocaleString() : value ? `${value.currency} ${value.money.toLocaleString()}` : "--")}
                 </div>
             </div>
 

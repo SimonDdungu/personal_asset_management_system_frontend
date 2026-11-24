@@ -90,3 +90,217 @@ export const useDeleteAsset = () => {
     },
   });
 };
+
+
+// count 
+export const useGetTotalAssetCount = () => {
+  return useQuery({
+    queryKey: ["total_asset_count"],
+    queryFn: async () => {
+      try {
+        const response = await api.get(API_ENDPOINTS.ASSETS.TOTAL_COUNT)
+        return response.data;
+      } catch (error) {
+        logApiError("Get total asset count", error);
+        throw error;
+      }
+    },
+    staleTime: 60 * 60 * 1000,
+    gcTime: 60 * 60 * 1000, 
+  });
+};
+
+export const useGetTotalPhysicalAssetCount = () => {
+  return useQuery({
+    queryKey: ["total_physical_asset_count"],
+    queryFn: async () => {
+      try {
+        const response = await api.get(API_ENDPOINTS.ASSETS.TOTAL_PHYSICAL_COUNT)
+        return response.data;
+      } catch (error) {
+        logApiError("Get total physical asset count", error);
+        throw error;
+      }
+    },
+    staleTime: 60 * 60 * 1000,
+    gcTime: 60 * 60 * 1000, 
+  });
+};
+
+export const useGetTotalFinancialAssetCount = () => {
+  return useQuery({
+    queryKey: ["total_financial_asset_count"],
+    queryFn: async () => {
+      try {
+        const response = await api.get(API_ENDPOINTS.ASSETS.TOTAL_FINANCIAL_COUNT)
+        return response.data;
+      } catch (error) {
+        logApiError("Get total financial asset count", error);
+        throw error;
+      }
+    },
+    staleTime: 60 * 60 * 1000,
+    gcTime: 60 * 60 * 1000, 
+  });
+};
+
+// categories
+export const useGetTopAssetCategories = () => {
+  return useQuery({
+    queryKey: ["top_asset_categories"],
+    queryFn: async () => {
+      try {
+        const response = await api.get(API_ENDPOINTS.ASSETS.TOP_CATEGORIES)
+        return response.data;
+      } catch (error) {
+        logApiError("Get total asset count", error);
+        throw error;
+      }
+    },
+    staleTime: 60 * 60 * 1000,
+    gcTime: 60 * 60 * 1000, 
+  });
+};
+
+
+export const useGetPhysicalTopAssetCategories = () => {
+  return useQuery({
+    queryKey: ["top_physical_asset_categories"],
+    queryFn: async () => {
+      try {
+        const response = await api.get(API_ENDPOINTS.ASSETS.TOP_PHYSICAL_CATEGORIES)
+        return response.data;
+      } catch (error) {
+        logApiError("Get top physical asset categories", error);
+        throw error;
+      }
+    },
+    staleTime: 60 * 60 * 1000,
+    gcTime: 60 * 60 * 1000, 
+  });
+};
+
+
+export const useGetFinancialTopAssetCategories = () => {
+  return useQuery({
+    queryKey: ["top_financial_asset_categories"],
+    queryFn: async () => {
+      try {
+        const response = await api.get(API_ENDPOINTS.ASSETS.TOP_FINANCIAL_CATEGORIES)
+        return response.data;
+      } catch (error) {
+        logApiError("Get top financial asset categories", error);
+        throw error;
+      }
+    },
+    staleTime: 60 * 60 * 1000,
+    gcTime: 60 * 60 * 1000, 
+  });
+};
+
+// categories count
+export const useGetAssetCategoryCount = () => {
+  return useQuery({
+    queryKey: ["category_count"],
+    queryFn: async () => {
+      try {
+        const response = await api.get(API_ENDPOINTS.ASSETS.CATEGORIES_COUNT)
+        return response.data;
+      } catch (error) {
+        logApiError("Get category count", error);
+        throw error;
+      }
+    },
+    staleTime: 60 * 60 * 1000,
+    gcTime: 60 * 60 * 1000, 
+  });
+};
+
+export const useGetPhysicalCategoryCount = () => {
+  return useQuery({
+    queryKey: ["physical_category_count"],
+    queryFn: async () => {
+      try {
+        const response = await api.get(API_ENDPOINTS.ASSETS.PHYSICAL_CATEGORIES_COUNT)
+        return response.data;
+      } catch (error) {
+        logApiError("Get physical category count", error);
+        throw error;
+      }
+    },
+    staleTime: 60 * 60 * 1000,
+    gcTime: 60 * 60 * 1000, 
+  });
+};
+
+export const useGetFinancialCategoryCount = () => {
+  return useQuery({
+    queryKey: ["financial_category_count"],
+    queryFn: async () => {
+      try {
+        const response = await api.get(API_ENDPOINTS.ASSETS.FINANCIAL_CATEGORIES_COUNT)
+        return response.data;
+      } catch (error) {
+        logApiError("Get financial category count", error);
+        throw error;
+      }
+    },
+    staleTime: 60 * 60 * 1000,
+    gcTime: 60 * 60 * 1000, 
+  });
+};
+
+
+
+
+// largest
+export const useGetLargestAssets = () => {
+  return useQuery({
+    queryKey: ["total_largest_assets"],
+    queryFn: async () => {
+      try {
+        const response = await api.get(API_ENDPOINTS.ASSETS.LARGEST)
+        return response.data;
+      } catch (error) {
+        logApiError("Get largest assets", error);
+        throw error;
+      }
+    },
+    staleTime: 60 * 60 * 1000,
+    gcTime: 60 * 60 * 1000, 
+  });
+};
+
+export const useGetPhysicalLargestAssets = () => {
+  return useQuery({
+    queryKey: ["total_physical_largest_assets"],
+    queryFn: async () => {
+      try {
+        const response = await api.get(API_ENDPOINTS.ASSETS.PHYSICAL_LARGEST)
+        return response.data;
+      } catch (error) {
+        logApiError("Get physical largest assets", error);
+        throw error;
+      }
+    },
+    staleTime: 60 * 60 * 1000,
+    gcTime: 60 * 60 * 1000, 
+  });
+};
+
+export const useGetFinancialLargestAssets = () => {
+  return useQuery({
+    queryKey: ["total_financial_largest_assets"],
+    queryFn: async () => {
+      try {
+        const response = await api.get(API_ENDPOINTS.ASSETS.FINANCIAL_LARGEST)
+        return response.data;
+      } catch (error) {
+        logApiError("Get financial largest assets", error);
+        throw error;
+      }
+    },
+    staleTime: 60 * 60 * 1000,
+    gcTime: 60 * 60 * 1000, 
+  });
+};

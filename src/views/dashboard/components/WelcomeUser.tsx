@@ -24,7 +24,7 @@ const WelcomeUser = () => {
                 <div className='text-2xl font-bold tracking-tight md:text-3xl flex gap-x-2 mb-2'>
                     Good {greeting ? `${greeting},` : <div className='h-9.5 w-50 rounded-md bg-gray-200 animate-pulse'></div>} {!isLoading ? <span className='capitalize'>{user ? `${user.firstName}.` : ""}</span> : <div className='h-9.5 w-38 rounded-md bg-gray-200 animate-pulse'></div>}
                 </div>
-                <p className='text-gray-700 text-sm'>Here's how your portfolio is performing today.</p>
+                <p className='text-gray-700 text-sm'>Here's how your portfolio is performing.</p>
             </div>
 
             <div>
