@@ -1,4 +1,4 @@
-import { PaginationFilters } from "../pagination/paaginationFilters";
+import { PaginationFilters } from "../../pagination/paginationFilters";
 
 export interface RealEstateAssetFilters extends PaginationFilters  {
   assetName?: string;
