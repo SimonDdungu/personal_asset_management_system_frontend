@@ -37,6 +37,5 @@ export const sidebarItems = [
   { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
   { name: "Physical Assets", icon: Building2, children: physicalAssetMenu },
   { name: "Financial Assets", icon: Wallet, children: financialAssetMenu },
-  { name: "Documents", href: "/documents", icon: FileText },
   { name: "Settings", href: "/settings", icon: Settings },
 ];
