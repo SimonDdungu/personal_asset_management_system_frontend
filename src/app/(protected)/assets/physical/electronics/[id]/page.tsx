@@ -2,6 +2,7 @@
 import ElectronicDetailView from '@/src/views/physical_assets/Electronics/ElectronicDetailView'
 import React, { Suspense } from 'react'
 import { useParams } from "next/navigation";
+import FullScreenLoadingSpinner from '@/src/components/ui/loading_state/FullScreenLoadingSpinner';
 
 const ElectronicDetails = () => {
     const { id } = useParams<{ id: string }>();
@@ -13,7 +14,7 @@ const ElectronicDetails = () => {
 
 const page = () => {
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<div className="min-h-screen w-full relative"><FullScreenLoadingSpinner /></div>}>
       <ElectronicDetails />
     </Suspense>
   );
