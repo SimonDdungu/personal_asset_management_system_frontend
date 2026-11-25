@@ -1,11 +1,9 @@
 "use client"
-import { ActionPopover } from '@/src/components/ui/pop_over/ActionPopOver'
 import AssetPopOver from '@/src/components/ui/pop_over/AssetPopOver'
 import { propertySizeUnitLabels } from '@/src/constants/symbols/propertySizeUnitLabels'
-import { BathIcon, Bed, Ellipsis, Eye, ImageOff, Pencil, SquareDimensions, Trash2 } from 'lucide-react'
+import { BathIcon, Bed, ImageOff, SquareDimensions } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
 interface RealEstateCardProps {
@@ -24,8 +22,7 @@ interface RealEstateCardProps {
 
 const RealEstateCard = ({id, assetId, assetName, image, currency, currentValue, address, noBathrooms, noBedrooms, propertySize, propertySizeUnit}: RealEstateCardProps) => {
     const [imageLoaded, setImageLoaded] = useState<boolean>(false)
-    const router = useRouter();
-    const basePath = "/assets/real_estate";
+    const basePath = "/assets/physical/real-estate";
 
     
   return (
@@ -51,7 +48,7 @@ const RealEstateCard = ({id, assetId, assetName, image, currency, currentValue, 
 
         <div className='py-4 px-3 border-t'>
           <p className='text-xs text-gray-700'>{address}</p>
-          <Link href={`/assets/real_estate/${id}`} className='mb-2 text-sm hover:underline text-wrap'>{assetName}</Link>
+          <Link href={`/assets/physical/real-estate/${id}`} className='mb-2 text-sm hover:underline text-wrap'>{assetName}</Link>
 
           <div className='flex flex-row flex-wrap gap-x-5 text-sm mb-1 border-b pb-1'>
             {noBedrooms && 

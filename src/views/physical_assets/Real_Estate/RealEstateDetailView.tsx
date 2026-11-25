@@ -12,6 +12,7 @@ interface RealEstateDetailViewProps {
 const RealEstateDetailView = ({id}: RealEstateDetailViewProps) => {
     
     const { data, isLoading, isFetching, isError, error } = useGetRealEstateAsset(id);
+    const basePath = "/assets/physical/real-estate";
 
     const images = data?.images?.[0]?.images
     const imageCaption = data?.images?.[0]?.caption
@@ -25,10 +26,10 @@ const RealEstateDetailView = ({id}: RealEstateDetailViewProps) => {
     const documentUploadId = data?.documents?.[0]?.id
 
   return (
-    <DetailViewLayout itemId={data?.id} assetId={data?.assetId} editLink="assets/real_estate" assetCategory={data?.assetCategory} assetName={data?.assetName} assetLabel={data?.address} 
+    <DetailViewLayout itemId={data?.id} assetId={data?.assetId} assetCategory={data?.assetCategory} assetName={data?.assetName} assetLabel={data?.address} 
     assetUploadImageId={imageUploadId} assetImages={images} imageCaption={imageCaption} assetDocuments={documents} documentCaption={documentCaption} currentCurrency={data?.currency} 
     currentValue={data?.currentValue} description={data?.description} createdAt={data?.createdAt} updatedAt={data?.updatedAt} currentValueUpdatedAt={data?.currentValueUpdatedAt} 
-    isLoading={isLoading} isFetching={isFetching} assetUploadDocId={documentUploadId}>
+    isLoading={isLoading} isFetching={isFetching} assetUploadDocId={documentUploadId} basePath={basePath}>
 
             <div>
                 <div className='grid grid-cols-2 sm:grid-cols-[max-content_max-content_max-content] xl:grid-cols-[max-content_max-content_max-content_max-content] gap-x-5 sm:gap-x-10 gap-y-3 border-b pb-5 mb-3'>

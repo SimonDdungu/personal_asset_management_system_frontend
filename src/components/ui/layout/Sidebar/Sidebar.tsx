@@ -52,7 +52,7 @@ const Sidebar = () => {
               {isOpen && (
                 <div className="ml-8 mt-2 space-y-1 border-l pl-3">
                   {item.children.map((child) => (
-                    <Link key={child.name} href={child.href} className={`block px-3 py-2 rounded-lg text-xs transition ${pathname === child.href ? "bg-blue-100 text-blue-700 font-semibold" : "text-gray-500 hover:bg-gray-100"}`}>
+                    <Link key={child.name} href={child.href} className={`block px-3 py-2 rounded-lg text-xs transition ${pathname === child.href ? "bg-blue-100 text-blue-700" : "text-gray-500 hover:bg-gray-100"}`}>
                       {child.name}
                     </Link>
                   ))}

@@ -2,11 +2,12 @@
 import React, { ReactNode, useState } from 'react'
 import { AssetCoverImages, AssetDocuments, BlueButton, WhiteButton } from '..';
 import Footer from './Footer';
-import { PencilIcon, Trash2 } from 'lucide-react';
+import { ChevronLeft, PencilIcon, Trash2 } from 'lucide-react';
 import { formatDateTime } from '@/src/util/date_time/formatDateTime';
 import { useDeleteAsset } from '@/src/hooks/assets/useAssets';
 import { DeleteAssetDialog } from '../dialogs/DeleteAssetDialog';
 import { ASSET_QUERY_KEYS } from '@/src/constants/react_query/category_keys';
+import Link from 'next/link';
 
 interface DetailViewLayoutProps {
     itemId: string
@@ -27,12 +28,12 @@ interface DetailViewLayoutProps {
     updatedAt: string,
     children: ReactNode,
     currentValueUpdatedAt: string,
-    editLink: string,
     isLoading?: boolean,
     isFetching?: boolean,
+    basePath?: string,
 }
 const DetailViewLayout = ({assetCategory, itemId, assetName, assetUploadImageId, assetImages, assetLabel, children, currentCurrency, currentValue, updatedAt, createdAt, description, assetDocuments, assetUploadDocId,
-    currentValueUpdatedAt, assetId, editLink, isLoading, isFetching}: DetailViewLayoutProps) => {
+    currentValueUpdatedAt, assetId, isLoading, isFetching, basePath}: DetailViewLayoutProps) => {
     const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
     const { mutateAsync: deleteAsset, isPending: isDeleting } = useDeleteAsset();
         
@@ -49,9 +50,12 @@ const DetailViewLayout = ({assetCategory, itemId, assetName, assetUploadImageId,
         <div className='box-border px-10 pt-10 pb-20'>
             <div className='mb-5'>
                 <div className='flex items-center justify-between'>
-                    <h1 className='text-xl'>{assetCategory ?? "Asset"}</h1>
+                    <Link href={basePath ?? "/dashboard"} className='text-xs flex items-center hover:underline'>
+                        <ChevronLeft size={25}/> 
+                        <span className='text-xl'>{assetCategory ?? "Asset"}</span>
+                    </Link>
                     <div className='flex flex-row items-center gap-x-3'>
-                       <BlueButton disabled={isLoading} link={`/${editLink}/${itemId}/edit`} label='Edit' icon={PencilIcon}/>
+                       <BlueButton disabled={isLoading} link={`${basePath}/${itemId}/edit`} label='Edit' icon={PencilIcon}/>
                        <WhiteButton disabled={isLoading || isDeleting} textColor='text-red-600' label='Delete' onClick={() => setDeleteDialogOpen(true)} icon={Trash2}/>
                     </div>
                 </div>

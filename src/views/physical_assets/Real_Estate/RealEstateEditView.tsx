@@ -11,7 +11,7 @@ interface RealEstateDetailViewProps {
 
 const RealEstateEditView = ({id}: RealEstateDetailViewProps) => {
     const { data, isLoading, isError, error } = useGetRealEstateAsset(id);
-    const viewPath = `/assets/real_estate/${id}`;
+    const viewPath = `/assets/physical/real-estate/${id}`;
 
     const updateRealEstate = useUpdateRealEstateAsset();
 
