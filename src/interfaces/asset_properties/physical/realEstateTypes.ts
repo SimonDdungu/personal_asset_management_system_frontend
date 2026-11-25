@@ -4,7 +4,6 @@ import { AssetImageResponse, AssetImageUploadResponse } from "../asset_files/ass
 
 export interface CreateRealEstateRequest {
     address: string;
-    description?: string;
     numberBedrooms: number;
     numberBathrooms: number;
     numberUnits?: number;
@@ -19,7 +18,6 @@ export interface CreateRealEstateRequest {
 
 export interface UpdateRealEstateRequest {
     address?: string;
-    description?: string;
     numberBedrooms?: number;
     numberBathrooms?: number;
     numberUnits?: number;
