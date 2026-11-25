@@ -6,7 +6,6 @@ import currencyCodes from "currency-codes";
 
 export const createRealEstateSchema = z.object({
     address: z.string("Address is required!").min(2, "Address is required!").max(255, "Address of real estate exceeds limit."),
-    description: z.string().max(255, "Description exceeds limit.").nullable().optional(),
     numberBedrooms: z.number("Number of Bedrooms is required").int().min(0, "Number of Bedrooms is required"),
     numberBathrooms: z.number("Number of Bathrooms is required").int().min(0, "Number of Bathrooms is required"),
     numberUnits: z.number().int().min(0, "Number of Units cannot be less than 0.").nullable().optional(),
@@ -24,7 +23,6 @@ export type CreateRealEstateFormData = z.infer<typeof createRealEstateSchema>;
 
 export const updateRealEstateSchema = z.object({
     address: z.string().max(255, "Address of real estate exceeds limit.").nullable().optional(),
-    description: z.string().max(255, "Description exceeds limit.").nullable().optional(),
     numberBedrooms: z.number().int().min(0, "Number of Bedrooms cannot be less than 0.").nullable().optional(),
     numberBathrooms: z.number().int().min(0, "Number of Bathrooms cannot be less than 0.").nullable().optional(),
     numberUnits: z.number().int().min(0, "Number of Units cannot be less than 0.").nullable().optional(),
