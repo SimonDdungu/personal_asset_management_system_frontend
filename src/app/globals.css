@@ -49,6 +49,12 @@
 }
 
 :root {
+  --navy: #17213a;
+  --blue: #3c6ae4;
+  ---mint: #57c2ab;
+  ---yellow: #f3bd5c;
+
+
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);

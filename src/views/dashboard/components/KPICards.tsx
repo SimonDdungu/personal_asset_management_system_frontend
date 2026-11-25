@@ -4,6 +4,7 @@ import { useGetTotalFinancialAssetValue, useGetTotalNetworth, useGetTotalPhysica
 import { useBaseCurrencyStore } from '@/src/zustand/store/base-currency-store';
 import { Briefcase, BuildingComplex, ChartColumn, LucideIcon, TrendingDown, TrendingUp, Wallet } from 'lucide-react';
 import { Total_Networth_Type } from '../../../shared/types/total-networth-type';
+import { useEffect } from 'react';
 
 interface KPICard_Prop{
     label: string;
@@ -16,36 +17,28 @@ interface KPICard_Prop{
     isLoading?: boolean
 }
 
+interface KPICardsProps {
+  networth: number;
+  physicalValue: number;
+  financialValue: number;
+  averageValue: number;
+  isNetworthLoading: boolean;
+  isPhysicalLoading: boolean;
+  isFinancialLoading: boolean;
+  isAverageLoading: boolean;
+}
 
-const KPICards = ({setTotalNetworth}: {setTotalNetworth: (value: number) => void}) => {
+const KPICards = ({networth, physicalValue, financialValue, averageValue, isAverageLoading, isFinancialLoading, isNetworthLoading, isPhysicalLoading}: KPICardsProps) => {
     const seletedBaseCurrency = useBaseCurrencyStore((state) => state.baseCurrency)
-
-    const { data: totalNetworthData, isLoading: totalNetworthLoading, isError: isTotalNetworthError} = useGetTotalNetworth();
-    const { data: totalPhysicalValue, isLoading: totalPhysicalLoading, isError: isTotalPhysicalError} = useGetTotalPhysicalAssetValue();
-    const { data: totalFinancialValue, isLoading: totalFinancialLoading, isError: isTotalFinancialError} = useGetTotalFinancialAssetValue();
-    const { data: totalAssetCount, isLoading: totalAsssetCountLoading, isError: isTotalAssetCountError} = useGetTotalAssetCount();
-
-    const selectedNetworth: Total_Networth_Type = totalNetworthData?.find((item: Total_Networth_Type) => item.currency === seletedBaseCurrency)
-    const selectedPhysicalValue: Total_Networth_Type = totalPhysicalValue?.find((item: Total_Networth_Type) => item.currency === seletedBaseCurrency)
-    const selectedFinancialValue: Total_Networth_Type = totalFinancialValue?.find((item: Total_Networth_Type) => item.currency === seletedBaseCurrency)
-
-    const networth = selectedNetworth?.total ?? 0
-    const baseCurrency = selectedNetworth?.currency
-    const physicalValue = selectedPhysicalValue?.total ?? 0
-    const financialValue = selectedFinancialValue?.total ?? 0
-
-    setTotalNetworth(networth ?? 0)
-
-
   return (
     <div className='grid grid-cols-4 gap-x-5'>
-        <KPICard label="Total net worth" icon={Wallet} icon_bgcolor='bg-purple-100' icon_color='text-purple-500' value={{ money: networth, currency: baseCurrency }} isLoading={totalNetworthLoading} />
+        <KPICard label="Total net worth" icon={Wallet} icon_bgcolor='bg-purple-100' icon_color='text-purple-500' value={{ money: networth, currency: seletedBaseCurrency }} isLoading={isNetworthLoading} />
 
-        <KPICard label="Physical assets" icon={BuildingComplex} icon_bgcolor='bg-blue-100' icon_color='text-blue-500' value={{ money: physicalValue, currency: baseCurrency }}  isLoading={totalPhysicalLoading} />
+        <KPICard label="Physical assets" icon={BuildingComplex} icon_bgcolor='bg-blue-100' icon_color='text-blue-500' value={{ money: physicalValue, currency: seletedBaseCurrency }}  isLoading={isPhysicalLoading} />
 
-        <KPICard label="Financial assets" icon={ChartColumn} icon_bgcolor='bg-green-100' icon_color='text-green-500' value={{money: financialValue, currency: baseCurrency}}  isLoading={totalFinancialLoading} />
+        <KPICard label="Financial assets" icon={ChartColumn} icon_bgcolor='bg-green-100' icon_color='text-green-500' value={{money: financialValue, currency: seletedBaseCurrency}}  isLoading={isFinancialLoading} />
 
-        <KPICard label="Total assets" icon={Briefcase} icon_bgcolor='bg-orange-100' icon_color='text-orange-500' value={totalAssetCount ?? 0} isLoading={totalAsssetCountLoading}/>
+        <KPICard label="Average asset Value" icon={Briefcase} icon_bgcolor='bg-orange-100' icon_color='text-orange-500' value={{money: averageValue, currency: seletedBaseCurrency}} isLoading={isAverageLoading}/>
     </div>
   )
 }
@@ -71,7 +64,7 @@ function KPICard({label, icon: Icon, icon_bgcolor, icon_color, value, percentage
             
             <div className='my-3 text-xl font-medium'>
                 <div>
-                     {isLoading ? <div className='h-7 w-61.5 rounded-lg bg-gray-200 animate-pulse'/> : (typeof value === "number" ? value.toLocaleString() : value ? `${value.currency} ${value.money.toLocaleString()}` : "--")}
+                     {isLoading ? <div className='h-7 w-61.5 rounded-lg bg-gray-200 animate-pulse'/> : (typeof value === "number" ? value.toLocaleString() : value ? `${value.currency} ${value.money?.toLocaleString()}` : "--")}
                 </div>
             </div>
 
