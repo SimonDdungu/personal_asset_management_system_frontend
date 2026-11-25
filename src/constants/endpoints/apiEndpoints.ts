@@ -17,6 +17,9 @@ export const API_ENDPOINTS = {
     CATEGORIES_COUNT: "assets/categories/count",
     PHYSICAL_CATEGORIES_COUNT: "assets/physical/categories/count",
     FINANCIAL_CATEGORIES_COUNT: "assets/financial/categories/count",
+    AVERAGE: "/assets/average",
+    AVERAGE_PHYSICAL: "/assets/physical/average",
+    AVERAGE_FINANCIAL: "/assets/financial/average",
   },
   USERS: {
     CREATE: "/auth/register",

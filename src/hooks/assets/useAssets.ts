@@ -304,3 +304,58 @@ export const useGetFinancialLargestAssets = () => {
     gcTime: 60 * 60 * 1000, 
   });
 };
+
+
+// Average
+export const useGetAssetsAverage = () => {
+  return useQuery({
+    queryKey: ["total_average_assets"],
+    queryFn: async () => {
+      try {
+        const response = await api.get(API_ENDPOINTS.ASSETS.AVERAGE)
+        return response.data;
+      } catch (error) {
+        logApiError("Get average value of assets", error);
+        throw error;
+      }
+    },
+    staleTime: 60 * 60 * 1000,
+    gcTime: 60 * 60 * 1000, 
+  });
+};
+
+export const useGetPhysicalAssetsAverage = () => {
+  return useQuery({
+    queryKey: ["total_physical_average_assets"],
+    queryFn: async () => {
+      try {
+        const response = await api.get(API_ENDPOINTS.ASSETS.AVERAGE_PHYSICAL)
+        return response.data;
+      } catch (error) {
+        logApiError("Get average value of physical assets", error);
+        throw error;
+      }
+    },
+    staleTime: 60 * 60 * 1000,
+    gcTime: 60 * 60 * 1000, 
+  });
+};
+
+
+export const useGetFinancialAssetsAverage = () => {
+  return useQuery({
+    queryKey: ["total_financial_average_assets"],
+    queryFn: async () => {
+      try {
+        const response = await api.get(API_ENDPOINTS.ASSETS.AVERAGE_FINANCIAL)
+        return response.data;
+      } catch (error) {
+        logApiError("Get average value of financial assets", error);
+        throw error;
+      }
+    },
+    staleTime: 60 * 60 * 1000,
+    gcTime: 60 * 60 * 1000, 
+  });
+};
+
