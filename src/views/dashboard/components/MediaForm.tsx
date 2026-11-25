@@ -2,7 +2,7 @@
 import BlueButton from '@/src/components/ui/buttons/BlueButton';
 import DocumentForm from '@/src/components/ui/documents/DocForm';
 import ImageForm from '@/src/components/ui/images/ImageForm';
-import { useCreateRealEstateAsset } from '@/src/hooks/real_estate/useRealEstate';
+import { useCreateRealEstateAsset } from '@/src/hooks/asset-properties/physical-assets/real_estate/useRealEstate';
 import { GotoNextStepper } from '@/src/interfaces/stepper/stepper_interfaces';
 import React, { useState } from 'react';
 

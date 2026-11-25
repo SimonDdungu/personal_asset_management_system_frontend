@@ -1,6 +1,6 @@
 "use client"
 import EditViewLayout from '@/src/components/ui/layout/EditViewLayout';
-import { useGetRealEstateAsset, useUpdateRealEstateAsset } from '@/src/hooks/real_estate/useRealEstate';
+import { useGetRealEstateAsset, useUpdateRealEstateAsset } from '@/src/hooks/asset-properties/physical-assets/real_estate/useRealEstate';
 import { updateRealEstateSchema } from '@/src/validation/asset_properties/realEstate_Validation';
 import RealEstateEditFields from './RealEstateEditFields';
 

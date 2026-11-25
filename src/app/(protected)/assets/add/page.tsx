@@ -1,7 +1,7 @@
 "use client"
 import FullScreenLoadingSpinner from '@/src/components/ui/loading_state/FullScreenLoadingSpinner';
-import { useCreateElectronicAsset } from '@/src/hooks/electronics/useElectronics';
-import { useCreateRealEstateAsset } from '@/src/hooks/real_estate/useRealEstate';
+import { useCreateElectronicAsset } from '@/src/hooks/asset-properties/physical-assets/electronics/useElectronics';
+import { useCreateRealEstateAsset } from '@/src/hooks/asset-properties/physical-assets/real_estate/useRealEstate';
 import { CreateAssetsRequest } from '@/src/interfaces/asset_properties/assetTypes';
 import Add_AssetForm from '@/src/views/dashboard/components/Add_AssetForm';
 import ElectronicForm from '@/src/views/dashboard/components/ElectronicForm';

@@ -12,7 +12,7 @@ import ImageForm from "../images/ImageForm";
 import { useState } from "react";
 import Add_AssetForm from "@/src/views/dashboard/components/Add_AssetForm";
 import RealEstateForm from "@/src/views/dashboard/components/RealEstateForm";
-import { useCreateRealEstateAsset } from "@/src/hooks/real_estate/useRealEstate";
+import { useCreateRealEstateAsset } from "@/src/hooks/asset-properties/physical-assets/real_estate/useRealEstate";
 import MediaForm from "@/src/views/dashboard/components/MediaForm";
 
 interface AddAssetDialogProps {

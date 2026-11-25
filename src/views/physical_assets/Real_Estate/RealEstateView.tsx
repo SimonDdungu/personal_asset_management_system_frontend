@@ -1,5 +1,5 @@
 "use client"
-import { useGetRealEstateAssets } from '@/src/hooks/real_estate/useRealEstate';
+import { useGetRealEstateAssets } from '@/src/hooks/asset-properties/physical-assets/real_estate/useRealEstate';
 import RealEstateCard from './components/RealEstateCard';
 import { useState } from 'react';
 import { RealEstateAssetFilters } from '@/src/interfaces/search_filters/realEstate_SearchFilters';

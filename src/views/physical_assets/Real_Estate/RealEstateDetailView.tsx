@@ -1,7 +1,7 @@
 "use client"
 import { DetailViewLayout } from '@/src/components/ui';
 import { propertySizeUnitLabels } from '@/src/constants/symbols/propertySizeUnitLabels';
-import { useGetRealEstateAsset } from '@/src/hooks/real_estate/useRealEstate';
+import { useGetRealEstateAsset } from '@/src/hooks/asset-properties/physical-assets/real_estate/useRealEstate';
 import { formatDate } from '@/src/util/date_time/formatDateTime';
 import { useState } from 'react';
 

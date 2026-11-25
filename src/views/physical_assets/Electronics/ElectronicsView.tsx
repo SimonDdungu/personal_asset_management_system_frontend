@@ -1,5 +1,5 @@
 "use client"
-import { useGetElectronicAssets } from '@/src/hooks/electronics/useElectronics';
+import { useGetElectronicAssets } from '@/src/hooks/asset-properties/physical-assets/electronics/useElectronics';
 import React from 'react'
 import ElectronicCard from './components/ElectronicCard';
 

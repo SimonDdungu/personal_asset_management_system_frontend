@@ -1,6 +1,6 @@
 "use client"
 import { DetailViewLayout } from '@/src/components/ui';
-import { useGetElectronicAsset } from '@/src/hooks/electronics/useElectronics';
+import { useGetElectronicAsset } from '@/src/hooks/asset-properties/physical-assets/electronics/useElectronics';
 import { useState } from 'react';
 
 interface ElectronicDetailViewProps {
