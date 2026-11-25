@@ -9,7 +9,7 @@ export const useCreateRealEstateAsset = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (data: any) => {
-      const response = await api.post(`${API_ENDPOINTS.ASSETS.REAL_ESTATE}`, data);
+      const response = await api.post(`${API_ENDPOINTS.ASSETS.PROPERTIES.PHYSICAL.REAL_ESTATE}`, data);
       return response.data;
     },
 
@@ -28,7 +28,7 @@ export const useGetRealEstateAssets = (filters?: RealEstateAssetFilters) => {
      queryKey: ["realestate-assets", filters],
     queryFn: async () => {
       try {
-        const response = await api.get(API_ENDPOINTS.ASSETS.REAL_ESTATE, {params: {...filters}});
+        const response = await api.get(API_ENDPOINTS.ASSETS.PROPERTIES.PHYSICAL.REAL_ESTATE, {params: {...filters}});
         return response.data;
       } catch (error) {
         logApiError("Get Real Estate Assets", error);
@@ -43,7 +43,7 @@ export const useGetRealEstateAsset = (id: string) => {
     queryKey: ["realestate-asset", id],
     queryFn: async () => {
       try {
-        const response = await api.get(`${API_ENDPOINTS.ASSETS.REAL_ESTATE}/${id}`)
+        const response = await api.get(`${API_ENDPOINTS.ASSETS.PROPERTIES.PHYSICAL.REAL_ESTATE}/${id}`)
         return response.data;
       } catch (error) {
         logApiError("Get Real Estate Asset", error);
@@ -61,7 +61,7 @@ export const useUpdateRealEstateAsset = () => {
   return useMutation({
     mutationFn: async ({ id, data }: { id: string; data: any }) => {
       try {
-        const response = await api.patch(`${API_ENDPOINTS.ASSETS.REAL_ESTATE}/${id}`, data);
+        const response = await api.patch(`${API_ENDPOINTS.ASSETS.PROPERTIES.PHYSICAL.REAL_ESTATE}/${id}`, data);
         return response.data;
       } catch (error) {
         logApiError("Update Real Estate Asset", error);
