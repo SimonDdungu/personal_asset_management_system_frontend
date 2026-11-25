@@ -1,8 +1,28 @@
 export const API_ENDPOINTS = {
   ASSETS: {
     BASE: "/assets",
-    ELECTRONICS: "/assets/electronics",
-    REAL_ESTATE: "/assets/realestate",
+    PROPERTIES: {
+      PHYSICAL: {
+        ELECTRONICS: "/assets/electronics",
+        REAL_ESTATE: "/assets/realestate",
+        COLLECTIABLES: "assets/collectibles-valuables",
+        FURNITURE: "assets/furniture",
+        LAND: "assets/land",
+        MACHINERY: "assets/machinery",
+        VEHICLES: "assets/vehicles"
+      },
+      FINANCIAL: {
+        BANK_ACCOUNTS: "assets/bank-accounts",
+        INSURANCE: "assets/insurance",
+        INVESTMENT: "assets/investments",
+        LIABILITY: "assets/liabilities",
+        LOANS: "assets/loans",
+        CASH: "assets/physical-cash",
+        RETIREMENT_FUND: "assets/retirement-funds",
+        SAVINGS: "assets/savings",
+        STOCKS: "assets/stocks"
+      }
+    },
     IMAGES: "/assets/files/images",
     DOCS: "assets/files/documents",
     TOTAL_COUNT: "assets/total/count",
