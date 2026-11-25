@@ -2,7 +2,7 @@
 import { useGetRealEstateAssets } from '@/src/hooks/asset-properties/physical-assets/real_estate/useRealEstate';
 import RealEstateCard from './components/RealEstateCard';
 import { useState } from 'react';
-import { RealEstateAssetFilters } from '@/src/interfaces/search_filters/realEstate_SearchFilters';
+import { RealEstateAssetFilters } from '@/src/interfaces/search_filters/physical/realEstate_SearchFilters';
 import { BlueButton, TextSearchInput, WhiteButton } from '@/src/components/ui';
 import { CircleX, Divide, Search } from 'lucide-react';
 import NumberSearchInput from '@/src/components/ui/input/NumberSearchInput';

@@ -1,5 +1,5 @@
 import { API_ENDPOINTS } from "@/src/constants/endpoints/apiEndpoints";
-import { RealEstateAssetFilters } from "@/src/interfaces/search_filters/realEstate_SearchFilters";
+import { RealEstateAssetFilters } from "@/src/interfaces/search_filters/physical/realEstate_SearchFilters";
 import api from "@/src/lib/api";
 import { logApiError } from "@/src/util/logApiError";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
