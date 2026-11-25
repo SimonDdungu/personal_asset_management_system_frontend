@@ -1,4 +1,5 @@
 import { API_ENDPOINTS } from "@/src/constants/endpoints/apiEndpoints";
+import { CreateMachineryRequest, UpdateMachineryRequest } from "@/src/interfaces/asset_properties/physical/machineryTypes";
 import { MachineryAssetFilters } from "@/src/interfaces/search_filters/physical/machinery_SearchFilters";
 import api from "@/src/lib/api";
 import { logApiError } from "@/src/util/logApiError";
@@ -9,7 +10,7 @@ const endpoint = API_ENDPOINTS.ASSETS.PROPERTIES.PHYSICAL.MACHINERY;
 export const useCreateMachineryAsset = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: async (data: unknown) => {
+    mutationFn: async (data: CreateMachineryRequest) => {
       const response = await api.post(endpoint, data);
       return response.data;
     },
@@ -56,7 +57,7 @@ export const useGetMachineryAsset = (id: string) => {
 export const useUpdateMachineryAsset = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: async ({ id, data }: { id: string; data: unknown }) => {
+    mutationFn: async ({ id, data }: { id: string; data: UpdateMachineryRequest }) => {
       try {
         const response = await api.patch(`${endpoint}/${id}`, data);
         return response.data;

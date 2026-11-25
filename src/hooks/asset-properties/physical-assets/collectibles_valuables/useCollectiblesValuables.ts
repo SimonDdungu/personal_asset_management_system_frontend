@@ -1,4 +1,5 @@
 import { API_ENDPOINTS } from "@/src/constants/endpoints/apiEndpoints";
+import { CreateCollectiblesValuablesRequest, UpdateCollectiblesValuablesRequest } from "@/src/interfaces/asset_properties/physical/collectiblesValuablesTypes";
 import { CollectiblesValuablesAssetFilters } from "@/src/interfaces/search_filters/physical/collectiblesValuables_SearchFilters";
 import api from "@/src/lib/api";
 import { logApiError } from "@/src/util/logApiError";
@@ -9,7 +10,7 @@ const endpoint = API_ENDPOINTS.ASSETS.PROPERTIES.PHYSICAL.COLLECTIABLES;
 export const useCreateCollectiblesValuablesAsset = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: async (data: unknown) => {
+    mutationFn: async (data: CreateCollectiblesValuablesRequest) => {
       const response = await api.post(endpoint, data);
       return response.data;
     },
@@ -56,7 +57,7 @@ export const useGetCollectiblesValuablesAsset = (id: string) => {
 export const useUpdateCollectiblesValuablesAsset = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: async ({ id, data }: { id: string; data: unknown }) => {
+    mutationFn: async ({ id, data }: { id: string; data: UpdateCollectiblesValuablesRequest }) => {
       try {
         const response = await api.patch(`${endpoint}/${id}`, data);
         return response.data;

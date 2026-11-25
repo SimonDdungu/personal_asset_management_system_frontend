@@ -1,4 +1,5 @@
 import { API_ENDPOINTS } from "@/src/constants/endpoints/apiEndpoints";
+import { CreateBankAccountRequest, UpdateBankAccountRequest } from "@/src/interfaces/asset_properties/financial/bankAccountTypes";
 import { BankAccountAssetFilters } from "@/src/interfaces/search_filters/financial/bankAccount_SearchFilters";
 import api from "@/src/lib/api";
 import { logApiError } from "@/src/util/logApiError";
@@ -9,7 +10,7 @@ const endpoint = API_ENDPOINTS.ASSETS.PROPERTIES.FINANCIAL.BANK_ACCOUNTS;
 export const useCreateBankAccountAsset = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: async (data: unknown) => {
+    mutationFn: async (data: CreateBankAccountRequest) => {
       const response = await api.post(endpoint, data);
       return response.data;
     },
@@ -56,7 +57,7 @@ export const useGetBankAccountAsset = (id: string) => {
 export const useUpdateBankAccountAsset = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: async ({ id, data }: { id: string; data: unknown }) => {
+    mutationFn: async ({ id, data }: { id: string; data: UpdateBankAccountRequest }) => {
       try {
         const response = await api.patch(`${endpoint}/${id}`, data);
         return response.data;
