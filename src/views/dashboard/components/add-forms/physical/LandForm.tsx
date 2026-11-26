@@ -11,7 +11,7 @@ import { useForm } from 'react-hook-form';
 const LandForm = ({onNext, onBack, setData}: GotoNextStepper) => {
   
   const { register, handleSubmit, control, formState: {errors} } = useForm<CreateLandFormData>({
-    resolver: zodResolver(createLandSchema), 
+    resolver: zodResolver(createLandSchema),  mode: "onChange", reValidateMode: "onChange",
   });
 
   function NextStep(data: CreateLandFormData){

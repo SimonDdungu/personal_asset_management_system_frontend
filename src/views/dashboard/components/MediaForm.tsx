@@ -45,7 +45,7 @@ const MediaForm = ({images, setImages, docs, setDocs, onNext, onBack, setData}: 
 
         <div className='flex items-center justify-between gap-x-3 mt-5'>
           <BlueButton label='Back' onClick={onBack}/>
-          <BlueButton label='Confirm' onClick={Next}/>
+          <BlueButton button label='Confirm' onClick={Next}/>
         </div>
     </div>
   )

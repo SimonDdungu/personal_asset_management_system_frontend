@@ -10,7 +10,7 @@ import { useForm } from 'react-hook-form';
 const VehicleForm = ({onNext, onBack, setData}: GotoNextStepper) => {
   
   const { register, handleSubmit, control, formState: {errors} } = useForm<CreateVehicleFormData>({
-    resolver: zodResolver(createVehicleSchema), 
+    resolver: zodResolver(createVehicleSchema), defaultValues: { make: 'Porsche', model: '911', color: 'Silver',  year: 2019 } ,mode: "onChange", reValidateMode: "onChange",
   });
 
   function NextStep(data: CreateVehicleFormData){

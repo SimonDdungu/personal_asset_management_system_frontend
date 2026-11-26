@@ -13,7 +13,7 @@ import { MOCK_REAL_ESTATE_DATA } from '../../../data/mock-real-estate';
 const RealEstateForm = ({onNext, onBack, setData}: GotoNextStepper) => {
   
   const { register, handleSubmit, control, formState: {errors} } = useForm<CreateRealEstateFormData>({
-    resolver: zodResolver(createRealEstateSchema), defaultValues: {...MOCK_REAL_ESTATE_DATA}
+    resolver: zodResolver(createRealEstateSchema), defaultValues: {...MOCK_REAL_ESTATE_DATA}, mode: "onChange",  reValidateMode: "onChange",
   });
 
   function NextStep(data: CreateRealEstateFormData){

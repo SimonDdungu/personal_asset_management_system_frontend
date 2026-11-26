@@ -9,7 +9,7 @@ import { useForm } from 'react-hook-form';
 
 const ElectronicForm = ({onNext, onBack, setData}: GotoNextStepper) => {
     const { register, handleSubmit, control, formState: {errors} } = useForm<CreateElectronicsFormData>({
-        resolver: zodResolver(createElectronicsSchema), 
+        resolver: zodResolver(createElectronicsSchema), mode: "onChange", reValidateMode: "onChange",
       });
 
   function NextStep(data: CreateElectronicsFormData){

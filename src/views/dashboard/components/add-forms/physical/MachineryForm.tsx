@@ -9,7 +9,7 @@ import { useForm } from 'react-hook-form';
 const MachineryForm = ({onNext, onBack, setData}: GotoNextStepper) => {
   
   const { register, handleSubmit, control, formState: {errors} } = useForm<CreateMachineryFormData>({
-    resolver: zodResolver(createMachinerySchema), 
+    resolver: zodResolver(createMachinerySchema), mode: "onChange", reValidateMode: "onChange",
   });
 
   function NextStep(data: CreateMachineryFormData){

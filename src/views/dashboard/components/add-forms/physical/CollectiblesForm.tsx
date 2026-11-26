@@ -10,7 +10,7 @@ import { useForm } from 'react-hook-form';
 const CollectiblesForm = ({onNext, onBack, setData}: GotoNextStepper) => {
   
   const { register, handleSubmit, control, formState: {errors} } = useForm<CreateCollectiblesValuablesFormData>({
-    resolver: zodResolver(createCollectiblesValuablesSchema), 
+    resolver: zodResolver(createCollectiblesValuablesSchema), mode: "onChange", reValidateMode: "onChange",
   });
 
   function NextStep(data: CreateCollectiblesValuablesFormData){

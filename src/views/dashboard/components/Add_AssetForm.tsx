@@ -19,7 +19,7 @@ import { MOCK_ASSETS } from '../data/mock-assets'
 
 const Add_AssetForm = ({onNext, onBack, setData, toStep}: GotoNextStepper) => { 
   const { register, handleSubmit, control, watch, setValue, formState: {errors} } = useForm<CreateAssetFormData>({ 
-    resolver: zodResolver(createAssetSchema), defaultValues: {...MOCK_ASSETS}, mode: "onSubmit", reValidateMode: "onChange",  shouldFocusError: false,
+    resolver: zodResolver(createAssetSchema), defaultValues: {...MOCK_ASSETS}, mode: "onSubmit", reValidateMode: "onChange",
   });
 
 

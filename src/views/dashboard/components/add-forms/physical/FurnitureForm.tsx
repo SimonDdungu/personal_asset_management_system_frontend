@@ -9,7 +9,7 @@ import { useForm } from 'react-hook-form';
 const FurnitureForm = ({onNext, onBack, setData}: GotoNextStepper) => {
   
   const { register, handleSubmit, control, formState: {errors} } = useForm<CreateFurnitureFormData>({
-    resolver: zodResolver(createFurnitureSchema), 
+    resolver: zodResolver(createFurnitureSchema), mode: "onChange",  reValidateMode: "onChange",
   });
 
   function NextStep(data: CreateFurnitureFormData){
