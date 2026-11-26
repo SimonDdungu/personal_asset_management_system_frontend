@@ -30,7 +30,7 @@ const PhysicalKPICards = ({
   return (
     <div className='grid grid-cols-4 gap-x-5'>
       <KPICard
-        label='Total net worth'
+        label='Physical net worth'
         icon={Wallet}
         iconColor='text-purple-500'
         iconBackground='bg-purple-100'
