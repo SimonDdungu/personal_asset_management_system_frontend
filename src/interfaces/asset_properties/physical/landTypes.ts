@@ -7,7 +7,6 @@ export interface CreateLandRequest {
     images?: CreateAssetImageRequest;
     documents?: CreateAssetDocumentRequest;
     address: string;
-    description?: string;
     plotNumber: string;
     landSize: number;
     landSizeUnit: string;
@@ -15,7 +14,6 @@ export interface CreateLandRequest {
 
 export interface UpdateLandRequest {
     address?: string;
-    description?: string;
     plotNumber?: string;
     landSize?: number;
     landSizeUnit?: string;
@@ -36,8 +34,8 @@ export interface LandResponse {
     currency: string;
     currentValue: number;
     currentValueUpdatedAt: string;
-    images: AssetImageUploadResponse[];
-    documents: AssetDocumentUploadResponse[];
+    images?: AssetImageUploadResponse[];
+    documents?: AssetDocumentUploadResponse[];
     createdAt: string;
     updatedAt: string;
 }
@@ -50,7 +48,7 @@ export interface LandSearchResponse {
     plotNumber: string;
     landSize: number;
     landSizeUnit: string;
-    image: AssetImageResponse;
+    image?: AssetImageResponse;
     currency: string;
     currentValue: number;
 }

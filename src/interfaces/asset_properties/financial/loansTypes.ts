@@ -28,9 +28,9 @@ export interface LoansResponse {
     assetCategory: string;
     lender: string;
     originalAmount: number;
-    interestRate: number;
+    interestRate?: number;
     startDate: string;
-    maturityDate: string;
+    maturityDate?: string;
     currency: string;
     currentValue: number;
     currentValueUpdatedAt: string;
@@ -45,8 +45,8 @@ export interface LoansSearchResponse {
     assetName: string;
     lender: string;
     originalAmount: number;
-    interestRate: number;
-    maturityDate: string;
+    interestRate?: number;
+    maturityDate?: string;
     currency: string;
     currentValue: number;
 }

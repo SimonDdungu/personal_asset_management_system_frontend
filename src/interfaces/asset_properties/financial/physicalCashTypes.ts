@@ -16,7 +16,7 @@ export interface PhysicalCashResponse {
     currency: string;
     currentValue: number;
     currentValueUpdatedAt: string;
-    documents: AssetDocumentUploadResponse[];
+    documents?: AssetDocumentUploadResponse[];
     createdAt: string;
     updatedAt: string;
 }

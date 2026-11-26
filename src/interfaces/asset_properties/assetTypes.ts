@@ -13,3 +13,12 @@ export interface UpdateAssetsRequest {
     currency?: string;
     currentValue?: number;
 }
+
+export interface AssetsResponse {
+    name: string;
+    assetType: string;
+    assetCategory: string;
+    acquisition: string;
+    currency: string;
+    currentValue: number;
+}

@@ -36,14 +36,14 @@ export interface VehicleResponse {
     model: string;
     year: number;
     color: string;
-    mileage: number;
-    registrationNumber: string;
-    vin: string;
+    mileage?: number;
+    registrationNumber?: string;
+    vin?: string;
     currency: string;
     currentValue: number;
     currentValueUpdatedAt: string;
-    images: AssetImageUploadResponse[];
-    documents: AssetDocumentUploadResponse[];
+    images?: AssetImageUploadResponse[];
+    documents?: AssetDocumentUploadResponse[];
     createdAt: string;
     updatedAt: string;
 }
@@ -56,8 +56,8 @@ export interface VehicleSearchResponse {
     model: string;
     year: number;
     color: string;
-    mileage: number;
-    image: AssetImageResponse;
+    mileage?: number;
+    image?: AssetImageResponse;
     currency: string;
     currentValue: number;
 }

@@ -25,12 +25,12 @@ export interface BankAccountResponse {
     assetName: string;
     bank: string;
     bankAccountNumber: string;
-    interestRate: number;
+    interestRate?: number;
     currency: string;
     currentBalance: number;
     previousBalance: number;
     currentBalanceUpdatedAt: string;
-    documents: AssetDocumentUploadResponse[];
+    documents?: AssetDocumentUploadResponse[];
     createdAt: string;
     updatedAt: string;
 }
@@ -40,7 +40,7 @@ export interface BankAccountSearchResponse {
     assetId: string;
     assetName: string;
     bank: string;
-    interestRate: number;
+    interestRate?: number;
     currency: string;
     currentBalance: number;
 }

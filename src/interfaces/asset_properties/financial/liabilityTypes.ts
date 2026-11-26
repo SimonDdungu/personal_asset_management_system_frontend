@@ -24,11 +24,11 @@ export interface LiabilityResponse {
     assetCategory: string;
     creditor: string;
     dueDate: string;
-    description: string;
+    description?: string;
     currency: string;
     currentValue: number;
     currentValueUpdatedAt: string;
-    documents: AssetDocumentUploadResponse[];
+    documents?: AssetDocumentUploadResponse[];
     createdAt: string;
     updatedAt: string;
 }

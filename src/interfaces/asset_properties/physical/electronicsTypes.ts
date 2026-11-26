@@ -29,15 +29,15 @@ export interface ElectronicsResponse {
     assetType: string;
     assetCategory: string;
     brand: string;
-    model: string;
-    serialNumber: string;
-    color: string;
-    year: number;
+    model?: string;
+    serialNumber?: string;
+    color?: string;
+    year?: number;
     currency: string;
     currentValue: number;
     currentValueUpdatedAt: string;
-    images: AssetImageUploadResponse[];
-    documents: AssetDocumentUploadResponse[];
+    images?: AssetImageUploadResponse[];
+    documents?: AssetDocumentUploadResponse[];
     createdAt: string;
     updatedAt: string;
 }
@@ -48,7 +48,8 @@ export interface ElectronicSearchResponse {
     assetName: string;
     assetType: string;
     assetCategory: string;
-    image: AssetImageResponse;
+    brand: string;
+    image?: AssetImageResponse;
     currency: string;
     currentValue: number;
 }

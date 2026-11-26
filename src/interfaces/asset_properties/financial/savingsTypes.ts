@@ -26,8 +26,8 @@ export interface SavingsResponse {
     assetCategory: string;
     institution: string;
     accountNumber: string;
-    interestRate: number;
-    maturityDate: string;
+    interestRate?: number;
+    maturityDate?: string;
     currency: string;
     currentValue: number;
     currentValueUpdatedAt: string;
@@ -41,8 +41,8 @@ export interface SavingsSearchResponse {
     assetId: string;
     assetName: string;
     institution: string;
-    interestRate: number;
-    maturityDate: string;
+    interestRate?: number;
+    maturityDate?: string;
     currency: string;
     currentValue: number;
 }

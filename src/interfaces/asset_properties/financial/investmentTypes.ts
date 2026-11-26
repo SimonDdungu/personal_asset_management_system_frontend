@@ -24,14 +24,14 @@ export interface InvestmentResponse {
     acquisition: string;
     assetType: string;
     assetCategory: string;
-    quantity: number;
-    institution: string;
-    interestRate: number;
-    referenceNumber: string;
+    quantity?: number;
+    institution?: string;
+    interestRate?: number;
+    referenceNumber?: string;
     currency: string;
     currentValue: number;
     currentValueUpdatedAt: string;
-    documents: AssetDocumentUploadResponse[];
+    documents?: AssetDocumentUploadResponse[];
     createdAt: string;
     updatedAt: string;
 }
@@ -40,9 +40,9 @@ export interface InvestmentSearchResponse {
     id: string;
     assetId: string;
     assetName: string;
-    quantity: number;
-    institution: string;
-    interestRate: number;
+    quantity?: number;
+    institution?: string;
+    interestRate?: number;
     currency: string;
     currentValue: number;
 }

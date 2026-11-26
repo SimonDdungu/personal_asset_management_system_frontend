@@ -8,13 +8,11 @@ export interface CreateFurnitureRequest {
     documents?: CreateAssetDocumentRequest;
     brand?: string;
     material?: string;
-    description?: string;
 }
 
 export interface UpdateFurnitureRequest {
     brand?: string;
     material?: string;
-    description?: string;
 }
 
 export interface FurnitureResponse {
@@ -24,14 +22,13 @@ export interface FurnitureResponse {
     acquisition: string;
     assetType: string;
     assetCategory: string;
-    brand: string;
-    material: string;
-    description: string;
+    brand?: string;
+    material?: string;
     currency: string;
     currentValue: number;
     currentValueUpdatedAt: string;
-    images: AssetImageUploadResponse[];
-    documents: AssetDocumentUploadResponse[];
+    images?: AssetImageUploadResponse[];
+    documents?: AssetDocumentUploadResponse[];
     createdAt: string;
     updatedAt: string;
 }
@@ -40,9 +37,9 @@ export interface FurnitureSearchResponse {
     id: string;
     assetId: string;
     assetName: string;
-    brand: string;
-    material: string;
-    image: AssetImageResponse;
+    brand?: string;
+    material?: string;
+    image?: AssetImageResponse;
     currency: string;
     currentValue: number;
 }
