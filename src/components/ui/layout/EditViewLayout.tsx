@@ -98,7 +98,7 @@ const EditViewLayout =  <T extends FieldValues,>({assetid, assetName, children, 
 
                         <div className='mb-5 bg-white rounded-lg px-5 py-8 text-sm border'>
                             <div className='pb-3 mb-3 border-b'>
-                                <h5 className=''>{category} Information</h5>
+                                <h5><span className="capitalize">{category}</span> Information</h5>
                             </div>
                             {children}
                         </div>
