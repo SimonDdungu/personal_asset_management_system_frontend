@@ -1,6 +1,6 @@
 "use client"
 import FullScreenLoadingSpinner from '@/src/components/ui/loading_state/FullScreenLoadingSpinner';
-import CollectiblesDetailView from '@/src/views/physical_assets/Collectibles/CollectiblesDetailView';
+import CollectiblesDetailView from '@/src/views/asset_properties/physical_assets/Collectibles/CollectiblesDetailView';
 import { useParams } from "next/navigation";
 import { Suspense } from 'react';
 

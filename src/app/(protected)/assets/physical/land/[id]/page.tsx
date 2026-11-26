@@ -1,6 +1,6 @@
 "use client"
 import FullScreenLoadingSpinner from '@/src/components/ui/loading_state/FullScreenLoadingSpinner';
-import LandDetailView from '@/src/views/physical_assets/Land/LandDetailView';
+import LandDetailView from '@/src/views/asset_properties/physical_assets/Land/LandDetailView';
 import { useParams } from "next/navigation";
 import { Suspense } from 'react';
 

@@ -3,7 +3,7 @@
 import { useParams } from "next/navigation";
 import { Suspense } from 'react';
 import FullScreenLoadingSpinner from '@/src/components/ui/loading_state/FullScreenLoadingSpinner';
-import RealEstateDetailView from "@/src/views/physical_assets/Real_Estate/RealEstateDetailView";
+import RealEstateDetailView from "@/src/views/asset_properties/physical_assets/Real_Estate/RealEstateDetailView";
 
 const RealEstateDetails = () => {
     const { id } = useParams<{ id: string }>();

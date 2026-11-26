@@ -1,6 +1,6 @@
 "use client"
 import FullScreenLoadingSpinner from '@/src/components/ui/loading_state/FullScreenLoadingSpinner';
-import LandEditView from '@/src/views/physical_assets/Land/LandEditView';
+import LandEditView from '@/src/views/asset_properties/physical_assets/Land/LandEditView';
 import { useParams } from "next/navigation";
 import { Suspense } from 'react';
 

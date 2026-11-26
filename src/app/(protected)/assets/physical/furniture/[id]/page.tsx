@@ -1,6 +1,6 @@
 "use client"
 import FullScreenLoadingSpinner from '@/src/components/ui/loading_state/FullScreenLoadingSpinner';
-import FurnitureDetailView from '@/src/views/physical_assets/Furniture/FurnitureDetailView';
+import FurnitureDetailView from '@/src/views/asset_properties/physical_assets/Furniture/FurnitureDetailView';
 import { useParams } from "next/navigation";
 import { Suspense } from 'react';
 

@@ -1,6 +1,6 @@
 "use client"
 import FullScreenLoadingSpinner from '@/src/components/ui/loading_state/FullScreenLoadingSpinner';
-import MachineryDetailView from '@/src/views/physical_assets/Machinery/MachineryDetailView';
+import MachineryDetailView from '@/src/views/asset_properties/physical_assets/Machinery/MachineryDetailView';
 import { useParams } from "next/navigation";
 import { Suspense } from 'react';
 

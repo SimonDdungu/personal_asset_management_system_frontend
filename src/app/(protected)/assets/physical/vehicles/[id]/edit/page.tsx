@@ -1,6 +1,6 @@
 "use client"
 import FullScreenLoadingSpinner from '@/src/components/ui/loading_state/FullScreenLoadingSpinner';
-import VehiclesEditView from '@/src/views/physical_assets/Vehicles/VehiclesEditView';
+import VehiclesEditView from '@/src/views/asset_properties/physical_assets/Vehicles/VehiclesEditView';
 import { useParams } from "next/navigation";
 import { Suspense } from 'react';
 

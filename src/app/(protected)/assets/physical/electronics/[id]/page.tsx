@@ -1,5 +1,5 @@
 "use client"
-import ElectronicDetailView from '@/src/views/physical_assets/Electronics/ElectronicDetailView'
+import ElectronicDetailView from '@/src/views/asset_properties/physical_assets/Electronics/ElectronicDetailView'
 import React, { Suspense } from 'react'
 import { useParams } from "next/navigation";
 import FullScreenLoadingSpinner from '@/src/components/ui/loading_state/FullScreenLoadingSpinner';
