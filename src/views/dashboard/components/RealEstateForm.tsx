@@ -2,14 +2,13 @@
 import { SelectInput, TextInput } from '@/src/components/ui';
 import BlueButton from '@/src/components/ui/buttons/BlueButton';
 import NumberInput from '@/src/components/ui/input/NumberInput';
+import { currencyOptions } from '@/src/constants/currency/currency';
+import { propertySizeUnitOptions } from '@/src/constants/symbols/propertySizeUnitLabels';
 import { GotoNextStepper } from '@/src/interfaces/stepper/stepper_interfaces';
-import { CreateRealEstateFormData, createRealEstateSchema } from '@/src/validation/asset_properties/realEstate_Validation';
+import { CreateRealEstateFormData, createRealEstateSchema } from '@/src/validation/asset_properties/physical/realEstate_Validation';
 import { zodResolver } from '@hookform/resolvers/zod';
-import React from 'react'
 import { useForm } from 'react-hook-form';
 import { MOCK_REAL_ESTATE_DATA } from '../data/mock-real-estate';
-import { PROPERTY_SIZE_UNITS, propertySizeUnitOptions } from '@/src/constants/symbols/propertySizeUnitLabels';
-import { currencyOptions } from '@/src/constants/currency/currency';
 
 const RealEstateForm = ({onNext, onBack, setData}: GotoNextStepper) => {
   
