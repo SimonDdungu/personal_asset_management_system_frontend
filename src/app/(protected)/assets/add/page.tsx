@@ -4,13 +4,13 @@ import { useCreateElectronicAsset } from '@/src/hooks/asset-properties/physical-
 import { useCreateRealEstateAsset } from '@/src/hooks/asset-properties/physical-assets/real_estate/useRealEstate';
 import { CreateAssetsRequest } from '@/src/interfaces/asset_properties/assetTypes';
 import Add_AssetForm from '@/src/views/dashboard/components/Add_AssetForm';
-import ElectronicForm from '@/src/views/dashboard/components/ElectronicForm';
+import ElectronicForm from '@/src/views/dashboard/components/add-forms/ElectronicForm';
 import MediaForm from '@/src/views/dashboard/components/MediaForm';
-import RealEstateForm from '@/src/views/dashboard/components/RealEstateForm';
+import RealEstateForm from '@/src/views/dashboard/components/add-forms/RealEstateForm';
 import { ChevronLeft } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import React, { useRef, useState } from 'react'
+import { useRef, useState } from 'react';
 
 const page = () => {
     const router = useRouter();

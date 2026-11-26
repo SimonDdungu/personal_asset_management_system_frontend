@@ -1,9 +1,9 @@
 "use client"
 import React, { useState } from 'react'
 import Add_AssetForm from '../../dashboard/components/Add_AssetForm'
-import ElectronicForm from '../../dashboard/components/ElectronicForm'
+import ElectronicForm from '../../dashboard/components/add-forms/ElectronicForm'
 import MediaForm from '../../dashboard/components/MediaForm'
-import RealEstateForm from '../../dashboard/components/RealEstateForm'
+import RealEstateForm from '../../dashboard/components/add-forms/RealEstateForm'
 
 const Physical_AssetForm = () => {
     const [step, setStep] = useState<string>("assets")
