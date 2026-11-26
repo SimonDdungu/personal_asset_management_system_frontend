@@ -16,6 +16,11 @@ import VehicleForm from '@/src/views/dashboard/components/add-forms/physical/Veh
 import FurnitureForm from '@/src/views/dashboard/components/add-forms/physical/FurnitureForm';
 import MachineryForm from '@/src/views/dashboard/components/add-forms/physical/MachineryForm';
 import CollectiblesForm from '@/src/views/dashboard/components/add-forms/physical/CollectiblesForm';
+import { useCreateVehicleAsset } from '@/src/hooks/asset-properties/physical-assets/vehicle/useVehicle';
+import { useCreateCollectiblesValuablesAsset } from '@/src/hooks/asset-properties/physical-assets/collectibles_valuables/useCollectiblesValuables';
+import { useCreateFurnitureAsset } from '@/src/hooks/asset-properties/physical-assets/furniture/useFurniture';
+import { useCreateMachineryAsset } from '@/src/hooks/asset-properties/physical-assets/machinery/useMachinery';
+import { useCreateLandAsset } from '@/src/hooks/asset-properties/physical-assets/land/useLand';
 
 const page = () => {
     const router = useRouter();
@@ -28,19 +33,24 @@ const page = () => {
     const [docs, setDocs] = useState<File[]>([]);
     const [isSubmitting, setIsSubmitting] = useState<boolean>(false)
     
-    const { mutateAsync: createRealEstate } = useCreateRealEstateAsset();
-    const { mutateAsync: createElectronic } = useCreateElectronicAsset();
+    const { mutateAsync: createRealEstate, isPending: isRealEstatePending } = useCreateRealEstateAsset();
+    const { mutateAsync: createElectronic, isPending: isElectronicPending } = useCreateElectronicAsset();
+    const { mutateAsync: createVehicle, isPending: isVehiclePending } = useCreateVehicleAsset();
+    const { mutateAsync: createCollectibles, isPending: isCollectiblesPending } = useCreateCollectiblesValuablesAsset();
+    const { mutateAsync: createFurniture, isPending: isFurniturePending } = useCreateFurnitureAsset();
+    const { mutateAsync: createMachinery, isPending: isMachineryPending } = useCreateMachineryAsset();
+    const { mutateAsync: createLand, isPending: isLandPending } = useCreateLandAsset();
 
     const submissionLoading = useRef<boolean>(false);
 
     async function submitAsset() {
+      if (!assetData) return;
       if (submissionLoading.current) return;
 
       submissionLoading.current = true;
 
       setIsSubmitting(true)
 
-      if (!assetData) return;
       
       const formData = new FormData();
 
@@ -80,8 +90,21 @@ const page = () => {
           await createRealEstate(formData);
         } else if (showAsset === "Electronics") {
           await createElectronic(formData);
+        } else if (showAsset === "Land") {
+          await createLand(formData);
+        } else if (showAsset === "Vehicles") {
+          await createVehicle(formData);
+        } else if (showAsset === "Furniture") {
+          await createFurniture(formData);
+        } else if (showAsset === "Machinery & Equipment") {
+          await createMachinery(formData);
+        } else if (showAsset === "Collectibles & Valuables") {
+          await createCollectibles(formData);
+        } else {
+          return;
         }
 
+        console.log("reached router.push");
         router.push("/dashboard")
 
       } catch (error) {
