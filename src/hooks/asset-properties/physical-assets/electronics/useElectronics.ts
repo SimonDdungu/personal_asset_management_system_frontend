@@ -1,5 +1,5 @@
 import { API_ENDPOINTS } from "@/src/constants/endpoints/apiEndpoints";
-import { CreateElectronicsRequest, ElectronicSearchResponse, ElectronicsResponse, UpdateElectronicsRequest } from "@/src/interfaces/asset_properties/physical/electronicsTypes";
+import { ElectronicSearchResponse, ElectronicsResponse } from "@/src/interfaces/asset_properties/physical/electronicsTypes";
 import { ElectronicsAssetFilters } from "@/src/interfaces/search_filters/physical/electronics_SearchFilters";
 import api from "@/src/lib/api";
 import { logApiError } from "@/src/util/logApiError";
@@ -8,7 +8,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 export const useCreateElectronicAsset = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: async (data: CreateElectronicsRequest) => {
+    mutationFn: async (data: FormData) => {
       const response = await api.post<ElectronicsResponse>(`${API_ENDPOINTS.ASSETS.PROPERTIES.PHYSICAL.ELECTRONICS}`, data);
       return response.data;
     },
@@ -57,7 +57,7 @@ export const useGetElectronicAsset = (id: string) => {
 export const useUpdateElectronicAsset = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: async ({ id, data }: { id: string; data: UpdateElectronicsRequest }) => {
+    mutationFn: async ({ id, data }: { id: string; data: FormData }) => {
       try {
         const response = await api.patch<ElectronicsResponse>(`${API_ENDPOINTS.ASSETS.PROPERTIES.PHYSICAL.ELECTRONICS}/${id}`, data);
         return response.data;

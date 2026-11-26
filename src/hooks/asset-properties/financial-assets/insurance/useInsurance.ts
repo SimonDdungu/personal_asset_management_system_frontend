@@ -1,5 +1,5 @@
 import { API_ENDPOINTS } from "@/src/constants/endpoints/apiEndpoints";
-import { CreateInsuranceRequest, InsuranceResponse, InsuranceSearchResponse, UpdateInsuranceRequest } from "@/src/interfaces/asset_properties/financial/insuranceTypes";
+import { InsuranceResponse, InsuranceSearchResponse } from "@/src/interfaces/asset_properties/financial/insuranceTypes";
 import { InsuranceAssetFilters } from "@/src/interfaces/search_filters/financial/insurance_SearchFilters";
 import api from "@/src/lib/api";
 import { logApiError } from "@/src/util/logApiError";
@@ -10,7 +10,7 @@ const endpoint = API_ENDPOINTS.ASSETS.PROPERTIES.FINANCIAL.INSURANCE;
 export const useCreateInsuranceAsset = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: async (data: CreateInsuranceRequest) => {
+    mutationFn: async (data: FormData) => {
       const response = await api.post<InsuranceResponse>(endpoint, data);
       return response.data;
     },
@@ -57,7 +57,7 @@ export const useGetInsuranceAsset = (id: string) => {
 export const useUpdateInsuranceAsset = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: async ({ id, data }: { id: string; data: UpdateInsuranceRequest }) => {
+    mutationFn: async ({ id, data }: { id: string; data: FormData }) => {
       try {
         const response = await api.patch<InsuranceResponse>(`${endpoint}/${id}`, data);
         return response.data;

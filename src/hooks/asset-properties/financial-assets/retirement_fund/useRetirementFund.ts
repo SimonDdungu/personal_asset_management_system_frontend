@@ -1,5 +1,5 @@
 import { API_ENDPOINTS } from "@/src/constants/endpoints/apiEndpoints";
-import { CreateRetirementFundRequest, RetirementFundResponse, RetirementFundSearchResponse, UpdateRetirementFundRequest } from "@/src/interfaces/asset_properties/financial/retirementFundTypes";
+import { RetirementFundResponse, RetirementFundSearchResponse } from "@/src/interfaces/asset_properties/financial/retirementFundTypes";
 import { RetirementFundAssetFilters } from "@/src/interfaces/search_filters/financial/retirementFund_SearchFilters";
 import api from "@/src/lib/api";
 import { logApiError } from "@/src/util/logApiError";
@@ -10,7 +10,7 @@ const endpoint = API_ENDPOINTS.ASSETS.PROPERTIES.FINANCIAL.RETIREMENT_FUND;
 export const useCreateRetirementFundAsset = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: async (data: CreateRetirementFundRequest) => {
+    mutationFn: async (data: FormData) => {
       const response = await api.post<RetirementFundResponse>(endpoint, data);
       return response.data;
     },
@@ -57,7 +57,7 @@ export const useGetRetirementFundAsset = (id: string) => {
 export const useUpdateRetirementFundAsset = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: async ({ id, data }: { id: string; data: UpdateRetirementFundRequest }) => {
+    mutationFn: async ({ id, data }: { id: string; data: FormData }) => {
       try {
         const response = await api.patch<RetirementFundResponse>(`${endpoint}/${id}`, data);
         return response.data;

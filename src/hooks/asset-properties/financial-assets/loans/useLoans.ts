@@ -1,5 +1,5 @@
 import { API_ENDPOINTS } from "@/src/constants/endpoints/apiEndpoints";
-import { CreateLoansRequest, LoansResponse, LoansSearchResponse, UpdateLoansRequest } from "@/src/interfaces/asset_properties/financial/loansTypes";
+import { LoansResponse, LoansSearchResponse } from "@/src/interfaces/asset_properties/financial/loansTypes";
 import { LoansAssetFilters } from "@/src/interfaces/search_filters/financial/loans_SearchFilters";
 import api from "@/src/lib/api";
 import { logApiError } from "@/src/util/logApiError";
@@ -10,7 +10,7 @@ const endpoint = API_ENDPOINTS.ASSETS.PROPERTIES.FINANCIAL.LOANS;
 export const useCreateLoansAsset = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: async (data: CreateLoansRequest) => {
+    mutationFn: async (data: FormData) => {
       const response = await api.post<LoansResponse>(endpoint, data);
       return response.data;
     },
@@ -57,7 +57,7 @@ export const useGetLoansAsset = (id: string) => {
 export const useUpdateLoansAsset = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: async ({ id, data }: { id: string; data: UpdateLoansRequest }) => {
+    mutationFn: async ({ id, data }: { id: string; data: FormData }) => {
       try {
         const response = await api.patch<LoansResponse>(`${endpoint}/${id}`, data);
         return response.data;

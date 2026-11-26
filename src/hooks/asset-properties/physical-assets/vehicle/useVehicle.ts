@@ -1,5 +1,5 @@
 import { API_ENDPOINTS } from "@/src/constants/endpoints/apiEndpoints";
-import { CreateVehicleRequest, UpdateVehicleRequest, VehicleResponse, VehicleSearchResponse } from "@/src/interfaces/asset_properties/physical/vehicleTypes";
+import { VehicleResponse, VehicleSearchResponse } from "@/src/interfaces/asset_properties/physical/vehicleTypes";
 import { VehicleAssetFilters } from "@/src/interfaces/search_filters/physical/vehicle_SearchFilters";
 import api from "@/src/lib/api";
 import { logApiError } from "@/src/util/logApiError";
@@ -10,7 +10,7 @@ const endpoint = API_ENDPOINTS.ASSETS.PROPERTIES.PHYSICAL.VEHICLES;
 export const useCreateVehicleAsset = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: async (data: CreateVehicleRequest) => {
+    mutationFn: async (data: FormData) => {
       const response = await api.post<VehicleResponse>(endpoint, data);
       return response.data;
     },
@@ -57,7 +57,7 @@ export const useGetVehicleAsset = (id: string) => {
 export const useUpdateVehicleAsset = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: async ({ id, data }: { id: string; data: UpdateVehicleRequest }) => {
+    mutationFn: async ({ id, data }: { id: string; data: FormData }) => {
       try {
         const response = await api.patch<VehicleResponse>(`${endpoint}/${id}`, data);
         return response.data;

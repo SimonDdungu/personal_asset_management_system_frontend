@@ -1,5 +1,5 @@
 import { API_ENDPOINTS } from "@/src/constants/endpoints/apiEndpoints";
-import { CreateStocksRequest, StocksSearchResponse, UpdateStocksRequest } from "@/src/interfaces/asset_properties/financial/stocksTypes";
+import { StocksSearchResponse } from "@/src/interfaces/asset_properties/financial/stocksTypes";
 import { StocksAssetFilters } from "@/src/interfaces/search_filters/financial/stocks_SearchFilters";
 import api from "@/src/lib/api";
 import { logApiError } from "@/src/util/logApiError";
@@ -10,7 +10,7 @@ const endpoint = API_ENDPOINTS.ASSETS.PROPERTIES.FINANCIAL.STOCKS;
 export const useCreateStocksAsset = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: async (data: CreateStocksRequest) => {
+    mutationFn: async (data: FormData) => {
       const response = await api.post<StocksSearchResponse>(endpoint, data);
       return response.data;
     },
@@ -57,7 +57,7 @@ export const useGetStocksAsset = (id: string) => {
 export const useUpdateStocksAsset = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: async ({ id, data }: { id: string; data: UpdateStocksRequest }) => {
+    mutationFn: async ({ id, data }: { id: string; data: FormData }) => {
       try {
         const response = await api.patch<StocksSearchResponse>(`${endpoint}/${id}`, data);
         return response.data;

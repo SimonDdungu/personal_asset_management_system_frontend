@@ -1,5 +1,5 @@
 import { API_ENDPOINTS } from "@/src/constants/endpoints/apiEndpoints";
-import { CreatePhysicalCashRequest, PhysicalCashResponse, PhysicalCashSearchResponse } from "@/src/interfaces/asset_properties/financial/physicalCashTypes";
+import { PhysicalCashResponse, PhysicalCashSearchResponse } from "@/src/interfaces/asset_properties/financial/physicalCashTypes";
 import { PhysicalCashAssetFilters } from "@/src/interfaces/search_filters/financial/physicalCash_SearchFilters";
 import api from "@/src/lib/api";
 import { logApiError } from "@/src/util/logApiError";
@@ -10,7 +10,7 @@ const endpoint = API_ENDPOINTS.ASSETS.PROPERTIES.FINANCIAL.CASH;
 export const useCreatePhysicalCashAsset = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: async (data: CreatePhysicalCashRequest) => {
+    mutationFn: async (data: FormData) => {
       const response = await api.post<PhysicalCashResponse>(endpoint, data);
       return response.data;
     },
@@ -57,7 +57,7 @@ export const useGetPhysicalCashAsset = (id: string) => {
 export const useUpdatePhysicalCashAsset = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: async ({ id, data }: { id: string; data: Record<string, never> }) => {
+    mutationFn: async ({ id, data }: { id: string; data: FormData }) => {
       try {
         const response = await api.patch<PhysicalCashResponse>(`${endpoint}/${id}`, data);
         return response.data;

@@ -1,5 +1,5 @@
 import { API_ENDPOINTS } from "@/src/constants/endpoints/apiEndpoints";
-import { CreateRealEstateRequest, RealEstateResponse, RealEstateSearchResponse, UpdateRealEstateRequest } from "@/src/interfaces/asset_properties/physical/realEstateTypes";
+import { RealEstateResponse, RealEstateSearchResponse } from "@/src/interfaces/asset_properties/physical/realEstateTypes";
 import { RealEstateAssetFilters } from "@/src/interfaces/search_filters/physical/realEstate_SearchFilters";
 import api from "@/src/lib/api";
 import { logApiError } from "@/src/util/logApiError";
@@ -8,7 +8,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 export const useCreateRealEstateAsset = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: async (data: CreateRealEstateRequest) => {
+    mutationFn: async (data: FormData) => {
       const response = await api.post<RealEstateResponse>(`${API_ENDPOINTS.ASSETS.PROPERTIES.PHYSICAL.REAL_ESTATE}`, data);
       return response.data;
     },
@@ -59,7 +59,7 @@ export const useGetRealEstateAsset = (id: string) => {
 export const useUpdateRealEstateAsset = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: async ({ id, data }: { id: string; data: UpdateRealEstateRequest }) => {
+    mutationFn: async ({ id, data }: { id: string; data: FormData }) => {
       try {
         const response = await api.patch<RealEstateResponse>(`${API_ENDPOINTS.ASSETS.PROPERTIES.PHYSICAL.REAL_ESTATE}/${id}`, data);
         return response.data;
