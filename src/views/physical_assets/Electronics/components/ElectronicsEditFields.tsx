@@ -1,6 +1,4 @@
-import { NumberInput, SelectInput, TextInput } from '@/src/components/ui';
-import { currencyOptions } from '@/src/constants/currency/currency';
-import { propertySizeUnitOptions } from '@/src/constants/symbols/propertySizeUnitLabels';
+import { NumberInput, TextInput } from '@/src/components/ui';
 import { UpdateElectronicsFormData } from '@/src/validation/asset_properties/physical/electronics_Validation';
 import { useFormContext } from 'react-hook-form';
 
@@ -10,32 +8,19 @@ const ElectronicsEditFields = () => {
         <div>
                 <div className='flex flex-col gap-y-3'>
 
-                        {/* <TextInput label='Address' name={"address"} placeholder='Enter address of property' register={register}/>
-
                         <div className='flex gap-x-5 items-center'>
-                            <NumberInput label='Number of bedrooms' name={"numberBedrooms"} placeholder='Enter number of bedrooms' register={register}/>
+                            <TextInput label='Brand' name={"brand"} placeholder='Enter brand of electronic' register={register}/>
 
-                            <NumberInput label='Number of bathrooms' name={"numberBathrooms"} placeholder='Enter number of bathrooms' register={register}/>
-
-                            <NumberInput label='Number of units' name={"numberUnits"} placeholder='Enter number of units' register={register}/>
+                            <TextInput label='Model' name={"model"} placeholder='Enter model of electronic' register={register}/>
                         </div>
 
                         <div className='flex flex-row gap-x-5 items-center'>
-                            <NumberInput label='Property size' name={"propertySize"} placeholder='Enter number of units' register={register}/>
-                            <SelectInput label='Property units' name='propertySizeUnit' placeholder='Select property units' options={propertySizeUnitOptions} control={control} register={register}/>
+                            <TextInput label='Color' name={"color"} placeholder='Enter color of electronic' register={register}/>
+
+                            <TextInput label='Serial number' name={"serialNumber"} placeholder='Enter serial number of electronic' register={register}/>
                         </div>
 
-                        <div className='flex flex-row gap-x-5 items-center'>
-                            <SelectInput label='Currency' name='constructionCostCurrency' placeholder='Select construction currency' options={currencyOptions} control={control} register={register}/>
-                            <NumberInput label='Construction cost' name={"constructionCost"} placeholder='Enter construction cost' register={register}/>
-                        </div>
-
-                        <TextInput label='Construction completion date' name={"constructionCompletionDate"} placeholder='Enter construction completion date' register={register}/>
-
-                        <div className='flex flex-row gap-x-5 items-center'>
-                            <SelectInput label='Currency' name='rentalIncomeCurrency' placeholder='Select rent currency' options={currencyOptions} control={control} register={register}/>
-                            <NumberInput label='Rental Income' name={"rentalIncome"} placeholder='Enter rental income' register={register}/>
-                        </div> */}
+                        <NumberInput label='Year' name={"year"} placeholder='Enter year of electronic' register={register} max={4}/>
 
                 </div> 
 
