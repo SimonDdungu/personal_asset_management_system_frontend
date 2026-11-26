@@ -4,13 +4,18 @@ import { useCreateElectronicAsset } from '@/src/hooks/asset-properties/physical-
 import { useCreateRealEstateAsset } from '@/src/hooks/asset-properties/physical-assets/real_estate/useRealEstate';
 import { CreateAssetsRequest } from '@/src/interfaces/asset_properties/assetTypes';
 import Add_AssetForm from '@/src/views/dashboard/components/Add_AssetForm';
-import ElectronicForm from '@/src/views/dashboard/components/add-forms/ElectronicForm';
+import ElectronicForm from '@/src/views/dashboard/components/add-forms/physical/ElectronicForm';
 import MediaForm from '@/src/views/dashboard/components/MediaForm';
-import RealEstateForm from '@/src/views/dashboard/components/add-forms/RealEstateForm';
+import RealEstateForm from '@/src/views/dashboard/components/add-forms/physical/RealEstateForm';
 import { ChevronLeft } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useRef, useState } from 'react';
+import LandForm from '@/src/views/dashboard/components/add-forms/physical/LandForm';
+import VehicleForm from '@/src/views/dashboard/components/add-forms/physical/VehicleForm';
+import FurnitureForm from '@/src/views/dashboard/components/add-forms/physical/FurnitureForm';
+import MachineryForm from '@/src/views/dashboard/components/add-forms/physical/MachineryForm';
+import CollectiblesForm from '@/src/views/dashboard/components/add-forms/physical/CollectiblesForm';
 
 const page = () => {
     const router = useRouter();
@@ -98,8 +103,15 @@ const page = () => {
           </div>
             <div className="">
                 {step === 0 && <Add_AssetForm onNext={() => setStep(1)} setData={setAssetData} toStep={setShowAsset}/>}
-                {step === 1 && showAsset === "Real estate" && <RealEstateForm onNext={() => setStep(2)} onBack={() => setStep(0)} setData={setAssetProperties}/>}
+                  
+                {step === 1 && showAsset === "Real Estate" && <RealEstateForm onNext={() => setStep(2)} onBack={() => setStep(0)} setData={setAssetProperties}/>}
                 {step === 1 && showAsset === "Electronics" && <ElectronicForm onNext={() => setStep(2)} onBack={() => setStep(0)} setData={setAssetProperties}/>}
+                {step === 1 && showAsset === "Land" && <LandForm onNext={() => setStep(2)} onBack={() => setStep(0)} setData={setAssetProperties}/>}
+                {step === 1 && showAsset === "Vehicles" && <VehicleForm onNext={() => setStep(2)} onBack={() => setStep(0)} setData={setAssetProperties}/>}
+                {step === 1 && showAsset === "Furniture" && <FurnitureForm onNext={() => setStep(2)} onBack={() => setStep(0)} setData={setAssetProperties}/>}
+                {step === 1 && showAsset === "Machinery & Equipment" && <MachineryForm onNext={() => setStep(2)} onBack={() => setStep(0)} setData={setAssetProperties}/>}
+                {step === 1 && showAsset === "Collectibles & Valuables" && <CollectiblesForm onNext={() => setStep(2)} onBack={() => setStep(0)} setData={setAssetProperties}/>}
+
                 {step === 2 && <MediaForm images={images} setImages={setImages} docs={docs} setDocs={setDocs} onNext={submitAsset} onBack={() => setStep(1)}/>}
 
                 {isSubmitting && <FullScreenLoadingSpinner bg_color='bg-black/50' />}
