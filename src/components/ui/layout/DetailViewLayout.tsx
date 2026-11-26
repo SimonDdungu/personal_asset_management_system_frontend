@@ -55,8 +55,8 @@ const DetailViewLayout = ({assetCategory, itemId, assetName, assetUploadImageId,
                         <span className='text-xl'>{assetCategory ?? "Asset"}</span>
                     </Link>
                     <div className='flex flex-row items-center gap-x-3'>
-                       <BlueButton disabled={isLoading} link={`${basePath}/${itemId}/edit`} label='Edit' icon={PencilIcon}/>
-                       <WhiteButton disabled={isLoading || isDeleting} textColor='text-red-600' label='Delete' onClick={() => setDeleteDialogOpen(true)} icon={Trash2}/>
+                       <BlueButton disabled={isLoading || isFetching} link={`${basePath}/${itemId}/edit`} label='Edit' icon={PencilIcon}/>
+                       <WhiteButton disabled={isLoading || isFetching || isDeleting} textColor='text-red-600' label='Delete' onClick={() => setDeleteDialogOpen(true)} icon={Trash2}/>
                     </div>
                 </div>
             </div>
@@ -70,7 +70,7 @@ const DetailViewLayout = ({assetCategory, itemId, assetName, assetUploadImageId,
             />
 
             <AssetCoverImages itemId={itemId} assetId={assetId} asset_category_query_key={ assetCategory ? ASSET_QUERY_KEYS[assetCategory] : undefined} assetImages={assetImages ?? []} 
-            assetName={assetName} uploadId={assetUploadImageId ?? ""} isLoading={isLoading} isReFetching={isFetching}/>
+            assetName={assetName} uploadId={assetUploadImageId ?? ""} isLoading={isLoading || isFetching} isReFetching={isFetching}/>
 
                 <div className='mb-5 bg-white rounded-lg p-10 text-sm border'>
                     <div className='pb-5 border-b'>
@@ -108,7 +108,7 @@ const DetailViewLayout = ({assetCategory, itemId, assetName, assetUploadImageId,
                     </div>
                 </div>
 
-                <AssetDocuments itemId={itemId} asset_category_query_key={ assetCategory ? ASSET_QUERY_KEYS[assetCategory] : undefined} assetDocuments={assetDocuments ?? []} isLoading={isLoading} uploadId={assetUploadDocId ?? ""}/>
+                <AssetDocuments itemId={itemId} asset_category_query_key={ assetCategory ? ASSET_QUERY_KEYS[assetCategory] : undefined} assetDocuments={assetDocuments ?? []} isLoading={isLoading || isFetching} uploadId={assetUploadDocId ?? ""}/>
 
         </div>
 
