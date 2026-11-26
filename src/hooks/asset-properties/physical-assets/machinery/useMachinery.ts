@@ -1,5 +1,5 @@
 import { API_ENDPOINTS } from "@/src/constants/endpoints/apiEndpoints";
-import { CreateMachineryRequest, UpdateMachineryRequest } from "@/src/interfaces/asset_properties/physical/machineryTypes";
+import { CreateMachineryRequest, MachineryResponse, MachinerySearchResponse, UpdateMachineryRequest } from "@/src/interfaces/asset_properties/physical/machineryTypes";
 import { MachineryAssetFilters } from "@/src/interfaces/search_filters/physical/machinery_SearchFilters";
 import api from "@/src/lib/api";
 import { logApiError } from "@/src/util/logApiError";
@@ -11,7 +11,7 @@ export const useCreateMachineryAsset = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (data: CreateMachineryRequest) => {
-      const response = await api.post(endpoint, data);
+      const response = await api.post<MachineryResponse>(endpoint, data);
       return response.data;
     },
     onSuccess: (data) => {
@@ -28,7 +28,7 @@ export const useGetMachineryAssets = (filters?: MachineryAssetFilters) => {
     queryKey: ["machinery-assets", filters],
     queryFn: async () => {
       try {
-        const response = await api.get(endpoint, { params: { ...filters } });
+        const response = await api.get<MachinerySearchResponse[]>(endpoint, { params: { ...filters } });
         return response.data;
       } catch (error) {
         logApiError("Get Machinery Assets", error);
@@ -43,7 +43,7 @@ export const useGetMachineryAsset = (id: string) => {
     queryKey: ["machinery-asset", id],
     queryFn: async () => {
       try {
-        const response = await api.get(`${endpoint}/${id}`);
+        const response = await api.get<MachineryResponse>(`${endpoint}/${id}`);
         return response.data;
       } catch (error) {
         logApiError("Get Machinery Asset", error);
@@ -59,7 +59,7 @@ export const useUpdateMachineryAsset = () => {
   return useMutation({
     mutationFn: async ({ id, data }: { id: string; data: UpdateMachineryRequest }) => {
       try {
-        const response = await api.patch(`${endpoint}/${id}`, data);
+        const response = await api.patch<MachineryResponse>(`${endpoint}/${id}`, data);
         return response.data;
       } catch (error) {
         logApiError("Update Machinery Asset", error);

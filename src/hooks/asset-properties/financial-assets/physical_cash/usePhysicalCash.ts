@@ -1,5 +1,5 @@
 import { API_ENDPOINTS } from "@/src/constants/endpoints/apiEndpoints";
-import { CreatePhysicalCashRequest } from "@/src/interfaces/asset_properties/financial/physicalCashTypes";
+import { CreatePhysicalCashRequest, PhysicalCashResponse, PhysicalCashSearchResponse } from "@/src/interfaces/asset_properties/financial/physicalCashTypes";
 import { PhysicalCashAssetFilters } from "@/src/interfaces/search_filters/financial/physicalCash_SearchFilters";
 import api from "@/src/lib/api";
 import { logApiError } from "@/src/util/logApiError";
@@ -11,7 +11,7 @@ export const useCreatePhysicalCashAsset = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (data: CreatePhysicalCashRequest) => {
-      const response = await api.post(endpoint, data);
+      const response = await api.post<PhysicalCashResponse>(endpoint, data);
       return response.data;
     },
     onSuccess: (data) => {
@@ -28,7 +28,7 @@ export const useGetPhysicalCashAssets = (filters?: PhysicalCashAssetFilters) => 
     queryKey: ["physical-cash-assets", filters],
     queryFn: async () => {
       try {
-        const response = await api.get(endpoint, { params: { ...filters } });
+        const response = await api.get<PhysicalCashSearchResponse[]>(endpoint, { params: { ...filters } });
         return response.data;
       } catch (error) {
         logApiError("Get Physical Cash Assets", error);
@@ -43,7 +43,7 @@ export const useGetPhysicalCashAsset = (id: string) => {
     queryKey: ["physical-cash-asset", id],
     queryFn: async () => {
       try {
-        const response = await api.get(`${endpoint}/${id}`);
+        const response = await api.get<PhysicalCashResponse>(`${endpoint}/${id}`);
         return response.data;
       } catch (error) {
         logApiError("Get Physical Cash Asset", error);
@@ -59,7 +59,7 @@ export const useUpdatePhysicalCashAsset = () => {
   return useMutation({
     mutationFn: async ({ id, data }: { id: string; data: Record<string, never> }) => {
       try {
-        const response = await api.patch(`${endpoint}/${id}`, data);
+        const response = await api.patch<PhysicalCashResponse>(`${endpoint}/${id}`, data);
         return response.data;
       } catch (error) {
         logApiError("Update Physical Cash Asset", error);

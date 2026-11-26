@@ -1,5 +1,5 @@
 import { API_ENDPOINTS } from "@/src/constants/endpoints/apiEndpoints";
-import { CreateRetirementFundRequest, UpdateRetirementFundRequest } from "@/src/interfaces/asset_properties/financial/retirementFundTypes";
+import { CreateRetirementFundRequest, RetirementFundResponse, RetirementFundSearchResponse, UpdateRetirementFundRequest } from "@/src/interfaces/asset_properties/financial/retirementFundTypes";
 import { RetirementFundAssetFilters } from "@/src/interfaces/search_filters/financial/retirementFund_SearchFilters";
 import api from "@/src/lib/api";
 import { logApiError } from "@/src/util/logApiError";
@@ -11,7 +11,7 @@ export const useCreateRetirementFundAsset = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (data: CreateRetirementFundRequest) => {
-      const response = await api.post(endpoint, data);
+      const response = await api.post<RetirementFundResponse>(endpoint, data);
       return response.data;
     },
     onSuccess: (data) => {
@@ -28,7 +28,7 @@ export const useGetRetirementFundAssets = (filters?: RetirementFundAssetFilters)
     queryKey: ["retirement-fund-assets", filters],
     queryFn: async () => {
       try {
-        const response = await api.get(endpoint, { params: { ...filters } });
+        const response = await api.get<RetirementFundSearchResponse[]>(endpoint, { params: { ...filters } });
         return response.data;
       } catch (error) {
         logApiError("Get Retirement Fund Assets", error);
@@ -43,7 +43,7 @@ export const useGetRetirementFundAsset = (id: string) => {
     queryKey: ["retirement-fund-asset", id],
     queryFn: async () => {
       try {
-        const response = await api.get(`${endpoint}/${id}`);
+        const response = await api.get<RetirementFundResponse>(`${endpoint}/${id}`);
         return response.data;
       } catch (error) {
         logApiError("Get Retirement Fund Asset", error);
@@ -59,7 +59,7 @@ export const useUpdateRetirementFundAsset = () => {
   return useMutation({
     mutationFn: async ({ id, data }: { id: string; data: UpdateRetirementFundRequest }) => {
       try {
-        const response = await api.patch(`${endpoint}/${id}`, data);
+        const response = await api.patch<RetirementFundResponse>(`${endpoint}/${id}`, data);
         return response.data;
       } catch (error) {
         logApiError("Update Retirement Fund Asset", error);

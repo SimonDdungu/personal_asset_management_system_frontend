@@ -1,5 +1,5 @@
 import { API_ENDPOINTS } from "@/src/constants/endpoints/apiEndpoints";
-import { CreateCollectiblesValuablesRequest, UpdateCollectiblesValuablesRequest } from "@/src/interfaces/asset_properties/physical/collectiblesValuablesTypes";
+import { CollectiblesValuablesResponse, CollectiblesValuablesSearchResponse, CreateCollectiblesValuablesRequest, UpdateCollectiblesValuablesRequest } from "@/src/interfaces/asset_properties/physical/collectiblesValuablesTypes";
 import { CollectiblesValuablesAssetFilters } from "@/src/interfaces/search_filters/physical/collectiblesValuables_SearchFilters";
 import api from "@/src/lib/api";
 import { logApiError } from "@/src/util/logApiError";
@@ -11,7 +11,7 @@ export const useCreateCollectiblesValuablesAsset = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (data: CreateCollectiblesValuablesRequest) => {
-      const response = await api.post(endpoint, data);
+      const response = await api.post<CollectiblesValuablesResponse>(endpoint, data);
       return response.data;
     },
     onSuccess: (data) => {
@@ -28,7 +28,7 @@ export const useGetCollectiblesValuablesAssets = (filters?: CollectiblesValuable
     queryKey: ["collectibles-valuables-assets", filters],
     queryFn: async () => {
       try {
-        const response = await api.get(endpoint, { params: { ...filters } });
+        const response = await api.get<CollectiblesValuablesSearchResponse[]>(endpoint, { params: { ...filters } });
         return response.data;
       } catch (error) {
         logApiError("Get Collectibles Valuables Assets", error);
@@ -43,7 +43,7 @@ export const useGetCollectiblesValuablesAsset = (id: string) => {
     queryKey: ["collectibles-valuables-asset", id],
     queryFn: async () => {
       try {
-        const response = await api.get(`${endpoint}/${id}`);
+        const response = await api.get<CollectiblesValuablesResponse>(`${endpoint}/${id}`);
         return response.data;
       } catch (error) {
         logApiError("Get Collectibles Valuables Asset", error);
@@ -59,7 +59,7 @@ export const useUpdateCollectiblesValuablesAsset = () => {
   return useMutation({
     mutationFn: async ({ id, data }: { id: string; data: UpdateCollectiblesValuablesRequest }) => {
       try {
-        const response = await api.patch(`${endpoint}/${id}`, data);
+        const response = await api.patch<CollectiblesValuablesResponse>(`${endpoint}/${id}`, data);
         return response.data;
       } catch (error) {
         logApiError("Update Collectibles Valuables Asset", error);

@@ -1,5 +1,5 @@
 import { API_ENDPOINTS } from "@/src/constants/endpoints/apiEndpoints";
-import { CreateStocksRequest, UpdateStocksRequest } from "@/src/interfaces/asset_properties/financial/stocksTypes";
+import { CreateStocksRequest, StocksSearchResponse, UpdateStocksRequest } from "@/src/interfaces/asset_properties/financial/stocksTypes";
 import { StocksAssetFilters } from "@/src/interfaces/search_filters/financial/stocks_SearchFilters";
 import api from "@/src/lib/api";
 import { logApiError } from "@/src/util/logApiError";
@@ -11,7 +11,7 @@ export const useCreateStocksAsset = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (data: CreateStocksRequest) => {
-      const response = await api.post(endpoint, data);
+      const response = await api.post<StocksSearchResponse>(endpoint, data);
       return response.data;
     },
     onSuccess: (data) => {
@@ -28,7 +28,7 @@ export const useGetStocksAssets = (filters?: StocksAssetFilters) => {
     queryKey: ["stocks-assets", filters],
     queryFn: async () => {
       try {
-        const response = await api.get(endpoint, { params: { ...filters } });
+        const response = await api.get<StocksSearchResponse[]>(endpoint, { params: { ...filters } });
         return response.data;
       } catch (error) {
         logApiError("Get Stocks Assets", error);
@@ -43,7 +43,7 @@ export const useGetStocksAsset = (id: string) => {
     queryKey: ["stocks-asset", id],
     queryFn: async () => {
       try {
-        const response = await api.get(`${endpoint}/${id}`);
+        const response = await api.get<StocksSearchResponse>(`${endpoint}/${id}`);
         return response.data;
       } catch (error) {
         logApiError("Get Stocks Asset", error);
@@ -59,7 +59,7 @@ export const useUpdateStocksAsset = () => {
   return useMutation({
     mutationFn: async ({ id, data }: { id: string; data: UpdateStocksRequest }) => {
       try {
-        const response = await api.patch(`${endpoint}/${id}`, data);
+        const response = await api.patch<StocksSearchResponse>(`${endpoint}/${id}`, data);
         return response.data;
       } catch (error) {
         logApiError("Update Stocks Asset", error);

@@ -1,5 +1,5 @@
 import { API_ENDPOINTS } from "@/src/constants/endpoints/apiEndpoints";
-import { CreateInvestmentRequest, UpdateInvestmentRequest } from "@/src/interfaces/asset_properties/financial/investmentTypes";
+import { CreateInvestmentRequest, InvestmentResponse, InvestmentSearchResponse, UpdateInvestmentRequest } from "@/src/interfaces/asset_properties/financial/investmentTypes";
 import { InvestmentAssetFilters } from "@/src/interfaces/search_filters/financial/investment_SearchFilters";
 import api from "@/src/lib/api";
 import { logApiError } from "@/src/util/logApiError";
@@ -11,7 +11,7 @@ export const useCreateInvestmentAsset = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (data: CreateInvestmentRequest) => {
-      const response = await api.post(endpoint, data);
+      const response = await api.post<InvestmentResponse>(endpoint, data);
       return response.data;
     },
     onSuccess: (data) => {
@@ -28,7 +28,7 @@ export const useGetInvestmentAssets = (filters?: InvestmentAssetFilters) => {
     queryKey: ["investment-assets", filters],
     queryFn: async () => {
       try {
-        const response = await api.get(endpoint, { params: { ...filters } });
+        const response = await api.get<InvestmentSearchResponse[]>(endpoint, { params: { ...filters } });
         return response.data;
       } catch (error) {
         logApiError("Get Investment Assets", error);
@@ -43,7 +43,7 @@ export const useGetInvestmentAsset = (id: string) => {
     queryKey: ["investment-asset", id],
     queryFn: async () => {
       try {
-        const response = await api.get(`${endpoint}/${id}`);
+        const response = await api.get<InvestmentResponse>(`${endpoint}/${id}`);
         return response.data;
       } catch (error) {
         logApiError("Get Investment Asset", error);
@@ -59,7 +59,7 @@ export const useUpdateInvestmentAsset = () => {
   return useMutation({
     mutationFn: async ({ id, data }: { id: string; data: UpdateInvestmentRequest }) => {
       try {
-        const response = await api.patch(`${endpoint}/${id}`, data);
+        const response = await api.patch<InvestmentResponse>(`${endpoint}/${id}`, data);
         return response.data;
       } catch (error) {
         logApiError("Update Investment Asset", error);

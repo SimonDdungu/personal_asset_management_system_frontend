@@ -1,5 +1,5 @@
 import { API_ENDPOINTS } from "@/src/constants/endpoints/apiEndpoints";
-import { CreateInsuranceRequest, UpdateInsuranceRequest } from "@/src/interfaces/asset_properties/financial/insuranceTypes";
+import { CreateInsuranceRequest, InsuranceResponse, InsuranceSearchResponse, UpdateInsuranceRequest } from "@/src/interfaces/asset_properties/financial/insuranceTypes";
 import { InsuranceAssetFilters } from "@/src/interfaces/search_filters/financial/insurance_SearchFilters";
 import api from "@/src/lib/api";
 import { logApiError } from "@/src/util/logApiError";
@@ -11,7 +11,7 @@ export const useCreateInsuranceAsset = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (data: CreateInsuranceRequest) => {
-      const response = await api.post(endpoint, data);
+      const response = await api.post<InsuranceResponse>(endpoint, data);
       return response.data;
     },
     onSuccess: (data) => {
@@ -28,7 +28,7 @@ export const useGetInsuranceAssets = (filters?: InsuranceAssetFilters) => {
     queryKey: ["insurance-assets", filters],
     queryFn: async () => {
       try {
-        const response = await api.get(endpoint, { params: { ...filters } });
+        const response = await api.get<InsuranceSearchResponse[]>(endpoint, { params: { ...filters } });
         return response.data;
       } catch (error) {
         logApiError("Get Insurance Assets", error);
@@ -43,7 +43,7 @@ export const useGetInsuranceAsset = (id: string) => {
     queryKey: ["insurance-asset", id],
     queryFn: async () => {
       try {
-        const response = await api.get(`${endpoint}/${id}`);
+        const response = await api.get<InsuranceResponse>(`${endpoint}/${id}`);
         return response.data;
       } catch (error) {
         logApiError("Get Insurance Asset", error);
@@ -59,7 +59,7 @@ export const useUpdateInsuranceAsset = () => {
   return useMutation({
     mutationFn: async ({ id, data }: { id: string; data: UpdateInsuranceRequest }) => {
       try {
-        const response = await api.patch(`${endpoint}/${id}`, data);
+        const response = await api.patch<InsuranceResponse>(`${endpoint}/${id}`, data);
         return response.data;
       } catch (error) {
         logApiError("Update Insurance Asset", error);

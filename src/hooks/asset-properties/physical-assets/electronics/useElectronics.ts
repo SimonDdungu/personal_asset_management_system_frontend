@@ -1,4 +1,6 @@
 import { API_ENDPOINTS } from "@/src/constants/endpoints/apiEndpoints";
+import { CreateElectronicsRequest, ElectronicSearchResponse, ElectronicsResponse, UpdateElectronicsRequest } from "@/src/interfaces/asset_properties/physical/electronicsTypes";
+import { ElectronicsAssetFilters } from "@/src/interfaces/search_filters/physical/electronics_SearchFilters";
 import api from "@/src/lib/api";
 import { logApiError } from "@/src/util/logApiError";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -6,8 +8,8 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 export const useCreateElectronicAsset = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: async (data: any) => {
-      const response = await api.post(`${API_ENDPOINTS.ASSETS.PROPERTIES.PHYSICAL.ELECTRONICS}`, data);
+    mutationFn: async (data: CreateElectronicsRequest) => {
+      const response = await api.post<ElectronicsResponse>(`${API_ENDPOINTS.ASSETS.PROPERTIES.PHYSICAL.ELECTRONICS}`, data);
       return response.data;
     },
 
@@ -21,12 +23,12 @@ export const useCreateElectronicAsset = () => {
   });
 };
 
-export const useGetElectronicAssets = () => {
+export const useGetElectronicAssets = (filters?: ElectronicsAssetFilters) => {
   return useQuery({
-    queryKey: ["electronic-assets"],
+    queryKey: ["electronic-assets", filters],
     queryFn: async () => {
       try {
-        const response = await api.get(`${API_ENDPOINTS.ASSETS.PROPERTIES.PHYSICAL.ELECTRONICS}`);
+        const response = await api.get<ElectronicSearchResponse[]>(`${API_ENDPOINTS.ASSETS.PROPERTIES.PHYSICAL.ELECTRONICS}`, { params: { ...filters } });
         return response.data;
       } catch (error) {
         logApiError("Get Electronic Assets", error);
@@ -41,7 +43,7 @@ export const useGetElectronicAsset = (id: string) => {
     queryKey: ["electronic-asset", id],
     queryFn: async () => {
       try {
-        const response = await api.get(`${API_ENDPOINTS.ASSETS.PROPERTIES.PHYSICAL.ELECTRONICS}/${id}`)
+        const response = await api.get<ElectronicsResponse>(`${API_ENDPOINTS.ASSETS.PROPERTIES.PHYSICAL.ELECTRONICS}/${id}`)
         return response.data;
       } catch (error) {
         logApiError("Get Electronic Asset", error);
@@ -55,9 +57,9 @@ export const useGetElectronicAsset = (id: string) => {
 export const useUpdateElectronicAsset = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: async ({ id, data }: { id: string; data: any }) => {
+    mutationFn: async ({ id, data }: { id: string; data: UpdateElectronicsRequest }) => {
       try {
-        const response = await api.patch(`${API_ENDPOINTS.ASSETS.PROPERTIES.PHYSICAL.ELECTRONICS}`, data);
+        const response = await api.patch<ElectronicsResponse>(`${API_ENDPOINTS.ASSETS.PROPERTIES.PHYSICAL.ELECTRONICS}/${id}`, data);
         return response.data;
       } catch (error) {
         logApiError("Update Electronic Asset", error);

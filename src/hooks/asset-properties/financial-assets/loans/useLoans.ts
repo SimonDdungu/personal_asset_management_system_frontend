@@ -1,5 +1,5 @@
 import { API_ENDPOINTS } from "@/src/constants/endpoints/apiEndpoints";
-import { CreateLoansRequest, UpdateLoansRequest } from "@/src/interfaces/asset_properties/financial/loansTypes";
+import { CreateLoansRequest, LoansResponse, LoansSearchResponse, UpdateLoansRequest } from "@/src/interfaces/asset_properties/financial/loansTypes";
 import { LoansAssetFilters } from "@/src/interfaces/search_filters/financial/loans_SearchFilters";
 import api from "@/src/lib/api";
 import { logApiError } from "@/src/util/logApiError";
@@ -11,7 +11,7 @@ export const useCreateLoansAsset = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (data: CreateLoansRequest) => {
-      const response = await api.post(endpoint, data);
+      const response = await api.post<LoansResponse>(endpoint, data);
       return response.data;
     },
     onSuccess: (data) => {
@@ -28,7 +28,7 @@ export const useGetLoansAssets = (filters?: LoansAssetFilters) => {
     queryKey: ["loans-assets", filters],
     queryFn: async () => {
       try {
-        const response = await api.get(endpoint, { params: { ...filters } });
+        const response = await api.get<LoansSearchResponse[]>(endpoint, { params: { ...filters } });
         return response.data;
       } catch (error) {
         logApiError("Get Loans Assets", error);
@@ -43,7 +43,7 @@ export const useGetLoansAsset = (id: string) => {
     queryKey: ["loans-asset", id],
     queryFn: async () => {
       try {
-        const response = await api.get(`${endpoint}/${id}`);
+        const response = await api.get<LoansResponse>(`${endpoint}/${id}`);
         return response.data;
       } catch (error) {
         logApiError("Get Loans Asset", error);
@@ -59,7 +59,7 @@ export const useUpdateLoansAsset = () => {
   return useMutation({
     mutationFn: async ({ id, data }: { id: string; data: UpdateLoansRequest }) => {
       try {
-        const response = await api.patch(`${endpoint}/${id}`, data);
+        const response = await api.patch<LoansResponse>(`${endpoint}/${id}`, data);
         return response.data;
       } catch (error) {
         logApiError("Update Loans Asset", error);

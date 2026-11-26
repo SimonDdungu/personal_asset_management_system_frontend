@@ -1,5 +1,6 @@
 import { config } from "@/src/config/config";
 import { API_ENDPOINTS } from "@/src/constants/endpoints/apiEndpoints";
+import { AssetsResponse, UpdateAssetsRequest } from "@/src/interfaces/asset_properties/assetTypes";
 import { AssetFilters } from "@/src/interfaces/search_filters/assets_SearchFilters";
 import api from "@/src/lib/api";
 import { logApiError } from "@/src/util/logApiError";
@@ -10,7 +11,7 @@ export const useGetAssets = (filters?: AssetFilters) => {
      queryKey: ["all_assets", filters],
     queryFn: async () => {
       try {
-        const response = await api.get(API_ENDPOINTS.ASSETS.BASE, {params: {...filters}});
+        const response = await api.get<AssetsResponse[]>(API_ENDPOINTS.ASSETS.BASE, {params: {...filters}});
         return response.data;
       } catch (error) {
         logApiError("Get Assets", error);
@@ -25,7 +26,7 @@ export const useAsset = (id: string) => {
     queryKey: ["asset", id],
     queryFn: async () => {
       try {
-        const response = await api.get(`${API_ENDPOINTS.ASSETS.BASE}/${id}`)
+        const response = await api.get<AssetsResponse>(`${API_ENDPOINTS.ASSETS.BASE}/${id}`)
         return response.data;
       } catch (error) {
         logApiError("Get Asset", error);
@@ -41,9 +42,9 @@ export const useAsset = (id: string) => {
 export const useUpdateAsset = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: async ({ id, data }: { id: string; data: any }) => {
+    mutationFn: async ({ id, data }: { id: string; data: UpdateAssetsRequest }) => {
       try {
-        const response = await api.patch(`${API_ENDPOINTS.ASSETS.BASE}/${id}`, data);
+        const response = await api.patch<AssetsResponse>(`${API_ENDPOINTS.ASSETS.BASE}/${id}`, data);
         return response.data;
       } catch (error) {
         logApiError("Update Asset", error);

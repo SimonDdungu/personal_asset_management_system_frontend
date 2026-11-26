@@ -1,5 +1,5 @@
 import { API_ENDPOINTS } from "@/src/constants/endpoints/apiEndpoints";
-import { CreateVehicleRequest, UpdateVehicleRequest } from "@/src/interfaces/asset_properties/physical/vehicleTypes";
+import { CreateVehicleRequest, UpdateVehicleRequest, VehicleResponse, VehicleSearchResponse } from "@/src/interfaces/asset_properties/physical/vehicleTypes";
 import { VehicleAssetFilters } from "@/src/interfaces/search_filters/physical/vehicle_SearchFilters";
 import api from "@/src/lib/api";
 import { logApiError } from "@/src/util/logApiError";
@@ -11,7 +11,7 @@ export const useCreateVehicleAsset = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (data: CreateVehicleRequest) => {
-      const response = await api.post(endpoint, data);
+      const response = await api.post<VehicleResponse>(endpoint, data);
       return response.data;
     },
     onSuccess: (data) => {
@@ -28,7 +28,7 @@ export const useGetVehicleAssets = (filters?: VehicleAssetFilters) => {
     queryKey: ["vehicle-assets", filters],
     queryFn: async () => {
       try {
-        const response = await api.get(endpoint, { params: { ...filters } });
+        const response = await api.get<VehicleSearchResponse[]>(endpoint, { params: { ...filters } });
         return response.data;
       } catch (error) {
         logApiError("Get Vehicle Assets", error);
@@ -43,7 +43,7 @@ export const useGetVehicleAsset = (id: string) => {
     queryKey: ["vehicle-asset", id],
     queryFn: async () => {
       try {
-        const response = await api.get(`${endpoint}/${id}`);
+        const response = await api.get<VehicleResponse>(`${endpoint}/${id}`);
         return response.data;
       } catch (error) {
         logApiError("Get Vehicle Asset", error);
@@ -59,7 +59,7 @@ export const useUpdateVehicleAsset = () => {
   return useMutation({
     mutationFn: async ({ id, data }: { id: string; data: UpdateVehicleRequest }) => {
       try {
-        const response = await api.patch(`${endpoint}/${id}`, data);
+        const response = await api.patch<VehicleResponse>(`${endpoint}/${id}`, data);
         return response.data;
       } catch (error) {
         logApiError("Update Vehicle Asset", error);

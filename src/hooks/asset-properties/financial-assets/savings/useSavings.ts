@@ -1,5 +1,5 @@
 import { API_ENDPOINTS } from "@/src/constants/endpoints/apiEndpoints";
-import { CreateSavingsRequest, UpdateSavingsRequest } from "@/src/interfaces/asset_properties/financial/savingsTypes";
+import { CreateSavingsRequest, SavingsResponse, SavingsSearchResponse, UpdateSavingsRequest } from "@/src/interfaces/asset_properties/financial/savingsTypes";
 import { SavingsAssetFilters } from "@/src/interfaces/search_filters/financial/savings_SearchFilters";
 import api from "@/src/lib/api";
 import { logApiError } from "@/src/util/logApiError";
@@ -11,7 +11,7 @@ export const useCreateSavingsAsset = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (data: CreateSavingsRequest) => {
-      const response = await api.post(endpoint, data);
+      const response = await api.post<SavingsResponse>(endpoint, data);
       return response.data;
     },
     onSuccess: (data) => {
@@ -28,7 +28,7 @@ export const useGetSavingsAssets = (filters?: SavingsAssetFilters) => {
     queryKey: ["savings-assets", filters],
     queryFn: async () => {
       try {
-        const response = await api.get(endpoint, { params: { ...filters } });
+        const response = await api.get<SavingsSearchResponse[]>(endpoint, { params: { ...filters } });
         return response.data;
       } catch (error) {
         logApiError("Get Savings Assets", error);
@@ -43,7 +43,7 @@ export const useGetSavingsAsset = (id: string) => {
     queryKey: ["savings-asset", id],
     queryFn: async () => {
       try {
-        const response = await api.get(`${endpoint}/${id}`);
+        const response = await api.get<SavingsResponse>(`${endpoint}/${id}`);
         return response.data;
       } catch (error) {
         logApiError("Get Savings Asset", error);
@@ -59,7 +59,7 @@ export const useUpdateSavingsAsset = () => {
   return useMutation({
     mutationFn: async ({ id, data }: { id: string; data: UpdateSavingsRequest }) => {
       try {
-        const response = await api.patch(`${endpoint}/${id}`, data);
+        const response = await api.patch<SavingsResponse>(`${endpoint}/${id}`, data);
         return response.data;
       } catch (error) {
         logApiError("Update Savings Asset", error);

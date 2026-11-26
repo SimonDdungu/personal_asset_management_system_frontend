@@ -1,5 +1,5 @@
 import { API_ENDPOINTS } from "@/src/constants/endpoints/apiEndpoints";
-import { CreateLandRequest, UpdateLandRequest } from "@/src/interfaces/asset_properties/physical/landTypes";
+import { CreateLandRequest, LandResponse, LandSearchResponse, UpdateLandRequest } from "@/src/interfaces/asset_properties/physical/landTypes";
 import { LandAssetFilters } from "@/src/interfaces/search_filters/physical/land_SearchFilters";
 import api from "@/src/lib/api";
 import { logApiError } from "@/src/util/logApiError";
@@ -11,7 +11,7 @@ export const useCreateLandAsset = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (data: CreateLandRequest) => {
-      const response = await api.post(endpoint, data);
+      const response = await api.post<LandResponse>(endpoint, data);
       return response.data;
     },
     onSuccess: (data) => {
@@ -28,7 +28,7 @@ export const useGetLandAssets = (filters?: LandAssetFilters) => {
     queryKey: ["land-assets", filters],
     queryFn: async () => {
       try {
-        const response = await api.get(endpoint, { params: { ...filters } });
+        const response = await api.get<LandSearchResponse[]>(endpoint, { params: { ...filters } });
         return response.data;
       } catch (error) {
         logApiError("Get Land Assets", error);
@@ -43,7 +43,7 @@ export const useGetLandAsset = (id: string) => {
     queryKey: ["land-asset", id],
     queryFn: async () => {
       try {
-        const response = await api.get(`${endpoint}/${id}`);
+        const response = await api.get<LandResponse>(`${endpoint}/${id}`);
         return response.data;
       } catch (error) {
         logApiError("Get Land Asset", error);
@@ -59,7 +59,7 @@ export const useUpdateLandAsset = () => {
   return useMutation({
     mutationFn: async ({ id, data }: { id: string; data: UpdateLandRequest }) => {
       try {
-        const response = await api.patch(`${endpoint}/${id}`, data);
+        const response = await api.patch<LandResponse>(`${endpoint}/${id}`, data);
         return response.data;
       } catch (error) {
         logApiError("Update Land Asset", error);
