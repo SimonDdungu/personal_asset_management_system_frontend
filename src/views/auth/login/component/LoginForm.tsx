@@ -27,10 +27,10 @@ export default function LoginForm() {
     resolver: zodResolver(loginSchema), defaultValues: {
       email: "james@gmail.com",
       password: "Simon#123",
-    },
+    }, reValidateMode: "onChange",
   });
 
-  const { register, handleSubmit, control } = methods;
+  const { register, handleSubmit, control, formState: {errors} } = methods;
 
   const onSubmit = async(data: loginFormTypes) => {
       if (isPending) return;
@@ -44,7 +44,7 @@ export default function LoginForm() {
 
         setUser(response.user);
 
-        router.push("/");
+        router.push("/dashboard");
 
     } catch (error) {
       if (axios.isAxiosError(error)) {
@@ -76,12 +76,13 @@ export default function LoginForm() {
         </div>
 
         <FormProvider {...methods}>
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-5 mb-5">
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-1 mb-5">
             <TextInput
               label="Email address"
               name="email"
               placeholder="Enter email address"
               register={register}
+              error={errors}
             />
 
             
@@ -91,7 +92,9 @@ export default function LoginForm() {
               placeholder="Enter your password"
             />
 
-            <BlueButton label="Login" width="w-full" justify="justify-center" padding="py-2" disabled={isPending}/>
+            <div className="mt-4">
+              <BlueButton label="Login" width="w-full" justify="justify-center" padding="py-2" disabled={isPending}/>
+            </div>
           </form>
         </FormProvider>
           <p className="text-xs">Don't have an account? <Link href={"/signup"} className="text-blue-600 underline">Create an account</Link></p>

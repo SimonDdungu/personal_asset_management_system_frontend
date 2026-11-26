@@ -23,17 +23,17 @@ export default function SignUpForm() {
 
   const methods = useForm<signUpFormTypes>({
     resolver: zodResolver(signUpSchema), defaultValues: {
-      firstName: "simon",
-      lastName: "james",
-      email: "james@gmail.com",
-      phoneNumber: "",
-      gender: "MALE",
-      password: "Simon#123",
-      confirmPassword: "Simon#123",
-    },
+      // firstName: "simon",
+      // lastName: "james",
+      // email: "james@gmail.com",
+      // phoneNumber: "",
+      // gender: "MALE",
+      // password: "Simon#123",
+      // confirmPassword: "Simon#123",
+    }, reValidateMode: "onChange"
   });
 
-  const { register, handleSubmit, control } = methods;
+  const { register, handleSubmit, control, formState: { errors } } = methods;
 
   const onSubmit = async(data: signUpFormTypes) => {
       if (isPending) return;
@@ -76,7 +76,7 @@ export default function SignUpForm() {
         </div>
 
         <FormProvider {...methods}>
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-5 mb-5">
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-1 mb-5">
             <div className="flex flex-row gap-x-3">
               <TextInput
                 label="First name"
@@ -84,6 +84,7 @@ export default function SignUpForm() {
                 placeholder="Enter first name"
                 register={register}
                 required={true}
+                error={errors}
               />
 
               <TextInput
@@ -92,6 +93,7 @@ export default function SignUpForm() {
                 placeholder="Enter last name"
                 register={register}
                 required={true}
+                error={errors}
               />
             </div>
 
@@ -101,6 +103,7 @@ export default function SignUpForm() {
               placeholder="Enter email address"
               register={register}
               required={true}
+              error={errors}
             />
 
             <div className="flex flex-row gap-x-3">
@@ -112,6 +115,7 @@ export default function SignUpForm() {
                 control={control}
                 register={register}
                 required={true}
+                error={errors}
               />
 
               <TextInput
@@ -119,6 +123,7 @@ export default function SignUpForm() {
                 name="phoneNumber"
                 placeholder="Enter phone number"
                 register={register}
+                error={errors}
               />
             </div>
             
@@ -137,8 +142,10 @@ export default function SignUpForm() {
                 placeholder="Confirm your password"
               />
             </div>
-
-            <BlueButton label="Sign Up" width="w-full" justify="justify-center" padding="py-2"/>
+            
+            <div className="mt-4">
+              <BlueButton label="Sign Up" width="w-full" justify="justify-center" padding="py-2"/>
+            </div>
           </form>
         </FormProvider>
          <p className="text-xs">Already have an account? <Link href={"/login"} className="text-blue-600 underline">Login</Link></p>
