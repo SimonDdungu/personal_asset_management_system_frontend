@@ -14,9 +14,9 @@ export interface CreateBankAccountRequest {
 export interface UpdateBankAccountRequest {
     bank?: string;
     bankAccountNumber?: string;
-    interestRate?: number;
+    interestRate?: number | null;
     currency?: string;
-    currentBalance?: number;
+    currentBalance?: number | null;
 }
 
 export interface BankAccountResponse {

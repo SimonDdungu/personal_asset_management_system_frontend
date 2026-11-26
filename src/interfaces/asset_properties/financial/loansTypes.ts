@@ -13,8 +13,8 @@ export interface CreateLoansRequest {
 
 export interface UpdateLoansRequest {
     lender?: string;
-    originalAmount?: number;
-    interestRate?: number;
+    originalAmount?: number | null;
+    interestRate?: number | null;
     startDate?: string;
     maturityDate?: string;
 }

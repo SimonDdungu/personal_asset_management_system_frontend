@@ -13,7 +13,7 @@ export interface CreateInsuranceRequest {
 
 export interface UpdateInsuranceRequest {
     provider?: string;
-    premiumAmount?: number;
+    premiumAmount?: number | null;
     premiumFrequency?: string;
     startDate?: string;
     endDate?: string;

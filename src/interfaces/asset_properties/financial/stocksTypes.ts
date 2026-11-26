@@ -11,7 +11,7 @@ export interface CreateStocksRequest {
 
 export interface UpdateStocksRequest {
     tickerSymbol?: string;
-    numberShares?: number;
+    numberShares?: number | null;
     brokerage?: string;
 }
 

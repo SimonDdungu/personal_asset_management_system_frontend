@@ -13,7 +13,7 @@ export interface CreateInvestmentRequest {
 export interface UpdateInvestmentRequest {
     quantity?: number;
     institution?: string;
-    interestRate?: number;
+    interestRate?: number | null;
     referenceNumber?: string;
 }
 

@@ -13,7 +13,7 @@ export interface CreateSavingsRequest {
 export interface UpdateSavingsRequest {
     institution?: string;
     accountNumber?: string;
-    interestRate?: number;
+    interestRate?: number | null;
     maturityDate?: string;
 }
 
