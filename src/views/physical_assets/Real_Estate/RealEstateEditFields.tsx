@@ -2,12 +2,12 @@ import { NumberInput, SelectInput, TextInput } from '@/src/components/ui'
 import { currencyOptions } from '@/src/constants/currency/currency';
 import { propertySizeUnitOptions } from '@/src/constants/symbols/propertySizeUnitLabels';
 import { UpdateAssetFormData } from '@/src/validation/asset_properties/asset_Validation';
-import { UpdateRealEstateFormData } from '@/src/validation/asset_properties/realEstate_Validation';
+import { UpdateRealEstateFormData } from '@/src/validation/asset_properties/physical/realEstate_Validation';
 import React from 'react'
 import { useFormContext } from 'react-hook-form';
 
 const RealEstateEditFields = () => {
-    const { register, control } = useFormContext<UpdateAssetFormData & UpdateRealEstateFormData>();
+    const { register, control } = useFormContext<UpdateRealEstateFormData>();
   return (
         <div>
                 <div className='flex flex-col gap-y-3'>

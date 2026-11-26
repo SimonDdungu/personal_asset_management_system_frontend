@@ -1,8 +1,9 @@
 "use client"
 import EditViewLayout from '@/src/components/ui/layout/EditViewLayout';
 import { useGetRealEstateAsset, useUpdateRealEstateAsset } from '@/src/hooks/asset-properties/physical-assets/real_estate/useRealEstate';
-import { updateRealEstateSchema } from '@/src/validation/asset_properties/realEstate_Validation';
 import RealEstateEditFields from './RealEstateEditFields';
+import { UpdateRealEstateFormData, updateRealEstateSchema } from '@/src/validation/asset_properties/physical/realEstate_Validation';
+import { UpdateAssetFormData } from '@/src/validation/asset_properties/asset_Validation';
 
 
 interface RealEstateDetailViewProps {
@@ -10,12 +11,12 @@ interface RealEstateDetailViewProps {
 }
 
 const RealEstateEditView = ({id}: RealEstateDetailViewProps) => {
-    const { data, isLoading, isError, error } = useGetRealEstateAsset(id);
+    const { data } = useGetRealEstateAsset(id);
     const viewPath = `/assets/physical/real-estate/${id}`;
 
     const updateRealEstate = useUpdateRealEstateAsset();
 
-    const onCategorySubmit = async(values: any) => {
+    const onCategorySubmit = async(values: UpdateAssetFormData & UpdateRealEstateFormData) => {
         try {
         const realEstateData = updateRealEstateSchema.parse(values);
 
@@ -27,8 +28,9 @@ const RealEstateEditView = ({id}: RealEstateDetailViewProps) => {
         }
     };
 
+
   return (
-    <EditViewLayout viewPath={viewPath} assetid={data?.assetId} assetName={data?.assetName} category='Real Estate' onCategorySubmit={onCategorySubmit} initialData={data ? { ...data, name: data.assetName } : undefined}>
+    <EditViewLayout viewPath={viewPath} assetid={data?.assetId ?? ""} assetName={data?.assetName ?? ""} category='Real Estate' onCategorySubmit={onCategorySubmit} initialData={data ? { ...data, name: data.assetName } : undefined}>
         <RealEstateEditFields />
     </EditViewLayout>
   )

@@ -15,8 +15,8 @@ interface DetailViewLayoutProps <T extends FieldValues>{
     assetName: string,
     category: string,
     children: ReactNode,
-    onCategorySubmit: (values: T) => Promise<void>;
-    initialData: UpdateAssetFormData & T;
+    onCategorySubmit: (values: UpdateAssetFormData & T) => Promise<void>;
+    initialData?: UpdateAssetFormData & T;
     viewPath: string;
 }
 
