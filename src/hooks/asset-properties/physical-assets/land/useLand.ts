@@ -1,5 +1,5 @@
 import { API_ENDPOINTS } from "@/src/constants/endpoints/apiEndpoints";
-import { LandResponse, LandSearchResponse } from "@/src/interfaces/asset_properties/physical/landTypes";
+import { LandResponse, LandSearchResponse, UpdateLandRequest } from "@/src/interfaces/asset_properties/physical/landTypes";
 import { LandAssetFilters } from "@/src/interfaces/search_filters/physical/land_SearchFilters";
 import api from "@/src/lib/api";
 import { logApiError } from "@/src/util/logApiError";
@@ -57,7 +57,7 @@ export const useGetLandAsset = (id: string) => {
 export const useUpdateLandAsset = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: async ({ id, data }: { id: string; data: FormData }) => {
+    mutationFn: async ({ id, data }: { id: string; data: UpdateLandRequest }) => {
       try {
         const response = await api.patch<LandResponse>(`${endpoint}/${id}`, data);
         return response.data;

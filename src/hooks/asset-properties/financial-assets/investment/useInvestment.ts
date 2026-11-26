@@ -1,5 +1,5 @@
 import { API_ENDPOINTS } from "@/src/constants/endpoints/apiEndpoints";
-import { InvestmentResponse, InvestmentSearchResponse } from "@/src/interfaces/asset_properties/financial/investmentTypes";
+import { InvestmentResponse, InvestmentSearchResponse, UpdateInvestmentRequest } from "@/src/interfaces/asset_properties/financial/investmentTypes";
 import { InvestmentAssetFilters } from "@/src/interfaces/search_filters/financial/investment_SearchFilters";
 import api from "@/src/lib/api";
 import { logApiError } from "@/src/util/logApiError";
@@ -57,7 +57,7 @@ export const useGetInvestmentAsset = (id: string) => {
 export const useUpdateInvestmentAsset = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: async ({ id, data }: { id: string; data: FormData }) => {
+    mutationFn: async ({ id, data }: { id: string; data: UpdateInvestmentRequest }) => {
       try {
         const response = await api.patch<InvestmentResponse>(`${endpoint}/${id}`, data);
         return response.data;

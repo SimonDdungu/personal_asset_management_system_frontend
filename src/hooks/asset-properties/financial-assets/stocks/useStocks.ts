@@ -1,5 +1,5 @@
 import { API_ENDPOINTS } from "@/src/constants/endpoints/apiEndpoints";
-import { StocksSearchResponse } from "@/src/interfaces/asset_properties/financial/stocksTypes";
+import { StocksSearchResponse, UpdateStocksRequest } from "@/src/interfaces/asset_properties/financial/stocksTypes";
 import { StocksAssetFilters } from "@/src/interfaces/search_filters/financial/stocks_SearchFilters";
 import api from "@/src/lib/api";
 import { logApiError } from "@/src/util/logApiError";
@@ -57,7 +57,7 @@ export const useGetStocksAsset = (id: string) => {
 export const useUpdateStocksAsset = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: async ({ id, data }: { id: string; data: FormData }) => {
+    mutationFn: async ({ id, data }: { id: string; data: UpdateStocksRequest }) => {
       try {
         const response = await api.patch<StocksSearchResponse>(`${endpoint}/${id}`, data);
         return response.data;

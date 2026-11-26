@@ -1,5 +1,5 @@
 import { API_ENDPOINTS } from "@/src/constants/endpoints/apiEndpoints";
-import { SavingsResponse, SavingsSearchResponse } from "@/src/interfaces/asset_properties/financial/savingsTypes";
+import { SavingsResponse, SavingsSearchResponse, UpdateSavingsRequest } from "@/src/interfaces/asset_properties/financial/savingsTypes";
 import { SavingsAssetFilters } from "@/src/interfaces/search_filters/financial/savings_SearchFilters";
 import api from "@/src/lib/api";
 import { logApiError } from "@/src/util/logApiError";
@@ -57,7 +57,7 @@ export const useGetSavingsAsset = (id: string) => {
 export const useUpdateSavingsAsset = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: async ({ id, data }: { id: string; data: FormData }) => {
+    mutationFn: async ({ id, data }: { id: string; data: UpdateSavingsRequest }) => {
       try {
         const response = await api.patch<SavingsResponse>(`${endpoint}/${id}`, data);
         return response.data;

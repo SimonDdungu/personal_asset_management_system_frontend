@@ -1,5 +1,5 @@
 import { API_ENDPOINTS } from "@/src/constants/endpoints/apiEndpoints";
-import { FurnitureResponse, FurnitureSearchResponse } from "@/src/interfaces/asset_properties/physical/furnitureTypes";
+import { FurnitureResponse, FurnitureSearchResponse, UpdateFurnitureRequest } from "@/src/interfaces/asset_properties/physical/furnitureTypes";
 import { FurnitureAssetFilters } from "@/src/interfaces/search_filters/physical/furniture_SearchFilters";
 import api from "@/src/lib/api";
 import { logApiError } from "@/src/util/logApiError";
@@ -57,7 +57,7 @@ export const useGetFurnitureAsset = (id: string) => {
 export const useUpdateFurnitureAsset = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: async ({ id, data }: { id: string; data: FormData }) => {
+    mutationFn: async ({ id, data }: { id: string; data: UpdateFurnitureRequest }) => {
       try {
         const response = await api.patch<FurnitureResponse>(`${endpoint}/${id}`, data);
         return response.data;

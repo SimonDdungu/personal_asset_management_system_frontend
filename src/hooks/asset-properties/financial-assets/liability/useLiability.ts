@@ -1,5 +1,5 @@
 import { API_ENDPOINTS } from "@/src/constants/endpoints/apiEndpoints";
-import { LiabilityResponse, LiabilitySearchResponse } from "@/src/interfaces/asset_properties/financial/liabilityTypes";
+import { LiabilityResponse, LiabilitySearchResponse, UpdateLiabilityRequest } from "@/src/interfaces/asset_properties/financial/liabilityTypes";
 import { LiabilityAssetFilters } from "@/src/interfaces/search_filters/financial/liability_SearchFilters";
 import api from "@/src/lib/api";
 import { logApiError } from "@/src/util/logApiError";
@@ -57,7 +57,7 @@ export const useGetLiabilityAsset = (id: string) => {
 export const useUpdateLiabilityAsset = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: async ({ id, data }: { id: string; data: FormData }) => {
+    mutationFn: async ({ id, data }: { id: string; data: UpdateLiabilityRequest }) => {
       try {
         const response = await api.patch<LiabilityResponse>(`${endpoint}/${id}`, data);
         return response.data;

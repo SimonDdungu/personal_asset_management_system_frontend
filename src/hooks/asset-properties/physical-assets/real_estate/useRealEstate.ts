@@ -1,5 +1,5 @@
 import { API_ENDPOINTS } from "@/src/constants/endpoints/apiEndpoints";
-import { RealEstateResponse, RealEstateSearchResponse } from "@/src/interfaces/asset_properties/physical/realEstateTypes";
+import { RealEstateResponse, RealEstateSearchResponse, UpdateRealEstateRequest } from "@/src/interfaces/asset_properties/physical/realEstateTypes";
 import { RealEstateAssetFilters } from "@/src/interfaces/search_filters/physical/realEstate_SearchFilters";
 import api from "@/src/lib/api";
 import { logApiError } from "@/src/util/logApiError";
@@ -59,7 +59,7 @@ export const useGetRealEstateAsset = (id: string) => {
 export const useUpdateRealEstateAsset = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: async ({ id, data }: { id: string; data: FormData }) => {
+    mutationFn: async ({ id, data }: { id: string; data: UpdateRealEstateRequest }) => {
       try {
         const response = await api.patch<RealEstateResponse>(`${API_ENDPOINTS.ASSETS.PROPERTIES.PHYSICAL.REAL_ESTATE}/${id}`, data);
         return response.data;

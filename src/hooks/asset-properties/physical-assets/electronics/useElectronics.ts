@@ -1,5 +1,5 @@
 import { API_ENDPOINTS } from "@/src/constants/endpoints/apiEndpoints";
-import { ElectronicSearchResponse, ElectronicsResponse } from "@/src/interfaces/asset_properties/physical/electronicsTypes";
+import { ElectronicSearchResponse, ElectronicsResponse, UpdateElectronicsRequest } from "@/src/interfaces/asset_properties/physical/electronicsTypes";
 import { ElectronicsAssetFilters } from "@/src/interfaces/search_filters/physical/electronics_SearchFilters";
 import api from "@/src/lib/api";
 import { logApiError } from "@/src/util/logApiError";
@@ -57,7 +57,7 @@ export const useGetElectronicAsset = (id: string) => {
 export const useUpdateElectronicAsset = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: async ({ id, data }: { id: string; data: FormData }) => {
+    mutationFn: async ({ id, data }: { id: string; data: UpdateElectronicsRequest }) => {
       try {
         const response = await api.patch<ElectronicsResponse>(`${API_ENDPOINTS.ASSETS.PROPERTIES.PHYSICAL.ELECTRONICS}/${id}`, data);
         return response.data;

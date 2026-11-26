@@ -57,7 +57,7 @@ export const useGetPhysicalCashAsset = (id: string) => {
 export const useUpdatePhysicalCashAsset = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: async ({ id, data }: { id: string; data: FormData }) => {
+    mutationFn: async ({ id, data }: { id: string; data: Record<string, never> }) => {
       try {
         const response = await api.patch<PhysicalCashResponse>(`${endpoint}/${id}`, data);
         return response.data;
