@@ -35,7 +35,7 @@ const ElectronicDetailView = ({ id }: { id: string }) => {
                     <span className='text-xs text-gray-700'>Serial number </span> <span>{data?.serialNumber ?? "N/A"}</span>
                 </div>
                 <div className='flex flex-col gap-y-1'>
-                    <span className='text-xs text-gray-700'>Year </span> <span>{data?.year ?? "N/A"}</span>
+                    <span className='text-xs text-gray-700'>Release Year </span> <span>{data?.year ?? "N/A"}</span>
                 </div>
             </div>     
         </div>
