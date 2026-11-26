@@ -1,6 +1,5 @@
 "use client"
 import { DetailViewLayout } from '@/src/components/ui';
-import { useGetMachineryAsset } from '@/src/hooks/asset-properties/physical-assets/machinery/useMachinery';
 import { useGetVehicleAsset } from '@/src/hooks/asset-properties/physical-assets/vehicle/useVehicle';
 
 const VehiclesDetailView = ({ id }: { id: string }) => {
