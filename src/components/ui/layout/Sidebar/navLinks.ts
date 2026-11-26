@@ -9,6 +9,7 @@ import {
 
 export const physicalAssetMenu = [
   { name: "Analytics", href: "/assets/physical/analytics" },
+  { name: "Collectibles & Valuables", href: "/assets/physical/collectibles-valuable" },
   { name: "Electronics", href: "/assets/physical/electronics" },
   { name: "Furniture", href: "/assets/physical/furniture" },
   { name: "Houses", href: "/assets/physical/houses" },
