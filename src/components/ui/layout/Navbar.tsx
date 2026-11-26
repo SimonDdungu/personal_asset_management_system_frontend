@@ -29,9 +29,9 @@ const Navbar = () => {
         <div className='flex justify-center items-center'>
 
             <div className='text-sm flex justify-center items-center text-gray-600 mx-auto'>
-                <span className='font-medium'>{time ?? ""}</span>
+                <span className='font-medium'>{time ?? <div className='h-5 w-14.5 rounded-md bg-gray-200 animate-pulse'></div>}</span>
                 <span className='mx-1'>{" | "}</span>
-                <span>{today ?? ""}</span>
+                <span>{today ?? <div className='h-5 w-29.5 rounded-md bg-gray-200 animate-pulse'></div>}</span>
             </div>
 
             <div className='flex gap-x-1 items-center text-xs text-gray-600 rounded-2xl bg-gray-100 pr-3 cursor-pointer'>
