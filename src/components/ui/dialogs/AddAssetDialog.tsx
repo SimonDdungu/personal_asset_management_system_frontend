@@ -11,7 +11,7 @@ import { Button } from "@/components/ui/button";
 import ImageForm from "../images/ImageForm";
 import { useState } from "react";
 import Add_AssetForm from "@/src/views/dashboard/components/Add_AssetForm";
-import RealEstateForm from "@/src/views/dashboard/components/add-forms/RealEstateForm";
+import RealEstateForm from "@/src/views/dashboard/components/add-forms/physical/RealEstateForm";
 import { useCreateRealEstateAsset } from "@/src/hooks/asset-properties/physical-assets/real_estate/useRealEstate";
 import MediaForm from "@/src/views/dashboard/components/MediaForm";
 
