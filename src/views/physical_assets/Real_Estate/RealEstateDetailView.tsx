@@ -15,20 +15,15 @@ const RealEstateDetailView = ({id}: RealEstateDetailViewProps) => {
     const basePath = "/assets/physical/real-estate";
 
     const images = data?.images?.[0]?.images
-    const imageCaption = data?.images?.[0]?.caption
     const imageUploadId = data?.images?.[0]?.id
 
-    console.log("actual image data: ",data?.images )
-    console.log("Images from the parent before being passed: ", data?.images?.[0].images)
-
     const documents = data?.documents?.[0]?.documents
-    const documentCaption = data?.documents?.[0]?.caption
     const documentUploadId = data?.documents?.[0]?.id
 
   return (
-    <DetailViewLayout itemId={data?.id} assetId={data?.assetId} assetCategory={data?.assetCategory} assetName={data?.assetName} assetLabel={data?.address} 
-    assetUploadImageId={imageUploadId} assetImages={images} imageCaption={imageCaption} assetDocuments={documents} documentCaption={documentCaption} currentCurrency={data?.currency} 
-    currentValue={data?.currentValue} description={data?.description} createdAt={data?.createdAt} updatedAt={data?.updatedAt} currentValueUpdatedAt={data?.currentValueUpdatedAt} 
+    <DetailViewLayout itemId={data?.id ?? ""} assetId={data?.assetId ?? ""} assetCategory={data?.assetCategory} assetName={data?.assetName ?? ""} assetLabel={data?.address} 
+    assetUploadImageId={imageUploadId} assetImages={images} assetDocuments={documents} currentCurrency={data?.currency ?? ""} 
+    currentValue={data?.currentValue} description={data?.description} createdAt={data?.createdAt ?? ""} updatedAt={data?.updatedAt ?? ""} currentValueUpdatedAt={data?.currentValueUpdatedAt ?? ""} 
     isLoading={isLoading} isFetching={isFetching} assetUploadDocId={documentUploadId} basePath={basePath}>
 
             <div>
@@ -52,7 +47,7 @@ const RealEstateDetailView = ({id}: RealEstateDetailViewProps) => {
 
                     <div className='flex flex-col gap-y-1'>
                         <span className='text-xs text-gray-700'>Property size</span>
-                        <span>{data?.propertySize ? `${data.propertySize} ${propertySizeUnitLabels[data.propertySizeUnit] ?? ""}` : "N/A"}</span>
+                        <span>{data?.propertySize ? `${data.propertySize} ${data?.propertySizeUnit ? propertySizeUnitLabels[data.propertySizeUnit] : ""}` : "N/A"}</span>
                     </div>
 
                 </div> 
@@ -68,7 +63,7 @@ const RealEstateDetailView = ({id}: RealEstateDetailViewProps) => {
 
                             <div className='flex flex-col gap-y-1'>
                                 <span className='text-xs text-gray-700'>Construction completion date</span>
-                                <span>{formatDate(data?.constructionCompletionDate) ?? "N/A"}</span>
+                                <span>{data?.constructionCompletionDate ? formatDate(data.constructionCompletionDate) : "N/A"}</span>
                             </div>
                         </div>
                     </div>
@@ -79,7 +74,7 @@ const RealEstateDetailView = ({id}: RealEstateDetailViewProps) => {
                         <h5 className='mb-4'>Rental Information</h5>
                         <div className='flex flex-col gap-y-1  border-b pb-5 mb-3'>
                             <span className='text-xs text-gray-700'>Rental income</span>
-                            <span>{data?.rentalIncomeCurrency ?? ""} {data.rentalIncome.toLocaleString("en-US", {maximumFractionDigits: 2})}</span>
+                            <span>{data?.rentalIncomeCurrency ?? ""} {data.rentalIncome?.toLocaleString("en-US", {maximumFractionDigits: 2}) ?? "N/A"}</span>
                         </div>
                     </div>
                 }

@@ -23,7 +23,7 @@ interface DetailViewLayoutProps {
     documentCaption?: string,
     imageCaption?: string,
     currentCurrency: string,
-    currentValue: number,
+    currentValue?: number,
     createdAt: string,
     updatedAt: string,
     children: ReactNode,
