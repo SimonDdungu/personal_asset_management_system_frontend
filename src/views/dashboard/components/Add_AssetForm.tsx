@@ -53,13 +53,13 @@ const Add_AssetForm = ({onNext, onBack, setData, toStep}: GotoNextStepper) => {
        <form onSubmit={handleSubmit(NextStep)}>
           <div>
               <div className='flex gap-x-2 '>
-                <ReadOnlyInput label='Asset type' name='assetType' placeholder='Select asset type' register={register} error={errors}/>
+                <SelectInput label='Asset category' name='assetCategory' placeholder='Select asset category' options={assetCategories} control={control} register={register} error={errors}/>
                 <TextInput label='Asset name' name='name' placeholder='e.g. Rental Property in Entebbe, SBGS Unit Trust Account' error={errors}  register={register}/>
               </div>
 
               <div className='flex gap-x-2 '>
                 <SelectInput label='Acquisition' name='acquisition' placeholder='Select acquisition' options={acquisitionTypes} control={control} register={register} error={errors}/>
-                <SelectInput label='Asset category' name='assetCategory' placeholder='Select asset category' options={assetCategories} control={control} register={register} error={errors}/>
+                <ReadOnlyInput label='Asset type' name='assetType' placeholder='Select asset type' register={register} error={errors}/>
               </div>
               
               <div className='flex gap-x-2 '>
