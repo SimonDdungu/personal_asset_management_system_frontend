@@ -1,15 +1,13 @@
 "use client"
 import { BlueButton } from '@/src/components/ui';
-import { AddAssetDialog } from '@/src/components/ui/dialogs/AddAssetDialog';
 import { useAuth } from '@/src/context/auth/AuthContext';
 import { getGreeting } from '@/src/util/date_time/getGreetings';
 import { Plus } from 'lucide-react';
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react';
 
 const WelcomeUser = () => {
     const [now, setNow] = useState<Date>();
     const {user, isLoading} = useAuth();
-    const [addAssetDialog, setAddAssetDialog] = useState<boolean>(false)
     
     useEffect(() => {
         setNow(new Date())
@@ -32,10 +30,6 @@ const WelcomeUser = () => {
             </div>
         </div>
 
-        <AddAssetDialog
-            open={addAssetDialog}
-            onOpenChange={setAddAssetDialog} 
-        />
     </div>
   )
 }
