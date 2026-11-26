@@ -35,7 +35,7 @@ const Navbar = () => {
             </div>
 
             <div className='flex gap-x-1 items-center text-xs text-gray-600 rounded-2xl bg-gray-100 pr-3 cursor-pointer'>
-                <div className={`size-8 rounded-full bg-gray-200 text-blue-600 overflow-hidden uppercase flex items-center justify-center ${isLoading ? "animate-pulse" : ""}`}><div className='max-w'>{user?.firstName?.[0]}{user?.lastName?.[0]}</div></div>
+                <div className={`size-8 rounded-full bg-gradient-to-br from-[#22335c] to-[#5872c6] text-white font-medium overflow-hidden uppercase flex items-center justify-center ${isLoading ? "animate-pulse" : ""}`}><div className='max-w'>{user?.firstName?.[0]}{user?.lastName?.[0]}</div></div>
                 <div className='min-w-24'>
                     {isLoading 
                         ? 
