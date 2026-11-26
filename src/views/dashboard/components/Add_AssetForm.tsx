@@ -43,7 +43,6 @@ const Add_AssetForm = ({onNext, onBack, setData, toStep}: GotoNextStepper) => {
   function NextStep(data: CreateAssetFormData){
     setData?.(data)
     toStep?.(data.assetCategory)
-    console.log("asset data: ", data)
     onNext();
   }
 

@@ -110,8 +110,6 @@ const AddAssetPage = () => {
         });
       }
 
-      console.log("FINAL DATA: ", formData)
-
       try {
         if (showAsset === "Real estate") {
           await createRealEstate(formData);
@@ -149,7 +147,6 @@ const AddAssetPage = () => {
           return;
         }
 
-        console.log("reached router.push");
         router.push("/dashboard")
 
       } catch (error) {

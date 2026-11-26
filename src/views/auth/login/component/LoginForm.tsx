@@ -40,8 +40,6 @@ export default function LoginForm() {
       try {
         const response = await loginUser(data);
 
-        console.log("login user: ", response)
-
         setUser(response.user);
 
         router.push("/dashboard");

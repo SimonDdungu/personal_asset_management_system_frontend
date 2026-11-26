@@ -68,8 +68,6 @@ const AssetCoverImages = ({assetImages = [], assetName, uploadId, isLoading, isR
             setAddImageDialogOpen(false)
         }
     };
-    
-    console.log("fetched asset images before sorting: ", assetImages)
 
     const handleDeleteImages = async () => {
         if (!selectedImages.length || isDeleting) return;

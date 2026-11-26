@@ -45,8 +45,6 @@ export default function SignUpForm() {
 
         const response = await createUser(userData);
 
-        console.log("created user: ", response)
-
         setUser(response.user);
 
         router.push("/");

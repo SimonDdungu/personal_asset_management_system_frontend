@@ -10,7 +10,6 @@ const CategoriesCount = () => {
     const { data, isLoading, isError} = useGetAssetCategoryCount();
     const selectedCategories: CATEGORIES_COUNT[] = data?.[seletedBaseCurrency] ?? []
 
-    console.log("Selected category count: ", selectedCategories)
   return (
     <div className='bg-white min-w-80 shadow rounded-lg p-4 cursor-default'>
         <div className='mb-3 pb-2 border-b'>
