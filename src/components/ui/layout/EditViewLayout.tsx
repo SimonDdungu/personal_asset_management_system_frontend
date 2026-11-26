@@ -9,6 +9,7 @@ import { FieldValues, FormProvider, useForm } from 'react-hook-form';
 import { BlueButton, NumberInput, SelectInput, TextInput, WhiteButton } from '..';
 import MultiTextInput from '../input/MultiTextInput';
 import FullScreenLoadingSpinner from '../loading_state/FullScreenLoadingSpinner';
+import { useRouter } from 'next/navigation';
 
 interface DetailViewLayoutProps <T extends FieldValues>{
     assetid: string,
@@ -21,11 +22,13 @@ interface DetailViewLayoutProps <T extends FieldValues>{
 }
 
 const EditViewLayout =  <T extends FieldValues,>({assetid, assetName, children, category, onCategorySubmit, initialData, viewPath}: DetailViewLayoutProps<T>) => {
+    const router = useRouter();
+    
     const [loading, setLoading] = useState<boolean>(false)
 
     const methods =useForm<UpdateAssetFormData & T>({values: initialData,});
 
-    const { register, control, handleSubmit, getValues } = methods;
+    const { register, control, handleSubmit, getValues, formState: {errors} } = methods;
 
     const updateAsset = useUpdateAsset();
     const requestInProgress = useRef(false);
@@ -42,6 +45,8 @@ const EditViewLayout =  <T extends FieldValues,>({assetid, assetName, children, 
             await updateAsset.mutateAsync({id: assetid, data: AssetData});
 
             await onCategorySubmit(getValues());
+
+            router.push(viewPath);
         } catch (error) {
             console.error("Failed to update asset:", error);
         } finally {
@@ -86,12 +91,12 @@ const EditViewLayout =  <T extends FieldValues,>({assetid, assetName, children, 
                             </div>
                             <div>
                                 <div className='flex flex-row gap-x-5 items-center'>
-                                    <SelectInput label='Acquisition' name='acquisition' placeholder='Select acquisition' options={acquisitionTypes} control={control} register={register}/>
-                                    <TextInput label='Asset Name' name={"name"} placeholder='Enter name of asset' register={register}/>
+                                    <SelectInput label='Acquisition' name='acquisition' placeholder='Select acquisition' options={acquisitionTypes} control={control} register={register} error={errors}/>
+                                    <TextInput label='Asset Name' name={"name"} placeholder='Enter name of asset' register={register} error={errors}/>
                                 </div>
                                 <div className='flex flex-row gap-x-5 items-center'>
-                                    <SelectInput label='Currency' name='currency' placeholder='Select currency' options={currencyOptions} control={control} register={register}/>
-                                    <NumberInput label='Current Value' name={"currentValue"} placeholder='Enter current value of asset' register={register}/>
+                                    <SelectInput label='Currency' name='currency' placeholder='Select currency' options={currencyOptions} control={control} register={register} error={errors}/>
+                                    <NumberInput label='Current Value' name={"currentValue"} placeholder='Enter current value of asset' register={register} error={errors}/>
                                 </div>
                             </div>
                         </div>
@@ -108,7 +113,7 @@ const EditViewLayout =  <T extends FieldValues,>({assetid, assetName, children, 
                                 <h5>Description</h5>
                                 <span className='text-gray-700 text-xs'>Provide context and useful information about this property.</span>
                             </div>
-                            <MultiTextInput name={"description"} placeholder='Enter description of the asset' register={register}/>
+                            <MultiTextInput name={"description"} placeholder='Enter description of the asset' register={register} error={errors}/>
                         </div>
                     </>
                     }

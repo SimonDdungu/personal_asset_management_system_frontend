@@ -20,7 +20,7 @@ const TextInput = ({name, id, placeholder, label, width, height, fontSize, regis
 
     return (
         <div className='relative pb-4 w-full'>
-            <label htmlFor={name} className='block text-xs mb-1'>
+            <label htmlFor={name} className={`${errorMessage ? "text-red-600" : "text-black"} text-xs blockmb-1`}>
                 {label}{required && <span className="text-red-600">*</span>}
             </label>
 

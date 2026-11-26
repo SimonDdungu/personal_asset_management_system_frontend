@@ -22,7 +22,7 @@ export function PasswordInput({name, label, placeholder, autoComplete = "new-pas
       control={control}
       render={({ field, fieldState }) => (
          <div className="relative pb-4 w-full">
-          <label htmlFor={name} className={`${fieldState.error ? "text-red-600" : "text-black"} text-xs`}>
+          <label htmlFor={name} className={`${fieldState.error ? "text-red-600" : "text-black"} text-xs blockmb-1`}>
             {label}{required && <span className="text-red-600">*</span>}
           </label>
 
