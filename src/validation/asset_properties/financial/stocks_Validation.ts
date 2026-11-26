@@ -1,8 +1,6 @@
 import { z } from "zod";
-import { createAssetSchema } from "../asset_Validation";
 
 export const createStocksSchema = z.object({
-    asset: createAssetSchema,
     tickerSymbol: z.string("Ticker symbol is required!").min(1, "Ticker symbol is required!").max(255, "Ticker symbol exceeds limit."),
     numberShares: z.number("Number of shares is required!").int().min(0, "Number of shares cannot be less than 0."),
     brokerage: z.string("Brokerage is required!").min(1, "Brokerage is required!").max(255, "Brokerage exceeds limit."),

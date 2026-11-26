@@ -1,9 +1,7 @@
 import { z } from "zod";
 import { maxPropertySize } from "@/src/constants/asset_properties/maxPropertySize";
-import { createAssetSchema } from "../asset_Validation";
 
 export const createLandSchema = z.object({
-    asset: createAssetSchema,
     address: z.string("Address is required!").min(2, "Address is required!").max(255, "Address of land exceeds limit."),
     plotNumber: z.string("Plot number is required!").min(1, "Plot number is required!").max(255, "Plot number exceeds limit."),
     landSize: z.number("Land size is required!").min(0, "Land size cannot be negative.").max(maxPropertySize, "Land size exceeds limit."),

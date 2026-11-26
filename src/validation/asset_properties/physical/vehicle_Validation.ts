@@ -1,8 +1,6 @@
 import { z } from "zod";
-import { createAssetSchema } from "../asset_Validation";
 
 export const createVehicleSchema = z.object({
-    asset: createAssetSchema,
     make: z.string("Make is required!").min(1, "Make is required!").max(255, "Make exceeds limit."),
     model: z.string("Model is required!").min(1, "Model is required!").max(255, "Model exceeds limit."),
     year: z.number("Year is required!").int().min(1900, "Year must be at least 1900").max(new Date().getFullYear() + 2, "Year is too far in the future"),

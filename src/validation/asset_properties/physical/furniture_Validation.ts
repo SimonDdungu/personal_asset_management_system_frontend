@@ -1,8 +1,6 @@
 import { z } from "zod";
-import { createAssetSchema } from "../asset_Validation";
 
 export const createFurnitureSchema = z.object({
-    asset: createAssetSchema,
     brand: z.string().max(255, "Brand exceeds limit.").optional(),
     material: z.string().max(255, "Material exceeds limit.").optional(),
 });

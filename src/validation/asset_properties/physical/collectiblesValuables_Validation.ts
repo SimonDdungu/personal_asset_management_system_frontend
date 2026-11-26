@@ -1,8 +1,6 @@
 import { z } from "zod";
-import { createAssetSchema } from "../asset_Validation";
 
 export const createCollectiblesValuablesSchema = z.object({
-    asset: createAssetSchema,
     creator: z.string().max(255, "Creator exceeds limit.").optional(),
     serialNumber: z.string().max(255, "Serial number exceeds limit.").optional(),
     material: z.string().max(255, "Material exceeds limit.").optional(),

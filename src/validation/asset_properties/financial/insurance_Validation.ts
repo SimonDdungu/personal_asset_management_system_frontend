@@ -1,13 +1,11 @@
 import { z } from "zod";
 import { maxMoneyValue } from "@/src/constants/asset_properties/maxMoneyValue";
-import { createAssetSchema } from "../asset_Validation";
 
 const premiumAmountSchema = z.number("Premium amount is required!")
     .min(0, "Premium amount cannot be negative.")
     .max(maxMoneyValue, "Premium amount exceeds limit.");
 
 export const createInsuranceSchema = z.object({
-    asset: createAssetSchema,
     provider: z.string("Provider is required!").min(1, "Provider is required!").max(255, "Provider exceeds limit."),
     premiumAmount: premiumAmountSchema,
     premiumFrequency: z.string("Premium frequency is required!").min(1, "Premium frequency is required!"),

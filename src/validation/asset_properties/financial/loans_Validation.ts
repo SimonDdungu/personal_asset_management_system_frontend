@@ -1,6 +1,5 @@
 import { z } from "zod";
 import { maxMoneyValue } from "@/src/constants/asset_properties/maxMoneyValue";
-import { createAssetSchema } from "../asset_Validation";
 
 const originalAmountSchema = z.number("Original amount is required!")
     .min(0, "Original amount cannot be negative.")
@@ -8,7 +7,6 @@ const originalAmountSchema = z.number("Original amount is required!")
 const interestRateSchema = z.number().min(0, "Interest rate cannot be negative.").max(999.99, "Interest rate exceeds limit.");
 
 export const createLoansSchema = z.object({
-    asset: createAssetSchema,
     lender: z.string("Lender is required!").min(1, "Lender is required!").max(255, "Lender exceeds limit."),
     originalAmount: originalAmountSchema,
     interestRate: interestRateSchema.optional(),

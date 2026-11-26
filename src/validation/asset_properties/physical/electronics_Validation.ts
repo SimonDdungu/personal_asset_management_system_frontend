@@ -1,8 +1,6 @@
 import { z } from "zod";
-import { createAssetSchema } from "../asset_Validation";
 
 export const createElectronicsSchema = z.object({
-    asset: createAssetSchema,
     brand: z.string("Brand is required!").min(1, "Brand is required!").max(255, "Brand exceeds limit."),
     model: z.string().max(255, "Model exceeds limit.").optional(),
     serialNumber: z.string().max(255, "Serial number exceeds limit.").optional(),
