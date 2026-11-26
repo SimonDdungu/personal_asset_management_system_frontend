@@ -7,19 +7,22 @@ interface ElectronicDetailViewProps {
     id: string
 }
 
-const ElectronicDetailView = ({id}: ElectronicDetailViewProps) => {
+const ElectronicDetailView = (id: string) => {
 
-    const { data, isLoading, isError, error } = useGetElectronicAsset(id);
+    const { data, isLoading, isFetching, isError, error } = useGetElectronicAsset(id);
+    const basePath = "/assets/physical/electronics";
 
     const images = data?.images?.[0]?.images
-    const imageCaption = data?.images?.[0]?.caption
+    const imageUploadId = data?.images?.[0]?.id
 
     const documents = data?.documents?.[0]?.documents
-    const documentCaption = data?.documents?.[0]?.caption
+    const documentUploadId = data?.documents?.[0]?.id
 
   return (
-    <DetailViewLayout assetCategory='Electronic Asset' assetName={data?.assetName} assetImages={images} imageCaption={imageCaption} assetDocuments={documents} documentCaption={documentCaption} currentCurrency={data?.currency} 
-    currentValue={data?.currentValue} createdAt={data?.createdAt} updatedAt={data?.updatedAt}>
+    <DetailViewLayout itemId={data?.id ?? ""} assetId={data?.assetId ?? ""} assetCategory={data?.assetCategory} assetName={data?.assetName ?? ""} assetLabel={data?.address} 
+    assetUploadImageId={imageUploadId} assetImages={images} assetDocuments={documents} currentCurrency={data?.currency ?? ""} 
+    currentValue={data?.currentValue} description={data?.description} createdAt={data?.createdAt ?? ""} updatedAt={data?.updatedAt ?? ""} currentValueUpdatedAt={data?.currentValueUpdatedAt ?? ""} 
+    isLoading={isLoading} isFetching={isFetching} assetUploadDocId={documentUploadId} basePath={basePath}>
     
         <div>
             <div className='grid grid-cols-2 sm:grid-cols-[max-content_max-content_max-content] xl:grid-cols-[max-content_max-content_max-content_max-content_max-content] gap-x-5 sm:gap-x-10 gap-y-3 border-b pb-5 mb-3'>

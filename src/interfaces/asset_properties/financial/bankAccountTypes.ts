@@ -23,6 +23,7 @@ export interface BankAccountResponse {
     id: string;
     assetId: string;
     assetName: string;
+    description?: string;
     bank: string;
     bankAccountNumber: string;
     interestRate?: number;

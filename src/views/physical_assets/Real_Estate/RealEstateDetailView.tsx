@@ -5,11 +5,7 @@ import { useGetRealEstateAsset } from '@/src/hooks/asset-properties/physical-ass
 import { formatDate } from '@/src/util/date_time/formatDateTime';
 import { useState } from 'react';
 
-interface RealEstateDetailViewProps {
-    id: string
-}
-
-const RealEstateDetailView = ({id}: RealEstateDetailViewProps) => {
+const RealEstateDetailView = (id: string) => {
     
     const { data, isLoading, isFetching, isError, error } = useGetRealEstateAsset(id);
     const basePath = "/assets/physical/real-estate";

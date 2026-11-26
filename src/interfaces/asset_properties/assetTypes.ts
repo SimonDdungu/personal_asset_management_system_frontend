@@ -19,6 +19,7 @@ export interface AssetsResponse {
     assetType: string;
     assetCategory: string;
     acquisition: string;
+    description?: string;
     currency: string;
     currentValue: number;
 }

@@ -28,6 +28,7 @@ export interface ElectronicsResponse {
     acquisition: string;
     assetType: string;
     assetCategory: string;
+    description?: string;
     brand: string;
     model?: string;
     serialNumber?: string;

@@ -24,6 +24,7 @@ export interface SavingsResponse {
     acquisition: string;
     assetType: string;
     assetCategory: string;
+    description?: string;
     institution: string;
     accountNumber: string;
     interestRate?: number;

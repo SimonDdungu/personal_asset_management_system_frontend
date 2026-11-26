@@ -13,6 +13,7 @@ export interface PhysicalCashResponse {
     acquisition: string;
     assetType: string;
     assetCategory: string;
+    description?: string;
     currency: string;
     currentValue: number;
     currentValueUpdatedAt: string;

@@ -18,6 +18,7 @@ export interface RetirementFundResponse {
     acquisition: string;
     assetType: string;
     assetCategory: string;
+    description?: string;
     provider: string;
     currency: string;
     currentValue: number;

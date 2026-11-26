@@ -26,6 +26,7 @@ export interface MachineryResponse {
     acquisition: string;
     assetType: string;
     assetCategory: string;
+    description?: string;
     brand?: string;
     model?: string;
     material?: string;

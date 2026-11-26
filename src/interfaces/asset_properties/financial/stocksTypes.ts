@@ -19,6 +19,7 @@ export interface StocksSearchResponse {
     id: string;
     assetId: string;
     assetName: string;
+    description?: string;
     tickerSymbol: string;
     numberShares: number;
     brokerage: string;

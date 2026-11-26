@@ -24,6 +24,7 @@ export interface InvestmentResponse {
     acquisition: string;
     assetType: string;
     assetCategory: string;
+    description?: string;
     quantity?: number;
     institution?: string;
     interestRate?: number;

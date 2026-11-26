@@ -32,6 +32,7 @@ export interface VehicleResponse {
     acquisition: string;
     assetType: string;
     assetCategory: string;
+    description?: string;
     make: string;
     model: string;
     year: number;

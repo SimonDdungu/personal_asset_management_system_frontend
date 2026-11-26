@@ -26,6 +26,7 @@ export interface InsuranceResponse {
     acquisition: string;
     assetType: string;
     assetCategory: string;
+    description?: string;
     provider: string;
     premiumAmount: number;
     premiumFrequency: string;

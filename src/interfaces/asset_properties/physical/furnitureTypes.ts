@@ -22,6 +22,7 @@ export interface FurnitureResponse {
     acquisition: string;
     assetType: string;
     assetCategory: string;
+    description?: string;
     brand?: string;
     material?: string;
     currency: string;

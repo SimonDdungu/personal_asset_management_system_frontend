@@ -27,7 +27,7 @@ export interface LandResponse {
     assetType: string;
     assetCategory: string;
     address: string;
-    description: string;
+    description?: string;
     plotNumber: string;
     landSize: number;
     landSizeUnit: string;

@@ -26,6 +26,7 @@ export interface CollectiblesValuablesResponse {
     acquisition: string;
     assetType: string;
     assetCategory: string;
+    description?: string;
     creator?: string;
     serialNumber?: string;
     material?: string;

@@ -26,6 +26,7 @@ export interface LoansResponse {
     acquisition: string;
     assetType: string;
     assetCategory: string;
+    description?: string;
     lender: string;
     originalAmount: number;
     interestRate?: number;
