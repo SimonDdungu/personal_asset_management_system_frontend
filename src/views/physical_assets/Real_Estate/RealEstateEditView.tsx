@@ -1,16 +1,11 @@
 "use client"
 import EditViewLayout from '@/src/components/ui/layout/EditViewLayout';
 import { useGetRealEstateAsset, useUpdateRealEstateAsset } from '@/src/hooks/asset-properties/physical-assets/real_estate/useRealEstate';
-import RealEstateEditFields from './RealEstateEditFields';
+import RealEstateEditFields from './components/RealEstateEditFields';
 import { UpdateRealEstateFormData, updateRealEstateSchema } from '@/src/validation/asset_properties/physical/realEstate_Validation';
 import { UpdateAssetFormData } from '@/src/validation/asset_properties/asset_Validation';
 
-
-interface RealEstateDetailViewProps {
-    id: string
-}
-
-const RealEstateEditView = ({id}: RealEstateDetailViewProps) => {
+const RealEstateEditView = ({id}: {id: string}) => {
     const { data } = useGetRealEstateAsset(id);
     const viewPath = `/assets/physical/real-estate/${id}`;
 

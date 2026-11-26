@@ -1,14 +1,13 @@
 "use client"
-import { useGetRealEstateAssets } from '@/src/hooks/asset-properties/physical-assets/real_estate/useRealEstate';
-import RealEstateCard from './components/RealEstateCard';
-import { useState } from 'react';
-import { RealEstateAssetFilters } from '@/src/interfaces/search_filters/physical/realEstate_SearchFilters';
 import { BlueButton, TextSearchInput, WhiteButton } from '@/src/components/ui';
-import { CircleX, Divide, Search } from 'lucide-react';
 import NumberSearchInput from '@/src/components/ui/input/NumberSearchInput';
-import FullScreenLoadingSpinner from '@/src/components/ui/loading_state/FullScreenLoadingSpinner';
 import AssetResultsLoadingSpinner from '@/src/components/ui/loading_state/AssetResultsLoadingSpinner';
 import Pagination from '@/src/components/ui/pagination/Pagination';
+import { useGetRealEstateAssets } from '@/src/hooks/asset-properties/physical-assets/real_estate/useRealEstate';
+import { RealEstateAssetFilters } from '@/src/interfaces/search_filters/physical/realEstate_SearchFilters';
+import { CircleX, Search } from 'lucide-react';
+import { useState } from 'react';
+import RealEstateCard from './components/RealEstateCard';
 
 const RealEstateView = () => {
   const [searchFilters, setSearchFilters] = useState<RealEstateAssetFilters>({});
