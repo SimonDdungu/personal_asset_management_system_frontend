@@ -1,4 +1,17 @@
 export const ASSET_QUERY_KEYS: Record<string, string> = {
   "Electronic": "electronic-asset",
-  "Real estate": "realestate-asset",
+  "Real Estate": "realestate-asset",
+  "Land": "land-asset",
+  "Vehicles": "vehicle-asset",
+  "Furniture": "furniture-asset",
+  "Collectibles & Valuables": "collectibles-valuables-asset",
+  "Bank Accounts": "bank-account-asset",
+  "Cash": "cash-asset",
+  "Savings": "savings-asset",
+  "Investments": "investments-asset",
+  "Stocks": "stocks-asset",
+  "Retirement Funds": "retirement-funds-asset",
+  "Loans": "loans-asset",
+  "Liabilities": "liability-asset",
+  "Insurance Policies": "insurance-asset",
 };
