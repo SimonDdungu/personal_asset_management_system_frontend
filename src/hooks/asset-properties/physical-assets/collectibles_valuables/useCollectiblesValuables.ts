@@ -1,5 +1,6 @@
 import { API_ENDPOINTS } from "@/src/constants/endpoints/apiEndpoints";
 import { CollectiblesValuablesResponse, CollectiblesValuablesSearchResponse, UpdateCollectiblesValuablesRequest } from "@/src/interfaces/asset_properties/physical/collectiblesValuablesTypes";
+import { PaginatedResponse } from "@/src/interfaces/pagination/pagination-response";
 import { CollectiblesValuablesAssetFilters } from "@/src/interfaces/search_filters/physical/collectiblesValuables_SearchFilters";
 import api from "@/src/lib/api";
 import { logApiError } from "@/src/util/logApiError";
@@ -28,7 +29,7 @@ export const useGetCollectiblesValuablesAssets = (filters?: CollectiblesValuable
     queryKey: ["collectibles-valuables-assets", filters],
     queryFn: async () => {
       try {
-        const response = await api.get<CollectiblesValuablesSearchResponse[]>(endpoint, { params: { ...filters } });
+        const response = await api.get<PaginatedResponse<CollectiblesValuablesSearchResponse>>(endpoint, { params: { ...filters } });
         return response.data;
       } catch (error) {
         logApiError("Get Collectibles Valuables Assets", error);

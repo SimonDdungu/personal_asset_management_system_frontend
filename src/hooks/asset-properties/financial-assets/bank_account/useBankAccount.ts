@@ -1,5 +1,6 @@
 import { API_ENDPOINTS } from "@/src/constants/endpoints/apiEndpoints";
 import { BankAccountResponse, BankAccountSearchResponse, UpdateBankAccountRequest } from "@/src/interfaces/asset_properties/financial/bankAccountTypes";
+import { PaginatedResponse } from "@/src/interfaces/pagination/pagination-response";
 import { BankAccountAssetFilters } from "@/src/interfaces/search_filters/financial/bankAccount_SearchFilters";
 import api from "@/src/lib/api";
 import { logApiError } from "@/src/util/logApiError";
@@ -28,7 +29,7 @@ export const useGetBankAccountAssets = (filters?: BankAccountAssetFilters) => {
     queryKey: ["bank-account-assets", filters],
     queryFn: async () => {
       try {
-        const response = await api.get<BankAccountSearchResponse[]>(endpoint, { params: { ...filters } });
+        const response = await api.get<PaginatedResponse<BankAccountSearchResponse>>(endpoint, { params: { ...filters } });
         return response.data;
       } catch (error) {
         logApiError("Get Bank Account Assets", error);

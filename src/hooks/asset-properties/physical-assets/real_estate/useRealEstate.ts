@@ -1,5 +1,6 @@
 import { API_ENDPOINTS } from "@/src/constants/endpoints/apiEndpoints";
 import { RealEstateResponse, RealEstateSearchResponse, UpdateRealEstateRequest } from "@/src/interfaces/asset_properties/physical/realEstateTypes";
+import { PaginatedResponse } from "@/src/interfaces/pagination/pagination-response";
 import { RealEstateAssetFilters } from "@/src/interfaces/search_filters/physical/realEstate_SearchFilters";
 import api from "@/src/lib/api";
 import { logApiError } from "@/src/util/logApiError";
@@ -28,7 +29,7 @@ export const useGetRealEstateAssets = (filters?: RealEstateAssetFilters) => {
      queryKey: ["realestate-assets", filters],
     queryFn: async () => {
       try {
-        const response = await api.get<RealEstateSearchResponse[]>(API_ENDPOINTS.ASSETS.PROPERTIES.PHYSICAL.REAL_ESTATE, {params: {...filters}});
+        const response = await api.get<PaginatedResponse<RealEstateSearchResponse>>(API_ENDPOINTS.ASSETS.PROPERTIES.PHYSICAL.REAL_ESTATE, {params: {...filters}});
         return response.data;
       } catch (error) {
         logApiError("Get Real Estate Assets", error);

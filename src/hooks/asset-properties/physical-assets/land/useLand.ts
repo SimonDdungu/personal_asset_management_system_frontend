@@ -1,5 +1,6 @@
 import { API_ENDPOINTS } from "@/src/constants/endpoints/apiEndpoints";
 import { LandResponse, LandSearchResponse, UpdateLandRequest } from "@/src/interfaces/asset_properties/physical/landTypes";
+import { PaginatedResponse } from "@/src/interfaces/pagination/pagination-response";
 import { LandAssetFilters } from "@/src/interfaces/search_filters/physical/land_SearchFilters";
 import api from "@/src/lib/api";
 import { logApiError } from "@/src/util/logApiError";
@@ -28,7 +29,7 @@ export const useGetLandAssets = (filters?: LandAssetFilters) => {
     queryKey: ["land-assets", filters],
     queryFn: async () => {
       try {
-        const response = await api.get<LandSearchResponse[]>(endpoint, { params: { ...filters } });
+        const response = await api.get<PaginatedResponse<LandSearchResponse>>(endpoint, { params: { ...filters } });
         return response.data;
       } catch (error) {
         logApiError("Get Land Assets", error);

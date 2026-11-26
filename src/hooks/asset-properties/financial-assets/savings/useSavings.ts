@@ -1,5 +1,6 @@
 import { API_ENDPOINTS } from "@/src/constants/endpoints/apiEndpoints";
 import { SavingsResponse, SavingsSearchResponse, UpdateSavingsRequest } from "@/src/interfaces/asset_properties/financial/savingsTypes";
+import { PaginatedResponse } from "@/src/interfaces/pagination/pagination-response";
 import { SavingsAssetFilters } from "@/src/interfaces/search_filters/financial/savings_SearchFilters";
 import api from "@/src/lib/api";
 import { logApiError } from "@/src/util/logApiError";
@@ -28,7 +29,7 @@ export const useGetSavingsAssets = (filters?: SavingsAssetFilters) => {
     queryKey: ["savings-assets", filters],
     queryFn: async () => {
       try {
-        const response = await api.get<SavingsSearchResponse[]>(endpoint, { params: { ...filters } });
+        const response = await api.get<PaginatedResponse<SavingsSearchResponse>>(endpoint, { params: { ...filters } });
         return response.data;
       } catch (error) {
         logApiError("Get Savings Assets", error);

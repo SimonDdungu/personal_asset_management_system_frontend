@@ -1,5 +1,6 @@
 import { API_ENDPOINTS } from "@/src/constants/endpoints/apiEndpoints";
 import { UpdateVehicleRequest, VehicleResponse, VehicleSearchResponse } from "@/src/interfaces/asset_properties/physical/vehicleTypes";
+import { PaginatedResponse } from "@/src/interfaces/pagination/pagination-response";
 import { VehicleAssetFilters } from "@/src/interfaces/search_filters/physical/vehicle_SearchFilters";
 import api from "@/src/lib/api";
 import { logApiError } from "@/src/util/logApiError";
@@ -28,7 +29,7 @@ export const useGetVehicleAssets = (filters?: VehicleAssetFilters) => {
     queryKey: ["vehicle-assets", filters],
     queryFn: async () => {
       try {
-        const response = await api.get<VehicleSearchResponse[]>(endpoint, { params: { ...filters } });
+        const response = await api.get<PaginatedResponse<VehicleSearchResponse>>(endpoint, { params: { ...filters } });
         return response.data;
       } catch (error) {
         logApiError("Get Vehicle Assets", error);

@@ -1,5 +1,6 @@
 import { API_ENDPOINTS } from "@/src/constants/endpoints/apiEndpoints";
 import { InsuranceResponse, InsuranceSearchResponse, UpdateInsuranceRequest } from "@/src/interfaces/asset_properties/financial/insuranceTypes";
+import { PaginatedResponse } from "@/src/interfaces/pagination/pagination-response";
 import { InsuranceAssetFilters } from "@/src/interfaces/search_filters/financial/insurance_SearchFilters";
 import api from "@/src/lib/api";
 import { logApiError } from "@/src/util/logApiError";
@@ -28,7 +29,7 @@ export const useGetInsuranceAssets = (filters?: InsuranceAssetFilters) => {
     queryKey: ["insurance-assets", filters],
     queryFn: async () => {
       try {
-        const response = await api.get<InsuranceSearchResponse[]>(endpoint, { params: { ...filters } });
+        const response = await api.get<PaginatedResponse<InsuranceSearchResponse>>(endpoint, { params: { ...filters } });
         return response.data;
       } catch (error) {
         logApiError("Get Insurance Assets", error);

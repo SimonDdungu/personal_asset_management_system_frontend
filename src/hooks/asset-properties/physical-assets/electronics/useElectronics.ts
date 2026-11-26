@@ -1,5 +1,6 @@
 import { API_ENDPOINTS } from "@/src/constants/endpoints/apiEndpoints";
 import { ElectronicSearchResponse, ElectronicsResponse, UpdateElectronicsRequest } from "@/src/interfaces/asset_properties/physical/electronicsTypes";
+import { PaginatedResponse } from "@/src/interfaces/pagination/pagination-response";
 import { ElectronicsAssetFilters } from "@/src/interfaces/search_filters/physical/electronics_SearchFilters";
 import api from "@/src/lib/api";
 import { logApiError } from "@/src/util/logApiError";
@@ -28,7 +29,7 @@ export const useGetElectronicAssets = (filters?: ElectronicsAssetFilters) => {
     queryKey: ["electronic-assets", filters],
     queryFn: async () => {
       try {
-        const response = await api.get<ElectronicSearchResponse[]>(`${API_ENDPOINTS.ASSETS.PROPERTIES.PHYSICAL.ELECTRONICS}`, { params: { ...filters } });
+        const response = await api.get<PaginatedResponse<ElectronicSearchResponse>>(`${API_ENDPOINTS.ASSETS.PROPERTIES.PHYSICAL.ELECTRONICS}`, { params: { ...filters } });
         return response.data;
       } catch (error) {
         logApiError("Get Electronic Assets", error);

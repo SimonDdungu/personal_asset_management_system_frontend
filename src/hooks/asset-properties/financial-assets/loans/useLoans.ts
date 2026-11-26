@@ -1,5 +1,6 @@
 import { API_ENDPOINTS } from "@/src/constants/endpoints/apiEndpoints";
 import { LoansResponse, LoansSearchResponse, UpdateLoansRequest } from "@/src/interfaces/asset_properties/financial/loansTypes";
+import { PaginatedResponse } from "@/src/interfaces/pagination/pagination-response";
 import { LoansAssetFilters } from "@/src/interfaces/search_filters/financial/loans_SearchFilters";
 import api from "@/src/lib/api";
 import { logApiError } from "@/src/util/logApiError";
@@ -28,7 +29,7 @@ export const useGetLoansAssets = (filters?: LoansAssetFilters) => {
     queryKey: ["loans-assets", filters],
     queryFn: async () => {
       try {
-        const response = await api.get<LoansSearchResponse[]>(endpoint, { params: { ...filters } });
+        const response = await api.get<PaginatedResponse<LoansSearchResponse>>(endpoint, { params: { ...filters } });
         return response.data;
       } catch (error) {
         logApiError("Get Loans Assets", error);

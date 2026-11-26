@@ -1,5 +1,6 @@
 import { API_ENDPOINTS } from "@/src/constants/endpoints/apiEndpoints";
 import { PhysicalCashResponse, PhysicalCashSearchResponse } from "@/src/interfaces/asset_properties/financial/physicalCashTypes";
+import { PaginatedResponse } from "@/src/interfaces/pagination/pagination-response";
 import { PhysicalCashAssetFilters } from "@/src/interfaces/search_filters/financial/physicalCash_SearchFilters";
 import api from "@/src/lib/api";
 import { logApiError } from "@/src/util/logApiError";
@@ -28,7 +29,7 @@ export const useGetPhysicalCashAssets = (filters?: PhysicalCashAssetFilters) => 
     queryKey: ["physical-cash-assets", filters],
     queryFn: async () => {
       try {
-        const response = await api.get<PhysicalCashSearchResponse[]>(endpoint, { params: { ...filters } });
+        const response = await api.get<PaginatedResponse<PhysicalCashSearchResponse>>(endpoint, { params: { ...filters } });
         return response.data;
       } catch (error) {
         logApiError("Get Physical Cash Assets", error);

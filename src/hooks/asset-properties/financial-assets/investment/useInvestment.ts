@@ -1,5 +1,6 @@
 import { API_ENDPOINTS } from "@/src/constants/endpoints/apiEndpoints";
 import { InvestmentResponse, InvestmentSearchResponse, UpdateInvestmentRequest } from "@/src/interfaces/asset_properties/financial/investmentTypes";
+import { PaginatedResponse } from "@/src/interfaces/pagination/pagination-response";
 import { InvestmentAssetFilters } from "@/src/interfaces/search_filters/financial/investment_SearchFilters";
 import api from "@/src/lib/api";
 import { logApiError } from "@/src/util/logApiError";
@@ -28,7 +29,7 @@ export const useGetInvestmentAssets = (filters?: InvestmentAssetFilters) => {
     queryKey: ["investment-assets", filters],
     queryFn: async () => {
       try {
-        const response = await api.get<InvestmentSearchResponse[]>(endpoint, { params: { ...filters } });
+        const response = await api.get<PaginatedResponse<InvestmentSearchResponse>>(endpoint, { params: { ...filters } });
         return response.data;
       } catch (error) {
         logApiError("Get Investment Assets", error);

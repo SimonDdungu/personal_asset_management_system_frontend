@@ -1,5 +1,6 @@
 import { API_ENDPOINTS } from "@/src/constants/endpoints/apiEndpoints";
 import { MachineryResponse, MachinerySearchResponse, UpdateMachineryRequest } from "@/src/interfaces/asset_properties/physical/machineryTypes";
+import { PaginatedResponse } from "@/src/interfaces/pagination/pagination-response";
 import { MachineryAssetFilters } from "@/src/interfaces/search_filters/physical/machinery_SearchFilters";
 import api from "@/src/lib/api";
 import { logApiError } from "@/src/util/logApiError";
@@ -28,7 +29,7 @@ export const useGetMachineryAssets = (filters?: MachineryAssetFilters) => {
     queryKey: ["machinery-assets", filters],
     queryFn: async () => {
       try {
-        const response = await api.get<MachinerySearchResponse[]>(endpoint, { params: { ...filters } });
+        const response = await api.get<PaginatedResponse<MachinerySearchResponse>>(endpoint, { params: { ...filters } });
         return response.data;
       } catch (error) {
         logApiError("Get Machinery Assets", error);

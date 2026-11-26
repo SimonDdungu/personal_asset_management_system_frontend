@@ -1,5 +1,6 @@
 import { API_ENDPOINTS } from "@/src/constants/endpoints/apiEndpoints";
 import { RetirementFundResponse, RetirementFundSearchResponse, UpdateRetirementFundRequest } from "@/src/interfaces/asset_properties/financial/retirementFundTypes";
+import { PaginatedResponse } from "@/src/interfaces/pagination/pagination-response";
 import { RetirementFundAssetFilters } from "@/src/interfaces/search_filters/financial/retirementFund_SearchFilters";
 import api from "@/src/lib/api";
 import { logApiError } from "@/src/util/logApiError";
@@ -28,7 +29,7 @@ export const useGetRetirementFundAssets = (filters?: RetirementFundAssetFilters)
     queryKey: ["retirement-fund-assets", filters],
     queryFn: async () => {
       try {
-        const response = await api.get<RetirementFundSearchResponse[]>(endpoint, { params: { ...filters } });
+        const response = await api.get<PaginatedResponse<RetirementFundSearchResponse>>(endpoint, { params: { ...filters } });
         return response.data;
       } catch (error) {
         logApiError("Get Retirement Fund Assets", error);

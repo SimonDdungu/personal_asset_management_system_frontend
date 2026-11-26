@@ -1,5 +1,6 @@
 import { API_ENDPOINTS } from "@/src/constants/endpoints/apiEndpoints";
 import { LiabilityResponse, LiabilitySearchResponse, UpdateLiabilityRequest } from "@/src/interfaces/asset_properties/financial/liabilityTypes";
+import { PaginatedResponse } from "@/src/interfaces/pagination/pagination-response";
 import { LiabilityAssetFilters } from "@/src/interfaces/search_filters/financial/liability_SearchFilters";
 import api from "@/src/lib/api";
 import { logApiError } from "@/src/util/logApiError";
@@ -28,7 +29,7 @@ export const useGetLiabilityAssets = (filters?: LiabilityAssetFilters) => {
     queryKey: ["liability-assets", filters],
     queryFn: async () => {
       try {
-        const response = await api.get<LiabilitySearchResponse[]>(endpoint, { params: { ...filters } });
+        const response = await api.get<PaginatedResponse<LiabilitySearchResponse>>(endpoint, { params: { ...filters } });
         return response.data;
       } catch (error) {
         logApiError("Get Liability Assets", error);
