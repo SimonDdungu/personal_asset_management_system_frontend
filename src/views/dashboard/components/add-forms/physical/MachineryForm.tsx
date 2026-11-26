@@ -19,7 +19,7 @@ const MachineryForm = ({onNext, onBack, setData}: GotoNextStepper) => {
 
   return (
     <div>
-        <h1 className='text-lg font-semibold mb-2 pb-1 border-b'>Machinery Properties</h1>
+        <h1 className='text-lg font-semibold mb-2 pb-1 border-b'>Machinery & Equipment Properties</h1>
         <form onSubmit={handleSubmit(NextStep)}>
             <div className='flex items-start gap-x-2'>
                 <TextInput label='Brand (optional)' name={"brand"} placeholder='Enter brand of machinery' register={register} error={errors}/>
