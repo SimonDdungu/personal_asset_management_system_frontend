@@ -8,7 +8,7 @@ import {
 } from "lucide-react";
 
 export const physicalAssetMenu = [
-  { name: "Analytics", href: "/assets/physical/analytics" },
+  { name: "Analytics", href: "/assets/physical" },
   { name: "Collectibles & Valuables", href: "/assets/physical/collectibles" },
   { name: "Electronics", href: "/assets/physical/electronics" },
   { name: "Furniture", href: "/assets/physical/furniture" },
@@ -19,7 +19,7 @@ export const physicalAssetMenu = [
 ];
 
 export const financialAssetMenu = [
-  { name: "Analytics", href: "/assets/financial/analytics" },
+  { name: "Analytics", href: "/assets/financial" },
   { name: "Bank Accounts", href: "/assets/financial/bank-accounts" },
   { name: "Cash", href: "/assets/financial/cash" },
   { name: "Insurance Policies", href: "/assets/financial/insurance" },
