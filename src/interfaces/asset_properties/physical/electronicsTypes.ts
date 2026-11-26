@@ -50,6 +50,10 @@ export interface ElectronicSearchResponse {
     assetType: string;
     assetCategory: string;
     brand: string;
+    model?: string;
+    serialNumber?: string;
+    color?: string;
+    year?: number;
     image?: AssetImageResponse;
     currency: string;
     currentValue: number;
