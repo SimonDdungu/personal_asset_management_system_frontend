@@ -1,0 +1,47 @@
+"use client"
+import { DetailViewLayout } from '@/src/components/ui';
+import { useGetElectronicAsset } from '@/src/hooks/asset-properties/physical-assets/electronics/useElectronics';
+import { useState } from 'react';
+
+const ElectronicDetailView = ({ id }: { id: string }) => {
+
+    const { data, isLoading, isFetching, isError, error } = useGetElectronicAsset(id);
+    const basePath = "/assets/physical/electronics";
+
+    const images = data?.images?.[0]?.images
+    const imageUploadId = data?.images?.[0]?.id
+
+    const documents = data?.documents?.[0]?.documents
+    const documentUploadId = data?.documents?.[0]?.id
+
+  return (
+    <DetailViewLayout itemId={data?.id ?? ""} assetId={data?.assetId ?? ""} assetCategory={data?.assetCategory} assetName={data?.assetName ?? ""} assetLabel={data?.brand ?? ""} 
+    assetUploadImageId={imageUploadId} assetImages={images} assetDocuments={documents} currentCurrency={data?.currency ?? ""} 
+    currentValue={data?.currentValue} description={data?.description} createdAt={data?.createdAt ?? ""} updatedAt={data?.updatedAt ?? ""} currentValueUpdatedAt={data?.currentValueUpdatedAt ?? ""} 
+    isLoading={isLoading} isFetching={isFetching} assetUploadDocId={documentUploadId} basePath={basePath}>
+    
+        <div>
+            <div className='grid grid-cols-2 sm:grid-cols-[max-content_max-content_max-content] xl:grid-cols-[max-content_max-content_max-content_max-content_max-content] gap-x-5 sm:gap-x-10 gap-y-3 border-b pb-5 mb-3'>
+                <div className='flex flex-col gap-y-1'>
+                    <span className='text-xs text-gray-700'>Brand </span> <span>{data?.brand ?? "N/A"}</span>
+                </div>
+                <div className='flex flex-col gap-y-1'>
+                    <span className='text-xs text-gray-700'>Model </span> <span>{data?.model ?? "N/A"}</span>
+                </div>
+                <div className='flex flex-col gap-y-1'>
+                    <span className='text-xs text-gray-700'>Color </span> <span>{data?.color ?? "N/A"}</span>
+                </div>
+                <div className='flex flex-col gap-y-1'>
+                    <span className='text-xs text-gray-700'>Serial number </span> <span>{data?.serialNumber ?? "N/A"}</span>
+                </div>
+                <div className='flex flex-col gap-y-1'>
+                    <span className='text-xs text-gray-700'>Release Year </span> <span>{data?.year ?? "N/A"}</span>
+                </div>
+            </div>     
+        </div>
+        
+    </DetailViewLayout>
+  )
+}
+
+export default ElectronicDetailView
