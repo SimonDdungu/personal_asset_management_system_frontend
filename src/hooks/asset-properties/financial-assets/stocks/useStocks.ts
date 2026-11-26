@@ -1,5 +1,5 @@
 import { API_ENDPOINTS } from "@/src/constants/endpoints/apiEndpoints";
-import { StocksSearchResponse, UpdateStocksRequest } from "@/src/interfaces/asset_properties/financial/stocksTypes";
+import { StocksResponse, StocksSearchResponse, UpdateStocksRequest } from "@/src/interfaces/asset_properties/financial/stocksTypes";
 import { PaginatedResponse } from "@/src/interfaces/pagination/pagination-response";
 import { StocksAssetFilters } from "@/src/interfaces/search_filters/financial/stocks_SearchFilters";
 import api from "@/src/lib/api";
@@ -12,7 +12,7 @@ export const useCreateStocksAsset = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (data: FormData) => {
-      const response = await api.post<StocksSearchResponse>(endpoint, data);
+      const response = await api.post<StocksResponse>(endpoint, data);
       return response.data;
     },
     onSuccess: (data) => {
@@ -44,7 +44,7 @@ export const useGetStocksAsset = (id: string) => {
     queryKey: ["stocks-asset", id],
     queryFn: async () => {
       try {
-        const response = await api.get<StocksSearchResponse>(`${endpoint}/${id}`);
+        const response = await api.get<StocksResponse>(`${endpoint}/${id}`);
         return response.data;
       } catch (error) {
         logApiError("Get Stocks Asset", error);
@@ -60,7 +60,7 @@ export const useUpdateStocksAsset = () => {
   return useMutation({
     mutationFn: async ({ id, data }: { id: string; data: UpdateStocksRequest }) => {
       try {
-        const response = await api.patch<StocksSearchResponse>(`${endpoint}/${id}`, data);
+        const response = await api.patch<StocksResponse>(`${endpoint}/${id}`, data);
         return response.data;
       } catch (error) {
         logApiError("Update Stocks Asset", error);

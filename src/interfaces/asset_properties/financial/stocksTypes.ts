@@ -1,5 +1,5 @@
 import { CreateAssetsRequest } from "../assetTypes";
-import { CreateAssetDocumentRequest } from "../asset_files/assetDocumentTypes";
+import { AssetDocumentUploadResponse, CreateAssetDocumentRequest } from "../asset_files/assetDocumentTypes";
 
 export interface CreateStocksRequest {
     asset: CreateAssetsRequest;
@@ -25,4 +25,23 @@ export interface StocksSearchResponse {
     brokerage: string;
     currency: string;
     currentValue: number;
+}
+
+export interface StocksResponse {
+    id: string;
+    assetId: string;
+    assetName: string;
+    acquisition: string;
+    assetType: string;
+    assetCategory: string;
+    description?: string;
+    tickerSymbol: string;
+    numberShares: number;
+    brokerage: string;
+    currency: string;
+    currentValue: number;
+    currentValueUpdatedAt: string;
+    documents?: AssetDocumentUploadResponse[];
+    createdAt: string;
+    updatedAt: string;
 }
