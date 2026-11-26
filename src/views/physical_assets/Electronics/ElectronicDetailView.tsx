@@ -3,11 +3,7 @@ import { DetailViewLayout } from '@/src/components/ui';
 import { useGetElectronicAsset } from '@/src/hooks/asset-properties/physical-assets/electronics/useElectronics';
 import { useState } from 'react';
 
-interface ElectronicDetailViewProps {
-    id: string
-}
-
-const ElectronicDetailView = (id: string) => {
+const ElectronicDetailView = ({ id }: { id: string }) => {
 
     const { data, isLoading, isFetching, isError, error } = useGetElectronicAsset(id);
     const basePath = "/assets/physical/electronics";
