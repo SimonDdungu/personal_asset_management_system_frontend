@@ -12,10 +12,8 @@ export const physicalAssetMenu = [
   { name: "Collectibles & Valuables", href: "/assets/physical/collectibles-valuable" },
   { name: "Electronics", href: "/assets/physical/electronics" },
   { name: "Furniture", href: "/assets/physical/furniture" },
-  { name: "Houses", href: "/assets/physical/houses" },
   { name: "Land", href: "/assets/physical/land" },
   { name: "Machinery & Equipment", href: "/assets/physical/machinery" },
-  { name: "Other Physical Assets", href: "/assets/physical/other" },
   { name: "Real Estate", href: "/assets/physical/real-estate" },
   { name: "Vehicles", href: "/assets/physical/vehicles" },
 ];
@@ -28,7 +26,6 @@ export const financialAssetMenu = [
   { name: "Investments", href: "/assets/financial/investments" },
   { name: "Liabilities", href: "/assets/financial/liabilities" },
   { name: "Loans", href: "/assets/financial/loans" },
-  { name: "Other Financial Assets", href: "/assets/financial/other" },
   { name: "Retirement Funds", href: "/assets/financial/retirement" },
   { name: "Savings", href: "/assets/financial/savings" },
   { name: "Stocks", href: "/assets/financial/stocks" },
