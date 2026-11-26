@@ -5,7 +5,7 @@ export const createVehicleSchema = z.object({
     model: z.string("Model is required!").min(1, "Model is required!").max(255, "Model exceeds limit."),
     year: z.number("Year is required!").int().min(1900, "Year must be at least 1900").max(new Date().getFullYear() + 2, "Year is too far in the future"),
     color: z.string("Color is required!").min(1, "Color is required!").max(255, "Color exceeds limit."),
-    mileage: z.number("Invalid mileage").int().min(0, "Mileage cannot be less than 0.").nullable().optional(),
+    mileage: z.number().int().min(0, "Mileage cannot be less than 0.").nullable().optional(),
     registrationNumber: z.string().max(255, "Registration number exceeds limit.").optional(),
     vin: z.string().max(255, "VIN exceeds limit.").optional(),
 });

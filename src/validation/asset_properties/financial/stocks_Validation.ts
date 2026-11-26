@@ -10,7 +10,7 @@ export type CreateStocksFormData = z.infer<typeof createStocksSchema>;
 
 export const updateStocksSchema = z.object({
     tickerSymbol: z.string().max(255, "Ticker symbol exceeds limit.").optional(),
-    numberShares: z.number().int().min(0, "Number of shares cannot be less than 0.").optional(),
+    numberShares: z.number().int().min(0, "Number of shares cannot be less than 0.").nullable().optional(),
     brokerage: z.string().max(255, "Brokerage exceeds limit.").optional(),
 });
 
