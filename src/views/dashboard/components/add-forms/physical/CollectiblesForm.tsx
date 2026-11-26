@@ -3,7 +3,6 @@ import { NumberInput, TextInput } from '@/src/components/ui';
 import BlueButton from '@/src/components/ui/buttons/BlueButton';
 import { GotoNextStepper } from '@/src/interfaces/stepper/stepper_interfaces';
 import { CreateCollectiblesValuablesFormData, createCollectiblesValuablesSchema } from '@/src/validation/asset_properties/physical/collectiblesValuables_Validation';
-import { CreateMachineryFormData, createMachinerySchema } from '@/src/validation/asset_properties/physical/machinery_Validation';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 

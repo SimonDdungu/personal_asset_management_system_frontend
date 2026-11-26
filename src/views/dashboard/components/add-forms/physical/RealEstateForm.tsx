@@ -8,12 +8,11 @@ import { GotoNextStepper } from '@/src/interfaces/stepper/stepper_interfaces';
 import { CreateRealEstateFormData, createRealEstateSchema } from '@/src/validation/asset_properties/physical/realEstate_Validation';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import { MOCK_REAL_ESTATE_DATA } from '../../../data/mock-real-estate';
 
 const RealEstateForm = ({onNext, onBack, setData}: GotoNextStepper) => {
   
   const { register, handleSubmit, control, formState: {errors} } = useForm<CreateRealEstateFormData>({
-    resolver: zodResolver(createRealEstateSchema), defaultValues: {...MOCK_REAL_ESTATE_DATA}, mode: "onChange",  reValidateMode: "onChange",
+    resolver: zodResolver(createRealEstateSchema), mode: "onChange",  reValidateMode: "onChange",
   });
 
   function NextStep(data: CreateRealEstateFormData){
