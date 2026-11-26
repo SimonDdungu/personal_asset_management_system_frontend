@@ -16,7 +16,7 @@ export interface UpdateMachineryRequest {
     brand?: string;
     model?: string;
     material?: string;
-    year?: number;
+    year?: number | null;
 }
 
 export interface MachineryResponse {

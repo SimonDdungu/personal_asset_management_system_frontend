@@ -15,7 +15,7 @@ export interface CreateLandRequest {
 export interface UpdateLandRequest {
     address?: string;
     plotNumber?: string;
-    landSize?: number;
+    landSize?: number | null;
     landSizeUnit?: string;
 }
 

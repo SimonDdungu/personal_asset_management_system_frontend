@@ -11,7 +11,7 @@ export interface UpdateAssetsRequest {
     name?: string;
     acquisition?: string;
     currency?: string;
-    currentValue?: number;
+    currentValue?: number | null;
 }
 
 export interface AssetsResponse {

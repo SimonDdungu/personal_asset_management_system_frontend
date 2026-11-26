@@ -18,16 +18,16 @@ export interface CreateRealEstateRequest {
 
 export interface UpdateRealEstateRequest {
     address?: string;
-    numberBedrooms?: number;
-    numberBathrooms?: number;
-    numberUnits?: number;
-    propertySize?: number;
+    numberBedrooms?: number | null;
+    numberBathrooms?: number | null;
+    numberUnits?: number | null;
+    propertySize?: number | null;
     propertySizeUnit?: PropertySizeUnitTypes;
     constructionCostCurrency?: string;
-    constructionCost?: number;
+    constructionCost?: number | null;
     constructionCompletionDate?: string;
     rentalIncomeCurrency?: string;
-    rentalIncome?: number;
+    rentalIncome?: number | null;
 }
 
 export interface RealEstateResponse {

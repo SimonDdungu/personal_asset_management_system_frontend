@@ -18,7 +18,7 @@ export interface UpdateElectronicsRequest {
     model?: string;
     serialNumber?: string;
     color?: string;
-    year?: number;
+    year?: number | null;
 }
 
 export interface ElectronicsResponse {

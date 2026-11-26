@@ -20,7 +20,7 @@ export interface UpdateVehicleRequest {
     model?: string;
     year?: number;
     color?: string;
-    mileage?: number;
+    mileage?: number | null;
     registrationNumber?: string;
     vin?: string;
 }

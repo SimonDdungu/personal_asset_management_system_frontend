@@ -16,7 +16,7 @@ export interface UpdateCollectiblesValuablesRequest {
     creator?: string;
     serialNumber?: string;
     material?: string;
-    year?: number;
+    year?: number | null;
 }
 
 export interface CollectiblesValuablesResponse {
