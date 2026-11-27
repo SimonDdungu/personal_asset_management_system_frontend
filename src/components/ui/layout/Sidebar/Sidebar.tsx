@@ -23,14 +23,14 @@ const Sidebar = () => {
   return (
     <aside className="w-55 h-full bg-white border-r border-gray-200 py-5 px-2 flex flex-col overflow-y-auto scrollbar-hide">
       {isLoggingOut && <FullScreenLoadingSpinner bg_color='bg-black/50'/>}
-      <div className='flex flex-col items-center justify-center mb-4 pb-3 border-b'>
+      <Link href="/dashboard" className='flex flex-col items-center justify-center mb-4 pb-3 border-b'>
         <div className="w-25 rounded-full overflow-hidden mb-2 relative border">
           <Image src={logo} alt="Accretion Logo" className='mx-auto w-full h-full'/>
         </div>
         <h1 className="text-lg font-medium text-gray-900">
           Accretion AMS
         </h1>
-      </div>
+      </Link>
 
 
      <nav className="space-y-2 mb-5">
